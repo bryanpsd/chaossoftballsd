@@ -26,6 +26,9 @@ importers:
       '@contentful/rich-text-react-renderer':
         specifier: ^16.1.3
         version: 16.1.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@contentful/rich-text-types':
+        specifier: ^17.2.2
+        version: 17.2.2
       '@google-cloud/recaptcha-enterprise':
         specifier: ^6.3.0
         version: 6.3.0

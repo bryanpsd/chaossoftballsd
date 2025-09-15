@@ -4,12 +4,16 @@ export const menuItems: MainNavProps["items"] = {
 	label: "Main",
 	menuItems: [
 		{
-			label: "Contact Us",
+			label: "About",
+			href: "#intro",
+		},
+		{
+			label: "Contact",
 			href: "#form",
 		},
-		// {
-		// 	label: "Faqs",
-		// 	href: "#faqs",
-		// },
+		{
+			label: "Faqs",
+			href: "#faqs",
+		},
 	],
 };

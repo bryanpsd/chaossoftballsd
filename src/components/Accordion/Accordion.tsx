@@ -1,32 +1,38 @@
 import * as Accordion from "@radix-ui/react-accordion";
+import type { TypeList } from "../../types/contentful/TypeList";
+import type { TypeQuestionAnswer } from "../../types/contentful/TypeQuestionAnswer";
+import { RichText } from "../RichText";
+import * as styles from "./Accordion.css";
 
-export const BasicAccordion = () => {
+type AccordionProps = {
+	list: TypeList<"WITHOUT_UNRESOLVABLE_LINKS">;
+};
+
+export const BasicAccordion = ({ list }: AccordionProps) => {
+	const items = list.fields.type as
+		| TypeQuestionAnswer<"WITHOUT_UNRESOLVABLE_LINKS">[]
+		| undefined;
+	if (!items || !Array.isArray(items)) return null;
 	return (
-		<Accordion.Root type="single" collapsible defaultValue="item-1">
-			<Accordion.Item value="item-1">
-				<Accordion.Header>
-					<Accordion.Trigger>What is Chaos Softball?</Accordion.Trigger>
-				</Accordion.Header>
-				<Accordion.Content>
-					Chaos Softball is a community softball team based in San Diego.
-				</Accordion.Content>
-			</Accordion.Item>
-			<Accordion.Item value="item-2">
-				<Accordion.Header>
-					<Accordion.Trigger>How do I join?</Accordion.Trigger>
-				</Accordion.Header>
-				<Accordion.Content>
-					Contact us through our website or social media to get started!
-				</Accordion.Content>
-			</Accordion.Item>
-			<Accordion.Item value="item-3">
-				<Accordion.Header>
-					<Accordion.Trigger>When are the games?</Accordion.Trigger>
-				</Accordion.Header>
-				<Accordion.Content>
-					Games are typically held on weekends. Check our schedule for details.
-				</Accordion.Content>
-			</Accordion.Item>
+		<Accordion.Root type="single" collapsible className={styles.accordionRoot}>
+			{items.map((entry, idx) =>
+				entry?.fields?.question && entry?.fields?.answer ? (
+					<Accordion.Item
+						value={`item-${idx}`}
+						key={entry.sys.id}
+						className={styles.accordionItem}
+					>
+						<Accordion.Header>
+							<Accordion.Trigger className={styles.accordionTrigger}>
+								{String(entry.fields.question)}
+							</Accordion.Trigger>
+						</Accordion.Header>
+						<Accordion.Content className={styles.accordionContent}>
+							<RichText richText={entry.fields.answer} />
+						</Accordion.Content>
+					</Accordion.Item>
+				) : null,
+			)}
 		</Accordion.Root>
 	);
 };

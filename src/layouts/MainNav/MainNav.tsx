@@ -21,9 +21,9 @@ export const MainNav = ({ items, currentPath }: MainNavProps) => {
 	const [active, setActive] = useState("");
 	return (
 		<NavMenu.Root value={active} onValueChange={(val) => setActive(val)}>
-			<NavMenu.List>
+			<NavMenu.List className={styles.mainNavList}>
 				{items.menuItems.map((item) => (
-					<NavMenu.Item key={item.label}>
+					<NavMenu.Item className={styles.mainNavItem} key={item.label}>
 						<NavMenu.Link
 							asChild
 							active={!!(item.href && currentPath.startsWith(item.href))}

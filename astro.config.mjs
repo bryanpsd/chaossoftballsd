@@ -10,6 +10,8 @@ import robotsTxt from "astro-robots-txt";
 
 // https://astro.build/config
 export default defineConfig({
+	site: "https://chaossoftballsd.org",
+	output: "server",
 	integrations: [
 		react(),
 		partytown({ config: { forward: ["dataLayer.push"] } }),
@@ -17,6 +19,9 @@ export default defineConfig({
 		robotsTxt(),
 	],
 	adapter: netlify(),
+	devToolbar: {
+		enabled: false,
+	},
 	vite: {
 		plugins: [vanillaExtractPlugin()],
 	},

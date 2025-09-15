@@ -1,10 +1,29 @@
 ---
 import { Image } from "astro:assets";
+import { contentfulClient } from "~services/contentful/contentful";
+import type {
+  TypePageSection,
+  TypePageSectionSkeleton,
+} from "~types/contentful";
+import type { TypeListSkeleton } from "~types/contentful/TypeList";
 import background from "../assets/chaos-bg.jpg";
 import heroLogo from "../assets/chaos-logo-large.png";
 import { contentPadding, pageMaxWidth } from "../styles/common.css";
 import { BasicAccordion } from "./Accordion";
 import { Form } from "./Form";
+import { RichText } from "./RichText";
+
+const entries = await contentfulClient.getEntries<TypePageSectionSkeleton>({
+  content_type: "pageSection",
+  "fields.title": "Home Section",
+});
+
+import type { TypeList } from "~types/contentful/TypeList";
+
+const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
+  content_type: "list",
+  "fields.title": "FAQs",
+});
 ---
 
 <main>
@@ -20,22 +39,28 @@ import { Form } from "./Form";
     />
   </section>
 
+  <section id="intro" class={`${pageMaxWidth} ${contentPadding}`}>
+    {
+      entries.items.map((item) => (
+        <section>
+          {item.fields.content && (
+            <RichText richText={item.fields.content} client:load />
+          )}
+        </section>
+      ))
+    }
+  </section>
+
   <section id="form" class={`${pageMaxWidth} ${contentPadding}`}>
-    <h2>Contact Us</h2>
-    <p>
-      Our website is currently under construction and will be ready soon — in
-      the meantime, feel free to use the form to submit any questions.
-    </p>
+    <h2>Contact</h2>
     <Form client:load />
   </section>
-</main>
 
-<!-- <section id="faqs">
-  <div class="box">
+  <section id="faqs" class={`${pageMaxWidth} ${contentPadding}`}>
     <h2>Faqs</h2>
-    <BasicAccordion client:load />
-  </div>
-</section> -->
+    <BasicAccordion list={faqs.items[0]} client:load />
+  </section>
+</main>
 
 <style>
   #hero {
@@ -48,6 +73,7 @@ import { Form } from "./Form";
     min-height: 60vh;
     overflow: hidden;
     text-align: center;
+    margin-bottom: 24px;
   }
 
   #hero::before {
@@ -90,31 +116,28 @@ import { Form } from "./Form";
     margin-top: 2rem;
     display: flex;
     justify-content: center;
-  }
-
-  #container {
-    font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans",
-      Arial, sans-serif;
-    height: 100%;
+    flex-direction: column;
   }
 
   main {
     height: 100%;
     display: flex;
     flex-direction: column;
+    gap: 24px;
+    margin-bottom: 80px;
+    font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans";
   }
 
   h1 {
-    font-size: 22px;
+    font-size: 42px;
     margin-top: 0.25em;
     color: white;
   }
 
   h2 {
     margin: 0 0 1em;
-    font-weight: normal;
     color: #111827;
-    font-size: 20px;
+    font-size: 28px;
   }
 
   p {

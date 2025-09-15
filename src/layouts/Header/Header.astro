@@ -1,0 +1,36 @@
+---
+import { Image } from "astro:assets";
+import { server } from "~actions";
+import logo from "../../assets/chaos-logo-small.png";
+import { MainNav } from "../MainNav";
+// import { Banner } from "./components/Banner";
+import * as styles from "./Header.css";
+import { menuItems } from "./utils/headerItems";
+
+// import { menuItems } from "./utils/headerItems";
+
+// const banners = await Astro.callAction(server.getHeaderBanners, null);
+
+const { pathname } = Astro.url;
+---
+
+<a class={`sr-only ${styles.mainContentJumpLink}`} href="#main-content"
+  >Jump to main content</a
+>
+
+<!-- {banners && banners.length > 0 && <Banner banners={banners} />} -->
+
+<header class={styles.headerWrapper}>
+  <div class={styles.header}>
+    <div class={styles.logoWrapper}>
+      <Image
+        src={logo}
+        alt="Chaos Softball San Diego"
+        width={75}
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+    <!-- <MainNav items={menuItems} currentPath={pathname} client:load /> -->
+  </div>
+</header>

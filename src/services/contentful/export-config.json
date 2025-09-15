@@ -1,5 +1,5 @@
 {
-	"exportDir": "src/contentful",
+	"exportDir": "src/services/contentful",
 	"contentFile": "export.json",
 	"downloadAssets": false
 }

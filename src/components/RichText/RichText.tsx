@@ -1,4 +1,5 @@
 import type { Options } from "@contentful/rich-text-react-renderer";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import type { Document } from "@contentful/rich-text-types";
 import { BLOCKS } from "@contentful/rich-text-types";
 
@@ -18,8 +19,6 @@ const options: Options = {
 interface RichTextProps {
 	richText?: Document;
 }
-
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 export const RichText = ({ richText }: RichTextProps) => {
 	return (

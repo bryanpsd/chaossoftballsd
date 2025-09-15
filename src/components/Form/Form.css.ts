@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { color } from "../../styles/colors";
 import { tokens } from "../../styles/designTokens.css";
 
 export const formWrapper = style([
@@ -7,7 +8,6 @@ export const formWrapper = style([
 		flexDirection: "column",
 		width: { "xs-min": "col-12", "md-min": "col-8" },
 		gap: 16,
-		padding: 24,
 	}),
 ]);
 
@@ -50,6 +50,26 @@ export const textarea = style([
 		selectors: {
 			"&:focus": {
 				borderColor: "#0070f3",
+			},
+		},
+	},
+]);
+
+export const submitButton = style([
+	{
+		background: color.brand.purple,
+		border: "none",
+		color: color.brand.white,
+		padding: "0.5em 1em",
+		borderRadius: "6px",
+		textDecoration: "none",
+		cursor: "pointer",
+		fontFamily:
+			'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+		transition: "background 0.2s, color 0.2s",
+		selectors: {
+			"&:hover, &:focus": {
+				background: "#2d1457",
 			},
 		},
 	},

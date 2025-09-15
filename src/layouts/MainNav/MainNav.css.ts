@@ -11,5 +11,13 @@ export const navLink = style([
 		padding: "0.5em 1em",
 		borderRadius: "6px",
 		textDecoration: "none",
+		fontFamily:
+			'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+		transition: "background 0.2s, color 0.2s",
+		selectors: {
+			"&:hover, &:focus": {
+				background: "#2d1457",
+			},
+		},
 	},
 ]);

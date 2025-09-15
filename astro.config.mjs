@@ -10,7 +10,12 @@ import robotsTxt from "astro-robots-txt";
 
 // https://astro.build/config
 export default defineConfig({
-	integrations: [react(), partytown(), sitemap(), robotsTxt()],
+	integrations: [
+		react(),
+		partytown({ config: { forward: ["dataLayer.push"] } }),
+		sitemap(),
+		robotsTxt(),
+	],
 	adapter: netlify(),
 	vite: {
 		plugins: [vanillaExtractPlugin()],

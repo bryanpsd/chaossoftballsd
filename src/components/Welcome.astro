@@ -2,39 +2,34 @@
 import { Image } from "astro:assets";
 import background from "../assets/chaos-bg.jpg";
 import heroLogo from "../assets/chaos-logo-large.png";
+import { contentPadding, pageMaxWidth } from "../styles/common.css";
 import { BasicAccordion } from "./Accordion";
 import { Form } from "./Form";
 ---
 
-<div id="container">
-  <main>
-    <section id="hero">
-      <img id="background" src={background.src} alt="" fetchpriority="high" />
-      <h1>Chaos Softball San Diego</h1>
-      <Image
-        src={heroLogo}
-        alt="Chaos Softball San Diego"
-        width={300}
-        loading="eager"
-        fetchpriority="high"
-      />
-    </section>
+<main>
+  <section id="hero">
+    <img id="background" src={background.src} alt="" fetchpriority="high" />
+    <h1>Chaos Softball San Diego</h1>
+    <Image
+      src={heroLogo}
+      alt="Chaos Softball San Diego Logo"
+      width={300}
+      loading="eager"
+      fetchpriority="high"
+    />
+  </section>
 
-    <section>
-      <div class="box">
-        <h2>Full Website Coming Soon</h2>
-      </div>
-    </section>
+  <section id="form" class={`${pageMaxWidth} ${contentPadding}`}>
+    <h2>Contact Us</h2>
+    <p>
+      Our website is currently under construction and will be ready soon — in
+      the meantime, feel free to use the form to submit any questions.
+    </p>
+    <Form client:load />
+  </section>
+</main>
 
-    <section id="form">
-      <div class="box">
-        <h2>Contact Us</h2>
-        <p>If you have any questions, feel free to reach out!</p>
-        <Form client:load />
-      </div>
-    </section>
-  </main>
-</div>
 <!-- <section id="faqs">
   <div class="box">
     <h2>Faqs</h2>

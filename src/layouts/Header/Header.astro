@@ -23,7 +23,9 @@ const { pathname } = Astro.url;
 <header class={styles.headerWrapper}>
   <div class={styles.header}>
     <div class={styles.logoWrapper}>
+      <span class="sr-only">chaossoftballsd.org</span>
       <Image
+        aria-hidden="true"
         src={logo}
         alt="Chaos Softball San Diego"
         width={75}
@@ -31,6 +33,6 @@ const { pathname } = Astro.url;
         fetchpriority="high"
       />
     </div>
-    <!-- <MainNav items={menuItems} currentPath={pathname} client:load /> -->
+    <MainNav items={menuItems} currentPath={pathname} client:load />
   </div>
 </header>

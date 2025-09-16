@@ -53,7 +53,7 @@ export const POST: APIRoute = async ({ request }) => {
 
 		// Prepare Netlify form data
 		const netlifyFormData = new URLSearchParams({
-			"form-name": "contact",
+			"form-name": "contactchaos",
 			name,
 			email,
 			message,

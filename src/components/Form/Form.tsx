@@ -49,7 +49,7 @@ export const Form = () => {
 
 	return (
 		<form
-			name="contact"
+			name="contactchaos"
 			className={styles.formWrapper}
 			onSubmit={handleSubmit(onSubmit)}
 			data-netlify="true"
@@ -103,7 +103,9 @@ export const Form = () => {
 			</div>
 
 			<div>
-				<button className={styles.submitButton} type="submit">Submit</button>
+				<button className={styles.submitButton} type="submit">
+					Submit
+				</button>
 			</div>
 		</form>
 	);

@@ -10,7 +10,7 @@ import robotsTxt from "astro-robots-txt";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://chaossoftballsd.org",
+	site: "https://chaossoftballsd.netlify.app",
 	output: "server",
 	integrations: [
 		react(),

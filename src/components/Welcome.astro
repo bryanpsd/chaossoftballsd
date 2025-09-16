@@ -10,7 +10,7 @@ import background from "../assets/chaos-bg.jpg";
 import heroLogo from "../assets/chaos-logo-large.png";
 import { contentPadding, pageMaxWidth } from "../styles/common.css";
 import { BasicAccordion } from "./Accordion";
-// import { Form } from "./Form";
+import { Form } from "./Form";
 import { RichText } from "./RichText";
 
 const entries = await contentfulClient.getEntries<TypePageSectionSkeleton>({
@@ -51,10 +51,10 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
     }
   </section>
 
-  <!-- <section id="form" class={`${pageMaxWidth} ${contentPadding}`}>
+  <section id="form" class={`${pageMaxWidth} ${contentPadding}`}>
     <h2>Contact</h2>
     <Form client:load />
-  </section> -->
+  </section>
 
   <section id="faqs" class={`${pageMaxWidth} ${contentPadding}`}>
     <h2>Faqs</h2>

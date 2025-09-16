@@ -28,7 +28,7 @@ export const Form = () => {
 		try {
 			const captchaToken = await captcha.execute();
 
-			const response = await fetch("/api/contact", {
+			const response = await fetch("/api/contactchaos", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ ...data, captchaToken }),
@@ -57,7 +57,7 @@ export const Form = () => {
 			noValidate
 			method="POST"
 		>
-			<input type="hidden" name="form-name" value="contact" />
+			<input type="hidden" name="form-name" value="contactchaos" />
 			<input type="hidden" {...register("bot-field")} />
 
 			<div className={styles.formField}>

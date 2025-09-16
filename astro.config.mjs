@@ -1,5 +1,3 @@
-// @ts-check
-
 import netlify from "@astrojs/netlify";
 import partytown from "@astrojs/partytown";
 import react from "@astrojs/react";

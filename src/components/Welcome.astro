@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { ToastContainer } from "react-toastify";
 import { contentfulClient } from "~services/contentful/contentful";
 import type {
   TypePageSection,
@@ -27,6 +28,7 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
 ---
 
 <main>
+  <ToastContainer position="top-center" client:load />
   <section id="hero">
     <img id="background" src={background.src} alt="" fetchpriority="high" />
     <h1>Chaos Softball San Diego</h1>

@@ -1,0 +1,12 @@
+---
+const currentDate = new Date();
+const year = currentDate.getFullYear();
+
+import * as styles from "./Footer.css";
+---
+
+<footer class={styles.footerWrapper}>
+    <span class={styles.footerCopyright}>
+        &copy; {year} Chaos Softball SD. All rights reserved.
+    </span>
+</footer>

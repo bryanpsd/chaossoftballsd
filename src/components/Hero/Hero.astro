@@ -1,0 +1,28 @@
+---
+import { Image } from "astro:assets";
+import background from "../../assets/chaos-bg.jpg";
+import heroLogo from "../../assets/chaos-logo-large.png";
+import { ResponsiveHeadline } from "../ResponsiveHeadline";
+
+import * as styles from "./Hero.css";
+---
+
+<section id="hero" class={styles.hero}>
+    <img
+        id="background"
+        class={styles.background}
+        src={background.src}
+        alt=""
+        fetchpriority="high"
+    />
+    <ResponsiveHeadline size={3} as="h1" style={{ color: "white" }}>
+        Chaos Softball San Diego
+    </ResponsiveHeadline>
+    <Image
+        src={heroLogo}
+        alt="Chaos Softball San Diego Logo"
+        width={300}
+        loading="eager"
+        fetchpriority="high"
+    />
+</section>

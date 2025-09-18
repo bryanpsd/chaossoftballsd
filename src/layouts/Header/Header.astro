@@ -28,12 +28,13 @@ const { pathname } = Astro.url;
   <div class={styles.header}>
     <div class={styles.logoWrapper}>
       <span class="sr-only">chaossoftballsd.org</span>
-      <a href="/">
+      <a href="/" aria-label="Home">
         <Image
           aria-hidden="true"
           src={logo}
           alt="Chaos Softball San Diego"
           width={75}
+          height={81}
           loading="eager"
           fetchpriority="high"
         />

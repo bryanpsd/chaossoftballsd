@@ -2,10 +2,40 @@
 const currentDate = new Date();
 const year = currentDate.getFullYear();
 
+import { menuItems } from "../Header/utils/headerItems";
 import * as styles from "./Footer.css";
 ---
 
 <footer class={styles.footerWrapper}>
+    <nav aria-label="Footer Navigation">
+        <ul class={styles.footerNav}>
+            {
+                menuItems.menuItems.map((item) => (
+                    <li>
+                        <a class={styles.footerNavLink} href={item.href}>
+                            {item.label}
+                        </a>
+                    </li>
+                ))
+            }
+            <li>
+                <a
+                    href="https://www.team.shop/en-us/team/chaos-softball-1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class={styles.footerNavLink}>Shop</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://www.instagram.com/chaossoftballsd/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class={styles.footerNavLink}>Instagram</a
+                >
+            </li>
+        </ul>
+    </nav>
     <p class={styles.footerCopyright}>
         &copy;{year} Chaos Softball SD. All rights reserved.
     </p>

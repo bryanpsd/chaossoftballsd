@@ -92,7 +92,6 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
   #hero > *:not(#background) {
     position: relative;
     z-index: 1;
-    margin: 0.5em auto;
   }
 
   #background {
@@ -105,12 +104,6 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
     z-index: -1;
     pointer-events: none;
     user-select: none;
-  }
-
-  #more-content {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
   }
 
   #faqs {
@@ -130,20 +123,5 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
     margin: 0 0 1em;
     color: #111827;
     font-size: 28px;
-  }
-
-  p {
-    color: #4b5563;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: -0.006em;
-    margin: 0;
-  }
-
-  @media screen and (max-width: 768px) {
-    #container {
-      display: flex;
-      flex-direction: column;
-    }
   }
 </style>

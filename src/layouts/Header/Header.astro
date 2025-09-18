@@ -24,14 +24,16 @@ const { pathname } = Astro.url;
   <div class={styles.header}>
     <div class={styles.logoWrapper}>
       <span class="sr-only">chaossoftballsd.org</span>
-      <Image
-        aria-hidden="true"
-        src={logo}
-        alt="Chaos Softball San Diego"
-        width={75}
-        loading="eager"
-        fetchpriority="high"
-      />
+      <a href="/">
+        <Image
+          aria-hidden="true"
+          src={logo}
+          alt="Chaos Softball San Diego"
+          width={75}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </a>
     </div>
     <MainNav items={menuItems} currentPath={pathname} client:load />
   </div>

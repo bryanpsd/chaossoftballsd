@@ -27,6 +27,7 @@
 		"@vanilla-extract/recipes": "^0.5.7",
 		"@vanilla-extract/sprinkles": "^1.6.5",
 		"astro": "^5.13.7",
+		"astro-icon": "^1.1.5",
 		"astro-robots-txt": "^1.0.0",
 		"contentful": "^11.7.18",
 		"react": "^19.1.1",

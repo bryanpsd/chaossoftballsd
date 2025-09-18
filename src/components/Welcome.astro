@@ -27,42 +27,40 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
 });
 ---
 
-<main>
-  <ToastContainer position="top-center" client:load />
-  <section id="hero">
-    <img id="background" src={background.src} alt="" fetchpriority="high" />
-    <h1>Chaos Softball San Diego</h1>
-    <Image
-      src={heroLogo}
-      alt="Chaos Softball San Diego Logo"
-      width={300}
-      loading="eager"
-      fetchpriority="high"
-    />
-  </section>
+<ToastContainer position="top-center" client:load />
+<section id="hero">
+  <img id="background" src={background.src} alt="" fetchpriority="high" />
+  <h1>Chaos Softball San Diego</h1>
+  <Image
+    src={heroLogo}
+    alt="Chaos Softball San Diego Logo"
+    width={300}
+    loading="eager"
+    fetchpriority="high"
+  />
+</section>
 
-  <section id="intro" class={`${pageMaxWidth} ${contentPadding}`}>
-    {
-      entries.items.map((item) => (
-        <section>
-          {item.fields.content && (
-            <RichText richText={item.fields.content} client:load />
-          )}
-        </section>
-      ))
-    }
-  </section>
+<section id="intro" class={`${pageMaxWidth} ${contentPadding}`}>
+  {
+    entries.items.map((item) => (
+      <section>
+        {item.fields.content && (
+          <RichText richText={item.fields.content} client:load />
+        )}
+      </section>
+    ))
+  }
+</section>
 
-  <section id="form" class={`${pageMaxWidth} ${contentPadding}`}>
-    <h2>Contact</h2>
-    <Form client:load />
-  </section>
+<section id="form" class={`${pageMaxWidth} ${contentPadding}`}>
+  <h2>Contact</h2>
+  <Form client:load />
+</section>
 
-  <section id="faqs" class={`${pageMaxWidth} ${contentPadding}`}>
-    <h2>Faqs</h2>
-    <BasicAccordion list={faqs.items[0]} client:load />
-  </section>
-</main>
+<section id="faqs" class={`${pageMaxWidth} ${contentPadding}`}>
+  <h2>Faqs</h2>
+  <BasicAccordion list={faqs.items[0]} client:load />
+</section>
 
 <style>
   #hero {
@@ -94,6 +92,7 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
   #hero > *:not(#background) {
     position: relative;
     z-index: 1;
+    margin: 0.5em auto;
   }
 
   #background {
@@ -121,15 +120,6 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
     flex-direction: column;
   }
 
-  main {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    margin-bottom: 80px;
-    font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans";
-  }
-
   h1 {
     font-size: 42px;
     margin-top: 0.25em;
@@ -150,26 +140,10 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
     margin: 0;
   }
 
-  .box {
-    padding: 16px;
-    background: rgba(255, 255, 255, 1);
-    border-radius: 16px;
-    border: 1px solid white;
-  }
-
   @media screen and (max-width: 768px) {
     #container {
       display: flex;
       flex-direction: column;
-    }
-
-    #hero {
-      display: block;
-      padding-top: 10%;
-    }
-
-    h1 {
-      line-height: 1.5;
     }
   }
 </style>

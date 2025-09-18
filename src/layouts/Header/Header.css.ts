@@ -9,7 +9,8 @@ export const headerWrapper = style([
 		width: "col-12",
 	}),
 	{
-		height: 84,
+		height: 90,
+		backgroundColor: "white",
 	},
 ]);
 

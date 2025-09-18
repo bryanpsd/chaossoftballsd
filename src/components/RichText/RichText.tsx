@@ -1,17 +1,40 @@
 import type { Options } from "@contentful/rich-text-react-renderer";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+
 import type { Document } from "@contentful/rich-text-types";
 import { BLOCKS } from "@contentful/rich-text-types";
 
+import { ResponsiveHeadline } from "../../components/ResponsiveHeadline";
+import { TextBlockSection } from "../../components/TextBlockSection";
+import { List } from "../../components/TextBlockSection/List";
+import type { TypographyProps } from "../../components/Typography";
+import { Typography } from "../../components/Typography";
+
 import * as styles from "./RichText.css";
+
+const BODY_TYPOGRAPHY_VARIANT: TypographyProps["variant"] = "bodyMd";
 
 const options: Options = {
 	renderNode: {
 		[BLOCKS.HEADING_2]: (_node, children) => (
-			<h2 style={{ fontSize: 28, margin: "0 0 1em" }}>{children}</h2>
+			<ResponsiveHeadline size={2} as="h2" style={{ marginBottom: "18px" }}>
+				{children}
+			</ResponsiveHeadline>
 		),
+
 		[BLOCKS.PARAGRAPH]: (_node, children) => (
-			<div className={styles.body}>{children}</div>
+			<Typography variant={BODY_TYPOGRAPHY_VARIANT} className={styles.body}>
+				{children}
+			</Typography>
+		),
+
+		[BLOCKS.UL_LIST]: (_node, children) => (
+			<List variant={BODY_TYPOGRAPHY_VARIANT}>{children}</List>
+		),
+
+		[BLOCKS.OL_LIST]: (_node, children) => (
+			<List variant={BODY_TYPOGRAPHY_VARIANT} ordered>
+				{children}
+			</List>
 		),
 	},
 };
@@ -22,8 +45,10 @@ interface RichTextProps {
 
 export const RichText = ({ richText }: RichTextProps) => {
 	return (
-		<div className={styles.textBlock}>
-			{richText ? documentToReactComponents(richText, options) : null}
-		</div>
+		<TextBlockSection
+			className={styles.textBlock}
+			text={richText}
+			options={options}
+		/>
 	);
 };

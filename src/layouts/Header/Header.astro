@@ -2,14 +2,14 @@
 import { Image } from "astro:assets";
 import { server } from "~actions";
 import logo from "../../assets/chaos-logo-small.png";
+import { Banner } from "../Banner";
 import { MainNav } from "../MainNav";
-// import { Banner } from "./components/Banner";
 import * as styles from "./Header.css";
 import { menuItems } from "./utils/headerItems";
 
 // import { menuItems } from "./utils/headerItems";
 
-// const banners = await Astro.callAction(server.getHeaderBanners, null);
+const banners = await Astro.callAction(server.getHeaderBanners, null);
 
 const { pathname } = Astro.url;
 ---
@@ -18,7 +18,11 @@ const { pathname } = Astro.url;
   >Jump to main content</a
 >
 
-<!-- {banners && banners.length > 0 && <Banner banners={banners} />} -->
+{
+  banners.data && (
+    <Banner banner={banners.data} currentPath={pathname} client:load />
+  )
+}
 
 <header class={styles.headerWrapper}>
   <div class={styles.header}>

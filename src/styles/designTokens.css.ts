@@ -52,6 +52,11 @@ const mediaQueryBreakpoints = objectKeys(breakpointQuery).reduce(
 const {
 	color: { brand, surface, outline, foreground, ...color },
 	space,
+	fontSize,
+	fontWeight,
+	lineHeight,
+	fontFamily,
+	duration,
 } = vars;
 // *******************************************************************
 
@@ -123,22 +128,22 @@ const colorProperties = defineProperties({
 // * Typography Properties                                           *
 // *******************************************************************
 
-// const typographyProperties = defineProperties({
-// 	conditions: {
-// 		...mediaQueryBreakpoints,
-// 	},
-// 	defaultCondition: "xs-min",
-// 	properties: {
-// 		fontFamily,
-// 		fontSize: { ...fontSize, ...space, inherit: "inherit" },
-// 		fontWeight,
-// 		lineHeight: { ...lineHeight, ...space, inherit: "inherit" },
-// 		textDecoration: ["none", "underline"],
-// 		textAlign: ["left", "center", "right", "justify", "inherit"],
-// 		textOverflow: ["ellipsis", "clip", "unset"],
-// 		whiteSpace: ["normal", "nowrap", "pre", "pre-wrap", "pre-line"],
-// 	},
-// });
+const typographyProperties = defineProperties({
+	conditions: {
+		...mediaQueryBreakpoints,
+	},
+	defaultCondition: "xs-min",
+	properties: {
+		fontFamily,
+		fontSize: { ...fontSize, ...space, inherit: "inherit" },
+		fontWeight,
+		lineHeight: { ...lineHeight, ...space, inherit: "inherit" },
+		textDecoration: ["none", "underline"],
+		textAlign: ["left", "center", "right", "justify", "inherit"],
+		textOverflow: ["ellipsis", "clip", "unset"],
+		whiteSpace: ["normal", "nowrap", "pre", "pre-wrap", "pre-line"],
+	},
+});
 // *******************************************************************
 
 // *******************************************************************
@@ -333,21 +338,21 @@ const displayProperties = defineProperties({
 // * Animation Properties                                               *
 // *******************************************************************
 
-// const animationProperties = defineProperties({
-// 	properties: {
-// 		transitionDuration: duration,
-// 	},
-// });
+const animationProperties = defineProperties({
+	properties: {
+		transitionDuration: duration,
+	},
+});
 
 // *******************************************************************
 
 export const tokens = createSprinkles(
 	displayProperties,
 	colorProperties,
-	// typographyProperties,
+	typographyProperties,
 	spacingProperties,
 	// borderProperties,
 	sizingProperties,
-	// animationProperties,
+	animationProperties,
 );
 export type Tokens = NonNullable<Parameters<typeof tokens>[0]>;

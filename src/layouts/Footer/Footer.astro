@@ -1,4 +1,6 @@
 ---
+import { Typography } from "../../components/Typography";
+
 const currentDate = new Date();
 const year = currentDate.getFullYear();
 
@@ -36,7 +38,7 @@ import * as styles from "./Footer.css";
             </li>
         </ul>
     </nav>
-    <p class={styles.footerCopyright}>
-        &copy;{year} Chaos Softball SD. All rights reserved.
-    </p>
+    <Typography className={styles.footerCopyright}>
+        &copy;{year} Chaos Softball SD. All rights reserved.</Typography
+    >
 </footer>

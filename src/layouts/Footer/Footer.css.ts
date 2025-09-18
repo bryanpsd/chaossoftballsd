@@ -1,6 +1,7 @@
 import { style } from "@vanilla-extract/css";
 import { contentPadding, pageMaxWidth } from "../../styles/common.css";
 import { tokens } from "../../styles/designTokens.css";
+import { fontFamily } from "../../styles/typography";
 
 export const footerWrapper = style([
 	tokens({
@@ -14,4 +15,6 @@ export const footerWrapper = style([
 	pageMaxWidth,
 ]);
 
-export const footerCopyright = style([tokens({})]);
+export const footerCopyright = style({
+	fontFamily: fontFamily.base + " !important",
+});

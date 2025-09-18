@@ -1,7 +1,25 @@
-import { globalStyle } from "@vanilla-extract/css";
+import { globalFontFace, globalStyle } from "@vanilla-extract/css";
+import { fontFamily } from "./typography";
+
+globalFontFace(fontFamily.base, {
+	sizeAdjust: "105%",
+	src: "local(arial)",
+});
+
+globalStyle("html", {
+	fontSize: 16,
+	boxSizing: "border-box",
+	WebkitFontSmoothing: "antialiased",
+	MozOsxFontSmoothing: "grayscale",
+});
 
 globalStyle("strong, b", {
 	fontWeight: 700,
+});
+
+// Apply base font to all elements to override reset
+globalStyle("*", {
+	fontFamily: fontFamily.base,
 });
 
 globalStyle("body", {

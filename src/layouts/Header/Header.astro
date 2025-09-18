@@ -2,12 +2,11 @@
 import { Image } from "astro:assets";
 import { server } from "~actions";
 import logo from "../../assets/chaos-logo-small.png";
+import * as commonStyles from "../../styles/common.css";
 import { Banner } from "../Banner";
 import { MainNav } from "../MainNav";
 import * as styles from "./Header.css";
 import { menuItems } from "./utils/headerItems";
-
-// import { menuItems } from "./utils/headerItems";
 
 const banners = await Astro.callAction(server.getHeaderBanners, null);
 
@@ -37,6 +36,7 @@ const { pathname } = Astro.url;
           height={81}
           loading="eager"
           fetchpriority="high"
+          class={commonStyles.image}
         />
       </a>
     </div>

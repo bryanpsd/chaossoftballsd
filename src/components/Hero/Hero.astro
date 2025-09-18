@@ -2,8 +2,8 @@
 import { Image } from "astro:assets";
 import background from "../../assets/chaos-bg.webp";
 import heroLogo from "../../assets/chaos-logo-large.png";
+import * as commonStyles from "../../styles/common.css";
 import { ResponsiveHeadline } from "../ResponsiveHeadline";
-
 import * as styles from "./Hero.css";
 ---
 
@@ -25,5 +25,6 @@ import * as styles from "./Hero.css";
         height={290}
         loading="eager"
         fetchpriority="high"
+        class={commonStyles.image}
     />
 </section>

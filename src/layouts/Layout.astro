@@ -1,4 +1,5 @@
 ---
+import { BackToTopButton } from "../components/BackToTop";
 import { BaseHead } from "./BaseHead";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
@@ -15,6 +16,7 @@ const { title, description, lang = "en-US" } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <BackToTopButton client:load />
   </body>
 </html>
 

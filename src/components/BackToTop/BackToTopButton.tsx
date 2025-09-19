@@ -1,0 +1,35 @@
+import { useEffect, useState } from "react";
+import { Button } from "../Button";
+import * as styles from "./BackToTopButton.css";
+
+export const BackToTopButton = () => {
+	const [visible, setVisible] = useState(false);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			setVisible(window.scrollY > 300);
+		};
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
+
+	const scrollToTop = () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	};
+
+	if (!visible) return null;
+
+	return (
+		<Button
+			type="button"
+			color="primary"
+			size="medium"
+			variant="contained"
+			className={styles.backToTopButton}
+			aria-label="Back to top"
+			onClick={scrollToTop}
+		>
+			↑
+		</Button>
+	);
+};

@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { color } from "../../styles/colors";
 import { tokens } from "../../styles/designTokens.css";
 
 export const body = style([
@@ -16,6 +17,12 @@ export const textBlock = style([
 		marginX: "auto",
 	}),
 ]);
+
+export const link = style({
+	color: color.brand.purple,
+	textDecoration: "underline",
+	textUnderlineOffset: "2px",
+});
 
 export const image = style({
 	display: "block",

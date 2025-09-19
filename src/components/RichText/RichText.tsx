@@ -1,7 +1,7 @@
 import type { Options } from "@contentful/rich-text-react-renderer";
 
 import type { Document } from "@contentful/rich-text-types";
-import { BLOCKS } from "@contentful/rich-text-types";
+import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 
 import { ResponsiveHeadline } from "../../components/ResponsiveHeadline";
 import { TextBlockSection } from "../../components/TextBlockSection";
@@ -36,6 +36,28 @@ const options: Options = {
 				{children}
 			</List>
 		),
+		[INLINES.HYPERLINK]: (node, children) => {
+			const uri = node.data.uri;
+			if (uri.startsWith("https://")) {
+				return (
+					<a
+						className={styles.link}
+						target="_blank"
+						rel="noopener noreferrer"
+						href={uri}
+					>
+						{children}
+					</a>
+				);
+			}
+			if (uri.startsWith("mailto:")) {
+				return (
+					<a className={styles.link} href={uri}>
+						{children}
+					</a>
+				);
+			}
+		},
 	},
 };
 

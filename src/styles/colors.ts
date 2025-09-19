@@ -1,6 +1,7 @@
 export const color = {
 	brand: {
 		purple: "#532293",
+		darkPurple: "#2d1457",
 		yellow: " #F5C50Cff",
 		orange: "#DC5B26ff",
 		pink: "#D84C6Dff",

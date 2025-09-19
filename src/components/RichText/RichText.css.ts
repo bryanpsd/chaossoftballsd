@@ -4,7 +4,7 @@ import { tokens } from "../../styles/designTokens.css";
 
 export const body = style([
 	{
-		fontSize: "18px",
+		fontSize: "16px",
 		maxWidth: "none",
 		marginBottom: "1.5em",
 		lineHeight: 1.3,

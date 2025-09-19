@@ -19,7 +19,7 @@ export const accordionTrigger = style({
 	background: color.brand.black,
 	color: color.brand.white,
 	fontWeight: 600,
-	fontSize: 18,
+	fontSize: 16,
 	padding: "12px 16px",
 	border: "none",
 	cursor: "pointer",

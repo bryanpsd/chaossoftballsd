@@ -1,4 +1,5 @@
 import { createGlobalTheme } from "@vanilla-extract/css";
+import { border } from "./borders";
 import { breakpoints } from "./breakpoints";
 import { color } from "./colors";
 import { duration } from "./duration";
@@ -14,6 +15,7 @@ export const vars = createGlobalTheme(":root", {
 	lineHeight,
 	fontWeight,
 	breakpoints,
+	border,
 	space,
 	duration,
 });

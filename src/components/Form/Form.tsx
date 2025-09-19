@@ -2,6 +2,7 @@ import { useId } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useCaptcha } from "~utils/useCaptcha";
+import { Button } from "../Button";
 import "react-toastify/dist/ReactToastify.css";
 import * as styles from "./Form.css";
 
@@ -101,11 +102,10 @@ export const Form = () => {
 					<span className={styles.error}>{errors.message.message}</span>
 				)}
 			</div>
-
 			<div>
-				<button className={styles.submitButton} type="submit">
+				<Button type="submit" color="primary" size="small" variant="contained">
 					Submit
-				</button>
+				</Button>
 			</div>
 		</form>
 	);

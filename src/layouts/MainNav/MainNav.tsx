@@ -1,5 +1,6 @@
 import * as NavMenu from "@radix-ui/react-navigation-menu";
 import { useState } from "react";
+import { Button } from "../../components/Button";
 import * as styles from "./MainNav.css";
 
 type NavigationLink = {
@@ -28,13 +29,16 @@ export const MainNav = ({ items, currentPath }: MainNavProps) => {
 							asChild
 							active={!!(item.href && currentPath.startsWith(item.href))}
 						>
-							<a
-								className={styles.navLink}
+							<Button
+								as="a"
+								size="small"
 								target={item.target}
 								href={item.href}
+								color="primary"
+								variant="contained"
 							>
 								{item.label}
-							</a>
+							</Button>
 						</NavMenu.Link>
 					</NavMenu.Item>
 				))}

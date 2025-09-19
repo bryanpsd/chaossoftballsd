@@ -52,6 +52,7 @@ const mediaQueryBreakpoints = objectKeys(breakpointQuery).reduce(
 const {
 	color: { brand, surface, outline, foreground, ...color },
 	space,
+	border,
 	fontSize,
 	fontWeight,
 	lineHeight,
@@ -180,31 +181,31 @@ const spacingProperties = defineProperties({
 // * Border Properties                                               *
 // *******************************************************************
 
-// const borderProperties = defineProperties({
-// 	properties: {
-// 		borderStyle: border.style,
-// 		borderStyleTop: border.style,
-// 		borderStyleBottom: border.style,
-// 		borderStyleRight: border.style,
-// 		borderStyleLeft: border.style,
+const borderProperties = defineProperties({
+	properties: {
+		borderStyle: border.style,
+		borderStyleTop: border.style,
+		borderStyleBottom: border.style,
+		borderStyleRight: border.style,
+		borderStyleLeft: border.style,
 
-// 		borderWidth: space,
-// 		borderTopWidth: space,
-// 		borderBottomWidth: space,
-// 		borderRightWidth: space,
-// 		borderLeftWidth: space,
+		borderWidth: space,
+		borderTopWidth: space,
+		borderBottomWidth: space,
+		borderRightWidth: space,
+		borderLeftWidth: space,
 
-// 		borderRadius: border.radius,
-// 		outline: ["none"],
-// 	},
-// 	shorthands: {
-// 		borderStyleX: ["borderStyleRight", "borderStyleLeft"],
-// 		borderStyleY: ["borderStyleTop", "borderStyleBottom"],
+		borderRadius: border.radius,
+		outline: ["none"],
+	},
+	shorthands: {
+		borderStyleX: ["borderStyleRight", "borderStyleLeft"],
+		borderStyleY: ["borderStyleTop", "borderStyleBottom"],
 
-// 		borderWidthX: ["borderRightWidth", "borderLeftWidth"],
-// 		borderWidthY: ["borderTopWidth", "borderBottomWidth"],
-// 	},
-// });
+		borderWidthX: ["borderRightWidth", "borderLeftWidth"],
+		borderWidthY: ["borderTopWidth", "borderBottomWidth"],
+	},
+});
 // *******************************************************************
 
 // *******************************************************************
@@ -351,7 +352,7 @@ export const tokens = createSprinkles(
 	colorProperties,
 	typographyProperties,
 	spacingProperties,
-	// borderProperties,
+	borderProperties,
 	sizingProperties,
 	animationProperties,
 );

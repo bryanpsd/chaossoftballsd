@@ -21,7 +21,7 @@ export const footerWrapper = style([
 export const footerNav = style({
 	display: "flex",
 	gap: 8,
-	fontSize: "18px",
+	fontSize: "16px",
 });
 
 export const footerNavLink = style({
@@ -39,5 +39,5 @@ export const footerNavLink = style({
 export const footerCopyright = style({
 	fontFamily: fontFamily.base,
 	textAlign: "center",
-	fontSize: "18px",
+	fontSize: "16px",
 });

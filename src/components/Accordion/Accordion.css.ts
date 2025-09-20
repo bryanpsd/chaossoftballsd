@@ -1,5 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import { color } from "../../styles/colors";
+import { color } from "../../styles/tokens/colors";
 
 export const accordionRoot = style({
 	width: "100%",

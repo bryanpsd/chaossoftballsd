@@ -1,6 +1,6 @@
 import { globalStyle, style } from "@vanilla-extract/css";
 import { type RecipeVariants, recipe } from "@vanilla-extract/recipes";
-import { tokens } from "../../styles/designTokens.css";
+import { tokens } from "../../styles/tokens/designTokens.css";
 
 export const baseButton = style([
 	tokens({

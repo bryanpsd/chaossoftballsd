@@ -2,9 +2,9 @@
 import { ToastContainer } from "react-toastify";
 import { contentfulClient } from "~services/contentful/contentful";
 import type { TypePageSectionSkeleton } from "~types/contentful";
-import type { TypeListSkeleton } from "~types/contentful/TypeList";
+import type { TypeList, TypeListSkeleton } from "~types/contentful/TypeList";
 
-import { contentPadding, pageMaxWidth } from "../styles/common.css";
+import { contentPadding, pageMaxWidth } from "../styles/utilities/common.css";
 import { BasicAccordion } from "./Accordion";
 import { Form } from "./Form";
 import { Hero } from "./Hero";
@@ -45,5 +45,8 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
   <ResponsiveHeadline size={2} as="h2" style={{ marginBottom: "18px" }}>
     Faqs
   </ResponsiveHeadline>
-  <BasicAccordion list={faqs.items[0]} client:load />
+  <BasicAccordion
+    list={faqs.items[0] as TypeList<"WITHOUT_UNRESOLVABLE_LINKS">}
+    client:load
+  />
 </section>

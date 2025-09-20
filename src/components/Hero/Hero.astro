@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import background from "../../assets/chaos-bg.webp";
 import heroLogo from "../../assets/chaos-logo-large.png";
-import * as commonStyles from "../../styles/common.css";
+import * as commonStyles from "../../styles/utilities/common.css";
 import { ResponsiveHeadline } from "../ResponsiveHeadline";
 import * as styles from "./Hero.css";
 ---
@@ -15,16 +15,18 @@ import * as styles from "./Hero.css";
         alt=""
         fetchpriority="high"
     />
-    <ResponsiveHeadline size={3} as="h1" style={{ color: "white" }}>
-        Chaos Softball San Diego
-    </ResponsiveHeadline>
-    <Image
-        src={heroLogo}
-        alt="Chaos Softball San Diego Logo"
-        width={293}
-        height={290}
-        loading="eager"
-        fetchpriority="high"
-        class={commonStyles.image}
-    />
+    <div class={styles.heroContainer}>
+        <ResponsiveHeadline size={3} as="h1" style={{ color: "white" }}>
+            Chaos Softball San Diego
+        </ResponsiveHeadline>
+        <Image
+            src={heroLogo}
+            alt="Chaos Softball San Diego Logo"
+            width={293}
+            height={290}
+            loading="eager"
+            fetchpriority="high"
+            class={commonStyles.image}
+        />
+    </div>
 </section>

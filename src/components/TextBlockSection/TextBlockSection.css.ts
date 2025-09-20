@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
-import { color } from "../../styles/colors";
-import { tokens } from "../../styles/designTokens.css";
+import { color } from "../../styles/tokens/colors";
+import { tokens } from "../../styles/tokens/designTokens.css";
 
 const firstChildMarginTop = style({
 	selectors: {

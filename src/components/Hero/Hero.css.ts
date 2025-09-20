@@ -44,6 +44,14 @@ export const background = style({
 	userSelect: "none",
 });
 
+export const heroContainer = style({
+	display: "flex",
+	alignItems: "center",
+	flexDirection: "column",
+	justifyContent: "center",
+	textAlign: "center",
+});
+
 globalStyle(`#faqs`, {
 	marginTop: "2rem",
 	display: "flex",

@@ -1,5 +1,5 @@
 import { globalFontFace, globalStyle } from "@vanilla-extract/css";
-import { fontFamily } from "./typography";
+import { fontFamily } from "../tokens/typography";
 
 globalFontFace(fontFamily.base, {
 	sizeAdjust: "105%",

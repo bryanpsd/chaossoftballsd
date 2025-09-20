@@ -1,5 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import { tokens } from "./designTokens.css";
+import { tokens } from "../tokens/designTokens.css";
 
 export const mainWrapper = style([
 	tokens({

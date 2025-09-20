@@ -21,7 +21,7 @@ export type TypeList<
 	Locales extends LocaleCode = LocaleCode,
 > = Entry<TypeListSkeleton, Modifiers, Locales>;
 
-export interface TypePageSectionFields {
-	title: EntryFieldTypes.Symbol;
-	content?: EntryFieldTypes.RichText;
-}
+export type TypeListProps = TypeList<
+	"WITHOUT_UNRESOLVABLE_LINKS",
+	"en-US"
+>["fields"];

@@ -1,5 +1,4 @@
 import type { Options } from "@contentful/rich-text-react-renderer";
-
 import type { Document } from "@contentful/rich-text-types";
 import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import { ContentfulImage } from "~/components/Image/ContentfulImage";

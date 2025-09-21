@@ -36,8 +36,9 @@
       "astro/client"
     ],
     "lib": [
-      "ES2022",
-      "DOM"
+      "dom",
+      "dom.iterable",
+      "ESNext"
     ],
     "verbatimModuleSyntax": true,
   }

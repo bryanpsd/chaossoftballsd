@@ -1,0 +1,19 @@
+---
+import { Layout } from "~/layouts";
+
+import * as styles from "~/styles/utilities/errorPages.css";
+
+export type Props = {
+  title: string;
+};
+
+const { title } = Astro.props;
+---
+
+<Layout title={title}>
+  <main>
+    <div class={styles.contentPadding}>
+      <slot />
+    </div>
+  </main>
+</Layout>

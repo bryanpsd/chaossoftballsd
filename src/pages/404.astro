@@ -1,0 +1,12 @@
+---
+export const prerender = true;
+
+import { ResponsiveHeadline } from "~/components/ResponsiveHeadline";
+import CustomError from "~/layouts/Error/Error.astro";
+---
+
+<CustomError title="Not Found">
+  <ResponsiveHeadline size={2} as="h1"
+    >Oops! We can't find that page.</ResponsiveHeadline
+  >
+</CustomError>

@@ -449,6 +449,164 @@
           }
         }
       ]
+    },
+    {
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "l66beixra3vz"
+          }
+        },
+        "id": "page",
+        "type": "ContentType",
+        "createdAt": "2025-09-20T20:29:38.387Z",
+        "updatedAt": "2025-09-20T20:29:38.691Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 1,
+        "publishedAt": "2025-09-20T20:29:38.691Z",
+        "firstPublishedAt": "2025-09-20T20:29:38.691Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+          }
+        },
+        "publishedCounter": 1,
+        "version": 2,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/l66beixra3vz/environments/master/content_types/page"
+      },
+      "displayField": "title",
+      "name": "Page",
+      "description": "",
+      "fields": [
+        {
+          "id": "title",
+          "name": "Title",
+          "type": "Symbol",
+          "localized": false,
+          "required": true,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "seoTitle",
+          "name": "SEO Title",
+          "type": "Symbol",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "seoDescription",
+          "name": "SEO Description",
+          "type": "Symbol",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "slug",
+          "name": "Slug",
+          "type": "Symbol",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "class",
+          "name": "Class",
+          "type": "Symbol",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "content",
+          "name": "Content",
+          "type": "RichText",
+          "localized": false,
+          "required": false,
+          "validations": [
+            {
+              "enabledMarks": [
+                "bold",
+                "italic",
+                "underline",
+                "code",
+                "subscript",
+                "strikethrough",
+                "superscript"
+              ],
+              "message": "Only bold, italic, underline, code, subscript, strikethrough, and superscript marks are allowed"
+            },
+            {
+              "enabledNodeTypes": [
+                "heading-1",
+                "heading-2",
+                "heading-3",
+                "heading-4",
+                "heading-5",
+                "heading-6",
+                "ordered-list",
+                "unordered-list",
+                "hr",
+                "blockquote",
+                "embedded-entry-block",
+                "embedded-asset-block",
+                "table",
+                "asset-hyperlink",
+                "embedded-entry-inline",
+                "entry-hyperlink",
+                "hyperlink"
+              ],
+              "message": "Only heading 1, heading 2, heading 3, heading 4, heading 5, heading 6, ordered list, unordered list, horizontal rule, quote, block entry, asset, table, link to asset, inline entry, link to entry, and link to Url nodes are allowed"
+            },
+            {
+              "nodes": {
+              }
+            }
+          ],
+          "disabled": false,
+          "omitted": false
+        }
+      ]
     }
   ],
   "tags": [
@@ -690,6 +848,82 @@
           "widgetNamespace": "builtin"
         }
       ]
+    },
+    {
+      "sys": {
+        "id": "default",
+        "type": "EditorInterface",
+        "space": {
+          "sys": {
+            "id": "l66beixra3vz",
+            "type": "Link",
+            "linkType": "Space"
+          }
+        },
+        "version": 2,
+        "createdAt": "2025-09-20T20:29:38.874Z",
+        "createdBy": {
+          "sys": {
+            "id": "4O3NQmYAbLm6HMXZ8nTywh",
+            "type": "Link",
+            "linkType": "User"
+          }
+        },
+        "updatedAt": "2025-09-20T20:29:39.183Z",
+        "updatedBy": {
+          "sys": {
+            "id": "4O3NQmYAbLm6HMXZ8nTywh",
+            "type": "Link",
+            "linkType": "User"
+          }
+        },
+        "contentType": {
+          "sys": {
+            "id": "page",
+            "type": "Link",
+            "linkType": "ContentType"
+          }
+        },
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        }
+      },
+      "controls": [
+        {
+          "fieldId": "title",
+          "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "seoTitle",
+          "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "seoDescription",
+          "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "slug",
+          "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "class",
+          "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "content",
+          "widgetId": "richTextEditor",
+          "widgetNamespace": "builtin"
+        }
+      ]
     }
   ],
   "entries": [
@@ -708,111 +942,10 @@
             "id": "l66beixra3vz"
           }
         },
-        "id": "381sgKLpmnnmpUMovcow4j",
-        "type": "Entry",
-        "createdAt": "2025-09-15T12:36:13.360Z",
-        "updatedAt": "2025-09-16T02:46:00.476Z",
-        "environment": {
-          "sys": {
-            "id": "master",
-            "type": "Link",
-            "linkType": "Environment"
-          }
-        },
-        "publishedVersion": 4,
-        "publishedAt": "2025-09-16T02:46:00.476Z",
-        "firstPublishedAt": "2025-09-16T02:46:00.476Z",
-        "createdBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "4O3NQmYAbLm6HMXZ8nTywh"
-          }
-        },
-        "updatedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "4O3NQmYAbLm6HMXZ8nTywh"
-          }
-        },
-        "publishedCounter": 1,
-        "version": 5,
-        "publishedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "4O3NQmYAbLm6HMXZ8nTywh"
-          }
-        },
-        "fieldStatus": {
-          "*": {
-            "en-US": "published"
-          }
-        },
-        "automationTags": [
-        ],
-        "contentType": {
-          "sys": {
-            "type": "Link",
-            "linkType": "ContentType",
-            "id": "banner"
-          }
-        },
-        "urn": "crn:contentful:::content:spaces/l66beixra3vz/environments/master/entries/381sgKLpmnnmpUMovcow4j"
-      },
-      "fields": {
-        "name": {
-          "en-US": "Test Banner"
-        },
-        "body": {
-          "en-US": {
-            "data": {
-            },
-            "content": [
-              {
-                "data": {
-                },
-                "content": [
-                  {
-                    "data": {
-                    },
-                    "marks": [
-                    ],
-                    "value": "This is a test",
-                    "nodeType": "text"
-                  }
-                ],
-                "nodeType": "paragraph"
-              }
-            ],
-            "nodeType": "document"
-          }
-        },
-        "global": {
-          "en-US": true
-        }
-      }
-    },
-    {
-      "metadata": {
-        "tags": [
-        ],
-        "concepts": [
-        ]
-      },
-      "sys": {
-        "space": {
-          "sys": {
-            "type": "Link",
-            "linkType": "Space",
-            "id": "l66beixra3vz"
-          }
-        },
         "id": "2kzfhrThUQHUHylyweefXn",
         "type": "Entry",
         "createdAt": "2025-09-15T15:09:11.206Z",
-        "updatedAt": "2025-09-16T02:46:00.352Z",
+        "updatedAt": "2025-09-18T22:06:55.244Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -820,8 +953,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 10,
-        "publishedAt": "2025-09-16T02:46:00.352Z",
+        "publishedVersion": 30,
+        "publishedAt": "2025-09-18T22:06:55.244Z",
         "firstPublishedAt": "2025-09-16T02:46:00.352Z",
         "createdBy": {
           "sys": {
@@ -834,16 +967,16 @@
           "sys": {
             "type": "Link",
             "linkType": "User",
-            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+            "id": "1rl0sCyEfyck00MpGTMmKB"
           }
         },
-        "publishedCounter": 1,
-        "version": 11,
+        "publishedCounter": 2,
+        "version": 31,
         "publishedBy": {
           "sys": {
             "type": "Link",
             "linkType": "User",
-            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+            "id": "1rl0sCyEfyck00MpGTMmKB"
           }
         },
         "fieldStatus": {
@@ -879,7 +1012,7 @@
                 "content": [
                   {
                     "nodeType": "text",
-                    "value": "About",
+                    "value": "Building Athletes. Not Just Softball Players.",
                     "marks": [
                     ],
                     "data": {
@@ -894,26 +1027,228 @@
                 "content": [
                   {
                     "nodeType": "text",
-                    "value": "The ",
+                    "value": "At Chaos Softball, we’re raising the bar for youth sports. We believe that great players come from strong athletes, so our program is designed to build speed, strength, and confidence first. The game comes next.",
                     "marks": [
                     ],
                     "data": {
                     }
-                  },
+                  }
+                ]
+              },
+              {
+                "nodeType": "heading-3",
+                "data": {
+                },
+                "content": [
                   {
                     "nodeType": "text",
-                    "value": "Chaos",
+                    "value": "What Makes Chaos Different:",
                     "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "unordered-list",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "list-item",
+                    "data": {
+                    },
+                    "content": [
                       {
-                        "type": "bold"
+                        "nodeType": "paragraph",
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Year-Round Development",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "data": {
+                            }
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": " – We train consistently, not seasonally, with structured practices each week.",
+                            "marks": [
+                            ],
+                            "data": {
+                            }
+                          }
+                        ]
                       }
-                    ],
-                    "data": {
-                    }
+                    ]
                   },
                   {
+                    "nodeType": "list-item",
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Premier Facilities",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "data": {
+                            }
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": " – Our athletes have access to high school fields and full batting cage setups to create a professional training environment.",
+                            "marks": [
+                            ],
+                            "data": {
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Athletic Performance Training",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "data": {
+                            }
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": " – Partnering with strength, agility and mobility coaches to provide an unparalleled atmosphere to foster growth. ",
+                            "marks": [
+                            ],
+                            "data": {
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Measured Growth",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "data": {
+                            }
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": " – Every athlete is baseline tested and re-tested six times a year. Results are tracked with ",
+                            "marks": [
+                            ],
+                            "data": {
+                            }
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": "Chaos Growth Charts",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "data": {
+                            }
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": ", giving families real data on development and unbiased comparisons with peer groups.",
+                            "marks": [
+                            ],
+                            "data": {
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Elite Coaching Staff",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "data": {
+                            }
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": " – Led by coaches who were successful athletes themselves, our staff focuses on teaching fundamentals, strategy, and the mindset needed to compete at the highest level.",
+                            "marks": [
+                            ],
+                            "data": {
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
                     "nodeType": "text",
-                    "value": " are a competitive 10U girls’ softball team based in San Diego, built on a foundation of hard work, teamwork, and love for the game. These young athletes bring passion and energy to the field, striving to improve their skills while supporting one another every step of the way. With a strong commitment to player development, the Chaos focus on teaching fundamentals, sharpening game strategy, and fostering confidence both on and off the diamond.",
+                    "value": "More than a team, Chaos is a program where athletes grow stronger, faster, and more confident; both on the field and in life.",
                     "marks": [
                     ],
                     "data": {
@@ -928,7 +1263,7 @@
                 "content": [
                   {
                     "nodeType": "text",
-                    "value": "More than just a team, the Chaos are a family. Coaches, players, and families work together to create an environment where the girls can grow as athletes and as individuals. Competing in tournaments across San Diego and beyond, the Chaos embrace every challenge with determination and grit. Win or lose, their mission is clear—play with heart, respect the game, and always bring the Chaos spirit.",
+                    "value": "\n",
                     "marks": [
                     ],
                     "data": {
@@ -959,7 +1294,7 @@
         "id": "5bWeaVgO7TBmx34O0pxRdf",
         "type": "Entry",
         "createdAt": "2025-09-15T15:58:47.546Z",
-        "updatedAt": "2025-09-16T02:46:00.411Z",
+        "updatedAt": "2025-09-19T11:15:33.941Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -967,8 +1302,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 6,
-        "publishedAt": "2025-09-16T02:46:00.411Z",
+        "publishedVersion": 13,
+        "publishedAt": "2025-09-19T11:15:33.941Z",
         "firstPublishedAt": "2025-09-16T02:46:00.411Z",
         "createdBy": {
           "sys": {
@@ -984,8 +1319,8 @@
             "id": "4O3NQmYAbLm6HMXZ8nTywh"
           }
         },
-        "publishedCounter": 1,
-        "version": 7,
+        "publishedCounter": 4,
+        "version": 14,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -1026,13 +1361,6 @@
               "sys": {
                 "type": "Link",
                 "linkType": "Entry",
-                "id": "3yCApLhMcKCy70DVEgKJLV"
-              }
-            },
-            {
-              "sys": {
-                "type": "Link",
-                "linkType": "Entry",
                 "id": "1Gc57boUbwiC436zwFfJld"
               }
             },
@@ -1041,6 +1369,13 @@
                 "type": "Link",
                 "linkType": "Entry",
                 "id": "1KQojZnkEY9U4sARmn2Eob"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "6jpbNc5bFNJqoKzwNMdjTP"
               }
             }
           ]
@@ -1065,7 +1400,7 @@
         "id": "2V7yy9FvWCmz2sRLZeoXCo",
         "type": "Entry",
         "createdAt": "2025-09-15T15:58:56.160Z",
-        "updatedAt": "2025-09-16T02:46:00.461Z",
+        "updatedAt": "2025-09-18T22:16:00.294Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -1073,8 +1408,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 5,
-        "publishedAt": "2025-09-16T02:46:00.461Z",
+        "publishedVersion": 24,
+        "publishedAt": "2025-09-18T22:16:00.294Z",
         "firstPublishedAt": "2025-09-16T02:46:00.461Z",
         "createdBy": {
           "sys": {
@@ -1087,16 +1422,16 @@
           "sys": {
             "type": "Link",
             "linkType": "User",
-            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+            "id": "1rl0sCyEfyck00MpGTMmKB"
           }
         },
-        "publishedCounter": 1,
-        "version": 6,
+        "publishedCounter": 3,
+        "version": 25,
         "publishedBy": {
           "sys": {
             "type": "Link",
             "linkType": "User",
-            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+            "id": "1rl0sCyEfyck00MpGTMmKB"
           }
         },
         "fieldStatus": {
@@ -1117,7 +1452,7 @@
       },
       "fields": {
         "question": {
-          "en-US": "What age group does the Chaos softball team play in?"
+          "en-US": "Where/When does Chaos train?"
         },
         "answer": {
           "en-US": {
@@ -1132,7 +1467,37 @@
                 "content": [
                   {
                     "nodeType": "text",
-                    "value": "The Chaos is a 10U (10 and under) girls fastpitch softball team. Players must be age-eligible as of January 1 of the current season.",
+                    "value": "Chaos Softball is a year-round program based in North County San Diego. We practice twice per week at premier local high school facilities, with access to well-maintained fields and full batting cages that give our athletes a professional training environment.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Training isn’t just about showing up to practice, it’s about building athletes. Our weekly sessions combine fundamentals, game strategy, and athletic development, while tournaments and friendlies throughout the year provide real-game opportunities to measure progress.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "As for the “where”? If you’re in North County, you’ll hear us before you see us: gloves popping, bats cracking, and the unmistakable energy of Chaos athletes going all out. Contact us for a quick workout invite. Everyone is invited to come and get a workout in. ",
                     "marks": [
                     ],
                     "data": {
@@ -1163,7 +1528,7 @@
         "id": "3yCApLhMcKCy70DVEgKJLV",
         "type": "Entry",
         "createdAt": "2025-09-15T16:00:53.450Z",
-        "updatedAt": "2025-09-16T02:46:00.445Z",
+        "updatedAt": "2025-09-18T22:26:58.725Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -1171,8 +1536,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 3,
-        "publishedAt": "2025-09-16T02:46:00.445Z",
+        "publishedVersion": 23,
+        "publishedAt": "2025-09-18T22:26:58.725Z",
         "firstPublishedAt": "2025-09-16T02:46:00.445Z",
         "createdBy": {
           "sys": {
@@ -1185,16 +1550,16 @@
           "sys": {
             "type": "Link",
             "linkType": "User",
-            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+            "id": "1rl0sCyEfyck00MpGTMmKB"
           }
         },
-        "publishedCounter": 1,
-        "version": 4,
+        "publishedCounter": 5,
+        "version": 24,
         "publishedBy": {
           "sys": {
             "type": "Link",
             "linkType": "User",
-            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+            "id": "1rl0sCyEfyck00MpGTMmKB"
           }
         },
         "fieldStatus": {
@@ -1215,7 +1580,7 @@
       },
       "fields": {
         "question": {
-          "en-US": "When and where do the Chaos practice?"
+          "en-US": "How do you test and track athlete progress?"
         },
         "answer": {
           "en-US": {
@@ -1230,7 +1595,424 @@
                 "content": [
                   {
                     "nodeType": "text",
-                    "value": "Practices are typically held 2–3 times a week at local fields. Specific times and locations are shared with families before each season.",
+                    "value": "At Chaos Softball, we don’t just ",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": "say",
+                    "marks": [
+                      {
+                        "type": "italic"
+                      }
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": " we focus on development, we prove it. Every athlete in our program is measured, tracked, and celebrated through our ",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": "Chaos Growth Charts",
+                    "marks": [
+                      {
+                        "type": "bold"
+                      }
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": ", a system designed to make progress visible and keep players motivated year-round.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "heading-3",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Baseline Testing",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "When an athlete joins Chaos, we establish their starting point with a full set of performance metrics. We measure:",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "unordered-list",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "list-item",
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Speed & Agility",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "data": {
+                            }
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": " – home-to-first times, shuttle runs, broad jumps, and plank holds.",
+                            "marks": [
+                            ],
+                            "data": {
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Defensive Skills",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "data": {
+                            }
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": " – throwing accuracy percentages, reaction drills, and fielding clean reps.",
+                            "marks": [
+                            ],
+                            "data": {
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Offense",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "data": {
+                            }
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": " – exit velocity, bunt success rate, and situational hitting execution.",
+                            "marks": [
+                            ],
+                            "data": {
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Pitchers",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "data": {
+                            }
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": " – fastball velocity, strike percentage, pitch command, and spin/movement (tracked with radar and charts).",
+                            "marks": [
+                            ],
+                            "data": {
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Catchers",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "data": {
+                            }
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": " – pop times to second, receiving consistency, blocking percentage, and throw-down accuracy.",
+                            "marks": [
+                            ],
+                            "data": {
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "This ensures every athlete has a clear snapshot of where they’re starting from, both as a player and as an overall athlete.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "heading-3",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Regular Retesting",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Development doesn’t happen overnight, but it does happen with consistency. That’s why we ",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": "re-test six times per year, ",
+                    "marks": [
+                      {
+                        "type": "bold"
+                      }
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": "about once every two months. These checkpoints give players and families real data on how training, practice, and at-home work are paying off.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "heading-3",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Chaos Growth Charts",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "After each testing cycle, results are updated on personalized ",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": "Chaos Growth Charts",
+                    "marks": [
+                      {
+                        "type": "bold"
+                      }
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": ". Athletes and families can see trends over time, celebrate personal records, and set new goals together. Growth Charts cover all positions, including pitchers and catchers, so no one’s development gets left behind.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "heading-3",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Motivation & Accountability",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Nothing fires up a young athlete like seeing proof of improvement. Whether it’s shaving time off a sprint, gaining velocity on the mound, dropping their pop time behind the plate, or hitting more line drives, the Growth Charts show that hard work pays off. And when the data highlights areas for improvement, it becomes a powerful teaching tool for coaches, players, and families alike.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "At Chaos, we believe growth should never be a mystery. With the Chaos Growth Charts, development is ",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": "measured, tracked, and celebrated, ",
+                    "marks": [
+                      {
+                        "type": "bold"
+                      }
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": "because building athletes isn’t about hoping they improve, it’s about making sure they do.",
                     "marks": [
                     ],
                     "data": {
@@ -1261,7 +2043,7 @@
         "id": "1Gc57boUbwiC436zwFfJld",
         "type": "Entry",
         "createdAt": "2025-09-15T16:01:45.386Z",
-        "updatedAt": "2025-09-16T02:46:00.430Z",
+        "updatedAt": "2025-09-18T22:11:17.505Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -1269,8 +2051,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 3,
-        "publishedAt": "2025-09-16T02:46:00.430Z",
+        "publishedVersion": 8,
+        "publishedAt": "2025-09-18T22:11:17.505Z",
         "firstPublishedAt": "2025-09-16T02:46:00.430Z",
         "createdBy": {
           "sys": {
@@ -1283,16 +2065,16 @@
           "sys": {
             "type": "Link",
             "linkType": "User",
-            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+            "id": "1rl0sCyEfyck00MpGTMmKB"
           }
         },
-        "publishedCounter": 1,
-        "version": 4,
+        "publishedCounter": 3,
+        "version": 9,
         "publishedBy": {
           "sys": {
             "type": "Link",
             "linkType": "User",
-            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+            "id": "1rl0sCyEfyck00MpGTMmKB"
           }
         },
         "fieldStatus": {
@@ -1328,7 +2110,7 @@
                 "content": [
                   {
                     "nodeType": "text",
-                    "value": "Players are expected to attend practices, games, and weekend tournaments. Families should plan for some travel depending on the schedule.",
+                    "value": "Chaos Softball is a year-round program designed for families who want to see their athletes grow on and off the field. Players practice twice a week and compete in tournaments and friendly games throughout the year, ensuring steady skill development and game experience. Beyond the field, we provide structured “homework” assignments, such as drills, fitness goals, or mindset exercises, to reinforce learning and build accountability. Families are an essential part of the process, helping track progress on growth charts and supporting athletes as they work toward their goals. At Chaos, the time commitment is shared: coaches, players, and families working together to build athletes, not just softball players. ",
                     "marks": [
                     ],
                     "data": {
@@ -1359,7 +2141,7 @@
         "id": "1KQojZnkEY9U4sARmn2Eob",
         "type": "Entry",
         "createdAt": "2025-09-15T16:02:20.679Z",
-        "updatedAt": "2025-09-16T02:46:00.387Z",
+        "updatedAt": "2025-09-19T11:43:26.662Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -1367,8 +2149,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 3,
-        "publishedAt": "2025-09-16T02:46:00.387Z",
+        "publishedVersion": 10,
+        "publishedAt": "2025-09-19T11:43:26.662Z",
         "firstPublishedAt": "2025-09-16T02:46:00.387Z",
         "createdBy": {
           "sys": {
@@ -1384,8 +2166,8 @@
             "id": "4O3NQmYAbLm6HMXZ8nTywh"
           }
         },
-        "publishedCounter": 1,
-        "version": 4,
+        "publishedCounter": 3,
+        "version": 11,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -1426,7 +2208,659 @@
                 "content": [
                   {
                     "nodeType": "text",
-                    "value": "Parents interested in having their child try out or join can contact the coaches directly or check team updates through our official page/social media.",
+                    "value": "Want to see what the Chaos is all about? Follow us on Instagram ",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "hyperlink",
+                    "data": {
+                      "uri": "https://instagram.com/ChaosSoftballSD"
+                    },
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "@ChaosSoftballSD",
+                        "marks": [
+                        ],
+                        "data": {
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": " for highlights, updates, and a behind-the-scenes look at our athletes in action. Have questions or want details about joining the program? Shoot us an email at ",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "hyperlink",
+                    "data": {
+                      "uri": "mailto:ChaosSoftballSanDiego@gmail.com"
+                    },
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "ChaosSoftballSanDiego@gmail.com",
+                        "marks": [
+                        ],
+                        "data": {
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": ", ",
+                    "marks": [
+                      {
+                        "type": "bold"
+                      }
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": "we actually check it (between practices, tournaments, and the occasional sunflower seed break).",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "The fastest way to get plugged in: follow, email, or come find us at the ballfield, just look for the neon Chaos gear and the loudest cheering section.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "l66beixra3vz"
+          }
+        },
+        "id": "6jpbNc5bFNJqoKzwNMdjTP",
+        "type": "Entry",
+        "createdAt": "2025-09-18T22:16:33.914Z",
+        "updatedAt": "2025-09-19T11:43:26.636Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 9,
+        "publishedAt": "2025-09-19T11:43:26.636Z",
+        "firstPublishedAt": "2025-09-18T22:17:43.913Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "1rl0sCyEfyck00MpGTMmKB"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+          }
+        },
+        "publishedCounter": 2,
+        "version": 10,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "questionAnswer"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/l66beixra3vz/environments/master/entries/6jpbNc5bFNJqoKzwNMdjTP"
+      },
+      "fields": {
+        "question": {
+          "en-US": "Do you hold Tryouts? When are they?"
+        },
+        "answer": {
+          "en-US": {
+            "nodeType": "document",
+            "data": {
+            },
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Chaos Softball does not run traditional tryouts. Instead, we host open workouts where athletes can train alongside our players, meet the coaches, and experience the Chaos culture firsthand. This gives families a chance to see how we train and ensures athletes feel comfortable in our environment.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Open workouts are scheduled throughout the year and are open to any player who wants to learn more about our program. If your athlete is ready to take the next step, reach out to us on Instagram ",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "hyperlink",
+                    "data": {
+                      "uri": "https://instagram.com/ChaosSoftballSD"
+                    },
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "@ChaosSoftballSD",
+                        "marks": [
+                        ],
+                        "data": {
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": " or email ",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "hyperlink",
+                    "data": {
+                      "uri": "mailto:ChaosSoftballSanDiego@gmail.com"
+                    },
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "ChaosSoftballSanDiego@gmail.com",
+                        "marks": [
+                        ],
+                        "data": {
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": " to get details on the next session.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "l66beixra3vz"
+          }
+        },
+        "id": "1Ott2cQT2xZULAaMsGvYLv",
+        "type": "Entry",
+        "createdAt": "2025-09-21T13:32:23.211Z",
+        "updatedAt": "2025-09-21T15:11:55.790Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 34,
+        "publishedAt": "2025-09-21T15:11:55.790Z",
+        "firstPublishedAt": "2025-09-21T15:11:55.790Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+          }
+        },
+        "publishedCounter": 1,
+        "version": 35,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "page"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/l66beixra3vz/environments/master/entries/1Ott2cQT2xZULAaMsGvYLv"
+      },
+      "fields": {
+        "title": {
+          "en-US": "This is a test page"
+        },
+        "seoTitle": {
+          "en-US": "Test page SEO"
+        },
+        "seoDescription": {
+          "en-US": "Test page SEO Description"
+        },
+        "slug": {
+          "en-US": "test-page"
+        },
+        "content": {
+          "en-US": {
+            "nodeType": "document",
+            "data": {
+            },
+            "content": [
+              {
+                "nodeType": "heading-2",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "This is the heading",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "This is the first paragraph on the ",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "hyperlink",
+                    "data": {
+                      "uri": "/"
+                    },
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "page",
+                        "marks": [
+                        ],
+                        "data": {
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": ". ",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": "It’s here",
+                    "marks": [
+                      {
+                        "type": "bold"
+                      }
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": " to help you test your ",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": "HTML",
+                    "marks": [
+                      {
+                        "type": "italic"
+                      }
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": " structure, styles, or scripts. You can replace this text with anything you’d like, ",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": "but for now",
+                    "marks": [
+                      {
+                        "type": "underline"
+                      }
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": ", it serves as a placeholder to show ",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  },
+                  {
+                    "nodeType": "hyperlink",
+                    "data": {
+                      "uri": "https://www.google.com/"
+                    },
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "how content",
+                        "marks": [
+                        ],
+                        "data": {
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": " looks when rendered in a browser.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "unordered-list",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "list-item",
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "ul list item 1",
+                            "marks": [
+                            ],
+                            "data": {
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "ul list item 2",
+                            "marks": [
+                            ],
+                            "data": {
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "ul list item 3",
+                            "marks": [
+                            ],
+                            "data": {
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "nodeType": "ordered-list",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "list-item",
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "ol list item",
+                            "marks": [
+                            ],
+                            "data": {
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "ol list item",
+                            "marks": [
+                            ],
+                            "data": {
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "ol list item",
+                            "marks": [
+                            ],
+                            "data": {
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Here’s a second paragraph for testing purposes. Adding multiple blocks of text helps you see how elements flow together, making it easier to check things like spacing, typography, and alignment. Feel free to add more paragraphs or experiment with other HTML tags as needed.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "embedded-asset-block",
+                "data": {
+                  "target": {
+                    "sys": {
+                      "id": "7rjy0JzFmyUMUj96LFSczj",
+                      "type": "Link",
+                      "linkType": "Asset"
+                    }
+                  }
+                },
+                "content": [
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "",
                     "marks": [
                     ],
                     "data": {
@@ -1441,6 +2875,88 @@
     }
   ],
   "assets": [
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "l66beixra3vz"
+          }
+        },
+        "id": "7rjy0JzFmyUMUj96LFSczj",
+        "type": "Asset",
+        "createdAt": "2025-09-21T14:08:40.926Z",
+        "updatedAt": "2025-09-21T14:33:57.146Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 11,
+        "publishedAt": "2025-09-21T14:33:57.146Z",
+        "firstPublishedAt": "2025-09-21T14:18:21.361Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+          }
+        },
+        "publishedCounter": 2,
+        "version": 12,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4O3NQmYAbLm6HMXZ8nTywh"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/l66beixra3vz/environments/master/assets/7rjy0JzFmyUMUj96LFSczj"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Test image"
+        },
+        "description": {
+          "en-US": "Coaching teaching the girls."
+        },
+        "file": {
+          "en-US": {
+            "url": "//images.ctfassets.net/l66beixra3vz/7rjy0JzFmyUMUj96LFSczj/0cfdd07b64234a3a09b088b4db552561/chaos-test.jpg",
+            "details": {
+              "size": 65510,
+              "image": {
+                "width": 300,
+                "height": 451
+              }
+            },
+            "fileName": "chaos-test.jpg",
+            "contentType": "image/jpeg"
+          }
+        }
+      }
+    }
   ],
   "locales": [
     {

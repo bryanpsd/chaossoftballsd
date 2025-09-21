@@ -39,6 +39,6 @@
       "ES2022",
       "DOM"
     ],
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
   }
 }

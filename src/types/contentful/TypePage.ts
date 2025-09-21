@@ -16,6 +16,7 @@ export interface TypePageFields {
 }
 
 export type TypePageSkeleton = EntrySkeletonType<TypePageFields, "page">;
+
 export type TypePage<
 	Modifiers extends ChainModifiers,
 	Locales extends LocaleCode = LocaleCode,
@@ -29,8 +30,3 @@ export function isTypePage<
 ): entry is TypePage<Modifiers, Locales> {
 	return entry.sys.contentType.sys.id === "page";
 }
-
-export type TypePageProps = TypePage<
-	"WITHOUT_UNRESOLVABLE_LINKS",
-	"en-US"
->["fields"];

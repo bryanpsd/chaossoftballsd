@@ -43,13 +43,8 @@ const options: Options = {
 		[BLOCKS.EMBEDDED_ASSET]: (node) => {
 			const { url } = node.data.target.fields.file;
 			const description = node.data.target.fields.description || "";
-			const assetUrl = url.startsWith("http") ? url : `https:${url}`;
 			return (
-				<ContentfulImage
-					className={styles.image}
-					src={assetUrl}
-					alt={description}
-				/>
+				<ContentfulImage className={styles.image} src={url} alt={description} />
 			);
 		},
 		[INLINES.HYPERLINK]: (node, children) => {

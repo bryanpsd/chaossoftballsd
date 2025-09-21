@@ -1,12 +1,15 @@
 import type { Options } from "@contentful/rich-text-react-renderer";
 import type { Document } from "@contentful/rich-text-types";
+import * as richTextTypes from "@contentful/rich-text-types";
+
+const { BLOCKS, INLINES, MARKS } = richTextTypes;
+
 import { ContentfulImage } from "~/components/Image/ContentfulImage";
 import { ResponsiveHeadline } from "~/components/ResponsiveHeadline";
 import { TextBlockSection } from "~/components/TextBlockSection";
 import { List } from "~/components/TextBlockSection/List";
 import type { TypographyProps } from "~/components/Typography";
 import { Typography } from "~/components/Typography";
-import { BLOCKS, INLINES, MARKS } from "~/utils/contentfulRichTextESM";
 
 import * as styles from "./RichText.css";
 

@@ -19,17 +19,17 @@ if (!slug || !entry.items || entry.items.length === 0) {
     throw new Error("Not Found");
 }
 
-const page = entry.items[0]?.fields || {};
+const pageContent = entry.items[0]?.fields || {};
 ---
 
 <Layout
-    title={`${page.seoTitle} | Chaos Softball San Diego`}
-    description={page.seoDescription}
+    title={`${pageContent.seoTitle} | Chaos Softball San Diego`}
+    description={pageContent.seoDescription}
 >
     <div class={styles.subPageWrapper}>
         <ResponsiveHeadline size={3} as="h1">
-            {page.title}
+            {pageContent.title}
         </ResponsiveHeadline>
-        {page.content && <RichText richText={page.content} />}
+        {pageContent.content && <RichText richText={pageContent.content} />}
     </div>
 </Layout>

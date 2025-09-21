@@ -1,6 +1,14 @@
 import type { Options } from "@contentful/rich-text-react-renderer";
 import type { Document } from "@contentful/rich-text-types";
-import { BLOCKS, INLINES } from "@contentful/rich-text-types";
+
+// Contentful rich text constants (ESM-compatible)
+const BLOCKS = {
+	PARAGRAPH: "paragraph",
+};
+const INLINES = {
+	HYPERLINK: "hyperlink",
+};
+
 import { Link } from "~/components/Link";
 import { TextBlockSection } from "~/components/TextBlockSection";
 import { Typography } from "~/components/Typography";

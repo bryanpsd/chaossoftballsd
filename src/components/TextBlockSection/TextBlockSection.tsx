@@ -2,14 +2,28 @@ import {
 	documentToReactComponents,
 	type Options,
 } from "@contentful/rich-text-react-renderer";
-import {
-	BLOCKS,
-	type Block,
-	type Document,
-	INLINES,
-	type Inline,
-	MARKS,
-} from "@contentful/rich-text-types";
+// Contentful rich text constants (ESM-compatible)
+import type { Block, Document, Inline } from "@contentful/rich-text-types";
+
+const BLOCKS = {
+	HEADING_1: "heading-1",
+	HEADING_2: "heading-2",
+	HEADING_3: "heading-3",
+	HEADING_4: "heading-4",
+	PARAGRAPH: "paragraph",
+	UL_LIST: "unordered-list",
+	OL_LIST: "ordered-list",
+	LIST_ITEM: "list-item",
+};
+const INLINES = {
+	HYPERLINK: "hyperlink",
+};
+const MARKS = {
+	BOLD: "bold",
+	SUBSCRIPT: "subscript",
+	UNDERLINE: "underline",
+};
+
 import type { CSSProperties } from "react";
 import { Link } from "~/components/Link";
 import { ResponsiveHeadline } from "~/components/ResponsiveHeadline";

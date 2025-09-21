@@ -4,11 +4,15 @@ import { tokens } from "../tokens/designTokens.css";
 export const mainWrapper = style([
 	tokens({
 		display: "flex",
-		width: "col-12",
 		justifyContent: "center",
 		flexDirection: "column",
 		alignItems: "center",
+		width: "col-12",
 	}),
+	{
+		height: "100%",
+		marginBottom: "2rem",
+	},
 ]);
 
 export const pageMaxWidth = style([
@@ -27,6 +31,9 @@ export const contentPadding = style([
 export const subPageWrapper = style([
 	tokens({
 		marginY: 12,
+		display: "flex",
+		flexDirection: "column",
+		gap: 8,
 	}),
 	pageMaxWidth,
 	contentPadding,

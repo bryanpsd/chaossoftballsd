@@ -38,6 +38,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.4",
+		"@types/node": "^24.5.2",
 		"@vanilla-extract/vite-plugin": "^5.1.1",
 		"cf-content-types-generator": "^2.16.0"
 	}

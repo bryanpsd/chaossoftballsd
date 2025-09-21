@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Typography, type TypographyProps } from "../../Typography";
+import { Typography, type TypographyProps } from "~/components/Typography";
 import { list, listItem } from "./List.css";
 
 type ListProps = {

@@ -12,6 +12,14 @@ export const body = style([
 	tokens({ marginBottom: "col-6" }),
 ]);
 
+export const italic = style({
+	fontStyle: "italic",
+});
+
+export const bold = style({
+	fontWeight: "bold",
+});
+
 export const textBlock = style([
 	tokens({
 		marginX: "auto",

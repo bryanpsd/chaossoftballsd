@@ -1,0 +1,34 @@
+---
+import { ResponsiveHeadline } from "~/components/ResponsiveHeadline";
+import { RichText } from "~/components/RichText";
+import Layout from "~/layouts/Layout.astro";
+import { contentfulClient } from "~/services/contentful/contentful";
+import type { TypePageSkeleton } from "~/types/contentful";
+import * as styles from "../styles/utilities/common.css";
+
+const { slug = "" } = Astro.params;
+
+const entry = await contentfulClient.getEntries<TypePageSkeleton>({
+    content_type: "page",
+    "fields.slug": slug,
+    limit: 1,
+});
+
+if (!slug || !entry.items || entry.items.length === 0) {
+    return Astro.redirect("/404");
+}
+
+const page = entry.items[0]?.fields || {};
+---
+
+<Layout
+    title={`${page.seoTitle} | Chaos Softball San Diego`}
+    description={page.seoDescription}
+>
+    <div class={styles.subPageWrapper}>
+        <ResponsiveHeadline size={3} as="h1">
+            {page.title}
+        </ResponsiveHeadline>
+        {page.content && <RichText richText={page.content} />}
+    </div>
+</Layout>

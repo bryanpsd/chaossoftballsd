@@ -5,15 +5,15 @@ export const menuItems: MainNavProps["items"] = {
 	menuItems: [
 		{
 			label: "About",
-			href: "#intro",
+			href: "/#intro",
 		},
 		{
 			label: "Contact",
-			href: "#form",
+			href: "/#form",
 		},
 		{
 			label: "Faqs",
-			href: "#faqs",
+			href: "/#faqs",
 		},
 	],
 };

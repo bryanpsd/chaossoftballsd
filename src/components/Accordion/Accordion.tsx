@@ -1,8 +1,8 @@
 import * as Accordion from "@radix-ui/react-accordion";
-import type { TypeList } from "../../types/contentful/TypeList";
-import type { TypeQuestionAnswer } from "../../types/contentful/TypeQuestionAnswer";
-import { RichText } from "../RichText";
-import * as styles from "./Accordion.css";
+import * as styles from "~/components/Accordion/Accordion.css";
+import { RichText } from "~/components/RichText";
+import type { TypeList } from "~/types/contentful/TypeList";
+import type { TypeQuestionAnswer } from "~/types/contentful/TypeQuestionAnswer";
 
 type AccordionProps = {
 	list: TypeList<"WITHOUT_UNRESOLVABLE_LINKS">;

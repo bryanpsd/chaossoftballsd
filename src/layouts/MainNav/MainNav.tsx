@@ -1,6 +1,6 @@
 import * as NavMenu from "@radix-ui/react-navigation-menu";
 import { useState } from "react";
-import { Button } from "../../components/Button";
+import { Button } from "~/components/Button";
 import * as styles from "./MainNav.css";
 
 type NavigationLink = {

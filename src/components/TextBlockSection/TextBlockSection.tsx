@@ -11,12 +11,12 @@ import {
 	MARKS,
 } from "@contentful/rich-text-types";
 import type { CSSProperties } from "react";
-import { Link } from "../../components/Link";
-import { ResponsiveHeadline } from "../../components/ResponsiveHeadline";
-import * as styles from "../../components/TextBlockSection/TextBlockSection.css";
-import { Typography, type TypographyProps } from "../../components/Typography";
-import { concatClasses } from "../../utils/concatClasses";
-import { replaceAllSpecialChars } from "../../utils/StringUtils";
+import { Link } from "~/components/Link";
+import { ResponsiveHeadline } from "~/components/ResponsiveHeadline";
+import * as styles from "~/components/TextBlockSection/TextBlockSection.css";
+import { Typography, type TypographyProps } from "~/components/Typography";
+import { concatClasses } from "~/utils/concatClasses";
+import { replaceAllSpecialChars } from "~/utils/StringUtils";
 import { List, ListItem } from "./List";
 
 const BODY_TYPOGRAPHY_VARIANT: TypographyProps["variant"] = "bodyMd";

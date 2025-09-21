@@ -21,6 +21,15 @@ export type TypeList<
 	Locales extends LocaleCode = LocaleCode,
 > = Entry<TypeListSkeleton, Modifiers, Locales>;
 
+export function isTypeList<
+	Modifiers extends ChainModifiers,
+	Locales extends LocaleCode,
+>(
+	entry: Entry<EntrySkeletonType, Modifiers, Locales>,
+): entry is TypeList<Modifiers, Locales> {
+	return entry.sys.contentType.sys.id === "list";
+}
+
 export type TypeListProps = TypeList<
 	"WITHOUT_UNRESOLVABLE_LINKS",
 	"en-US"

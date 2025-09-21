@@ -5,17 +5,17 @@ import React, {
 	type MouseEventHandler,
 	type ReactNode,
 } from "react";
-import type {
-	PolymorphicComponentPropWithRef,
-	PolymorphicRef,
-} from "../../types/PolymorphicComponent";
-import { concatClasses } from "../../utils/concatClasses";
 import {
 	type ButtonVariants,
 	button,
 	buttonIcon,
 	buttonLabel,
-} from "./Button.css";
+} from "~/components/Button/Button.css";
+import type {
+	PolymorphicComponentPropWithRef,
+	PolymorphicRef,
+} from "~/types/PolymorphicComponent";
+import { concatClasses } from "~/utils/concatClasses";
 
 export type ButtonProps<C extends ElementType = "button"> =
 	PolymorphicComponentPropWithRef<

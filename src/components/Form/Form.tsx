@@ -1,10 +1,10 @@
 import { useId } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useCaptcha } from "~utils/useCaptcha";
-import { Button } from "../Button";
+import { Button } from "~/components/Button";
+import { useCaptcha } from "~/utils/useCaptcha";
 import "react-toastify/dist/ReactToastify.css";
-import * as styles from "./Form.css";
+import * as styles from "~/components/Form/Form.css";
 
 type FormData = {
 	name: string;

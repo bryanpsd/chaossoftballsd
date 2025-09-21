@@ -1,5 +1,5 @@
 import { type ComponentPropsWithRef, forwardRef } from "react";
-import { concatClasses } from "../../utils/concatClasses";
+import { concatClasses } from "~/utils/concatClasses";
 import { jumpLink as jumpLinkClass, link } from "./Link.css";
 
 export type LinkProps = ComponentPropsWithRef<"a"> & {

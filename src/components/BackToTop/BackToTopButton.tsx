@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Button } from "../Button";
-import * as styles from "./BackToTopButton.css";
+import * as styles from "~/components/BackToTop/BackToTopButton.css";
+import { Button } from "~/components/Button";
 
 export const BackToTopButton = () => {
 	const [visible, setVisible] = useState(false);

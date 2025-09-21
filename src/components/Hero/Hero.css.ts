@@ -2,6 +2,7 @@ import { globalStyle, style } from "@vanilla-extract/css";
 
 export const hero = style({
 	position: "relative",
+	width: "100%",
 	display: "flex",
 	alignItems: "center",
 	flexDirection: "column",

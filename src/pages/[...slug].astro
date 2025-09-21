@@ -15,7 +15,8 @@ const entry = await contentfulClient.getEntries<TypePageSkeleton>({
 });
 
 if (!slug || !entry.items || entry.items.length === 0) {
-    return Astro.redirect("/404");
+    Astro.response.status = 404;
+    throw new Error("Not Found");
 }
 
 const page = entry.items[0]?.fields || {};

@@ -1,10 +1,10 @@
 ---
-import { ResponsiveHeadline } from "~/components/ResponsiveHeadline";
-import Layout from "~/layouts/Layout.astro";
-import { contentfulClient } from "~/services/contentful/contentful";
-import type { TypePageSkeleton } from "~/types/contentful";
+import { ResponsiveHeadline } from "../components/ResponsiveHeadline";
 import { RichText } from "../components/RichText";
+import Layout from "../layouts/Layout.astro";
+import { contentfulClient } from "../services/contentful/contentful";
 import * as styles from "../styles/utilities/common.css";
+import type { TypePageSkeleton } from "../types/contentful";
 
 const { slug = "" } = Astro.params;
 

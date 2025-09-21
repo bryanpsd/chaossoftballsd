@@ -1,6 +1,6 @@
 import type { Options } from "@contentful/rich-text-react-renderer";
 import type { Document } from "@contentful/rich-text-types";
-import { BLOCKS, INLINES } from "@contentful/rich-text-types";
+import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import { ContentfulImage } from "~/components/Image/ContentfulImage";
 import { ResponsiveHeadline } from "~/components/ResponsiveHeadline";
 import { TextBlockSection } from "~/components/TextBlockSection";
@@ -14,8 +14,8 @@ const BODY_TYPOGRAPHY_VARIANT: TypographyProps["variant"] = "bodyMd";
 
 const options: Options = {
 	renderMark: {
-		italic: (_text) => <em className={styles.italic}>{_text}</em>,
-		bold: (_text) => <strong className={styles.bold}>{_text}</strong>,
+		[MARKS.ITALIC]: (_text) => <em className={styles.italic}>{_text}</em>,
+		[MARKS.BOLD]: (_text) => <strong className={styles.bold}>{_text}</strong>,
 	},
 	renderNode: {
 		[BLOCKS.HEADING_2]: (_node, children) => (

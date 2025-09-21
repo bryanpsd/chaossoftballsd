@@ -1,6 +1,9 @@
 import type { Options } from "@contentful/rich-text-react-renderer";
 import type { Document } from "@contentful/rich-text-types";
-import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
+import * as richTextTypes from "@contentful/rich-text-types";
+
+const { BLOCKS, INLINES, MARKS } = richTextTypes;
+
 import { ContentfulImage } from "~/components/Image/ContentfulImage";
 import { ResponsiveHeadline } from "~/components/ResponsiveHeadline";
 import { TextBlockSection } from "~/components/TextBlockSection";

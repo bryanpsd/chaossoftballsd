@@ -1,7 +1,10 @@
 import type { Options } from "@contentful/rich-text-react-renderer";
 
 import type { Document } from "@contentful/rich-text-types";
-import { BLOCKS, INLINES } from "@contentful/rich-text-types";
+import pkg from "@contentful/rich-text-types";
+
+const { INLINES, BLOCKS } = pkg;
+
 import { ContentfulImage } from "~/components/Image/ContentfulImage";
 import { ResponsiveHeadline } from "~/components/ResponsiveHeadline";
 import { TextBlockSection } from "~/components/TextBlockSection";

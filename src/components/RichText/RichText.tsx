@@ -1,5 +1,13 @@
 import type { Options } from "@contentful/rich-text-react-renderer";
 import type { Document } from "@contentful/rich-text-types";
+import { ContentfulImage } from "../../components/Image/ContentfulImage";
+import { ResponsiveHeadline } from "../../components/ResponsiveHeadline";
+import { TextBlockSection } from "../../components/TextBlockSection";
+import { List } from "../../components/TextBlockSection/List";
+import type { TypographyProps } from "../../components/Typography";
+import { Typography } from "../../components/Typography";
+
+import * as styles from "./RichText.css";
 
 // Contentful rich text constants (ESM-compatible)
 const BLOCKS = {
@@ -36,15 +44,6 @@ const MARKS = {
 	CODE: "code",
 };
 
-import { ContentfulImage } from "../../components/Image/ContentfulImage";
-import { ResponsiveHeadline } from "../../components/ResponsiveHeadline";
-import { TextBlockSection } from "../../components/TextBlockSection";
-import { List } from "../../components/TextBlockSection/List";
-import type { TypographyProps } from "../../components/Typography";
-import { Typography } from "../../components/Typography";
-
-import * as styles from "./RichText.css";
-
 const BODY_TYPOGRAPHY_VARIANT: TypographyProps["variant"] = "bodyMd";
 
 const options: Options = {
@@ -54,7 +53,29 @@ const options: Options = {
 	},
 	renderNode: {
 		[BLOCKS.HEADING_2]: (_node, children) => (
-			<ResponsiveHeadline size={2} as="h2" style={{ marginBottom: "18px" }}>
+			<ResponsiveHeadline size={2} as="h2" className={styles.heading}>
+				{children}
+			</ResponsiveHeadline>
+		),
+		[BLOCKS.HEADING_3]: (_node, children) => (
+			<ResponsiveHeadline size={3} as="h3" className={styles.heading}>
+				{children}
+			</ResponsiveHeadline>
+		),
+		[BLOCKS.HEADING_4]: (_node, children) => (
+			<ResponsiveHeadline size={4} as="h4" className={styles.heading}>
+				{children}
+			</ResponsiveHeadline>
+		),
+
+		[BLOCKS.HEADING_5]: (_node, children) => (
+			<ResponsiveHeadline size={5} as="h5" className={styles.heading}>
+				{children}
+			</ResponsiveHeadline>
+		),
+
+		[BLOCKS.HEADING_6]: (_node, children) => (
+			<ResponsiveHeadline size={6} as="h6" className={styles.heading}>
 				{children}
 			</ResponsiveHeadline>
 		),

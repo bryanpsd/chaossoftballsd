@@ -27,7 +27,7 @@ const pageContent = entry.items[0]?.fields || {};
     description={pageContent.seoDescription}
 >
     <div class={styles.subPageWrapper}>
-        <ResponsiveHeadline size={3} as="h1">
+        <ResponsiveHeadline size={1} as="h1">
             {pageContent.title}
         </ResponsiveHeadline>
         {pageContent.content && <RichText richText={pageContent.content} />}

@@ -9,7 +9,7 @@ type HeadlineProps<C extends ElementType = typeof defaultElement> =
 	PolymorphicComponentProp<
 		C,
 		{
-			size?: 1 | 2 | 3 | 4;
+			size?: 1 | 2 | 3 | 4 | 5 | 6; // 1 is largest, 6 is smallest
 		}
 	>;
 

@@ -11,6 +11,10 @@ export const body = style([
 	tokens({ marginBottom: "col-6" }),
 ]);
 
+export const heading = style({
+	marginBottom: "18px",
+});
+
 export const italic = style({
 	fontStyle: "italic",
 });

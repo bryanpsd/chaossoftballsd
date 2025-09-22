@@ -97,24 +97,7 @@ const options: Options = {
 		),
 
 		[BLOCKS.QUOTE]: (_node, children) => (
-			<blockquote className={styles.blockquote}>
-				{Array.isArray(children)
-					? children.map((child, i) =>
-							typeof child === "string" ? (
-								child
-							) : child && child.type === "p" ? (
-								<p
-									className={styles.blockquoteParagraph}
-									key={child.key ?? `blockquote-paragraph-${i}`}
-								>
-									{child.props.children}
-								</p>
-							) : (
-								child
-							),
-						)
-					: children}
-			</blockquote>
+			<blockquote className={styles.blockquote}>{children}</blockquote>
 		),
 
 		[BLOCKS.TABLE]: (node, _children) => {
@@ -125,7 +108,10 @@ const options: Options = {
 
 			type ContentfulTableCellNode = {
 				nodeType: string;
-				content?: Array<{ value?: string; content?: Array<{ value?: string }> }>;
+				content?: Array<{
+					value?: string;
+					content?: Array<{ value?: string }>;
+				}>;
 			};
 			type ContentfulTableRowNode = {
 				nodeType: string;
@@ -169,6 +155,7 @@ const options: Options = {
 				<ContentfulImage className={styles.image} src={url} alt={description} />
 			);
 		},
+
 		[INLINES.HYPERLINK]: (node, children) => {
 			const uri = node.data.uri;
 			if (uri.startsWith("https://")) {

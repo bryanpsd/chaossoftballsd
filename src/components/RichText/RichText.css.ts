@@ -38,20 +38,29 @@ export const link = style({
 	textUnderlineOffset: "2px",
 });
 
-export const image = style({
-	display: "block",
-	width: "100%",
-	height: "auto",
-});
+export const image = style([
+	tokens({
+		display: "block",
+		width: "col-12",
+		height: "auto",
+	}),
+]);
 
-export const blockquote = style({
-	borderLeft: "4px solid #e0e0e0",
-	background: "#fafafa",
-	padding: "12px 20px",
-	margin: "18px 0",
-	fontStyle: "italic",
-	color: "#444",
-});
+export const blockquote = style([
+	tokens({
+		display: "block",
+		width: "col-12",
+		height: "auto",
+		paddingX: 20,
+		paddingY: 12,
+		marginY: 18,
+	}),
+	{
+		borderLeft: `4px solid ${color.brand.purple}`,
+		background: color.brand.gray,
+		fontStyle: "italic",
+	},
+]);
 
 export const blockquoteParagraph = style({
 	marginBottom: 0,

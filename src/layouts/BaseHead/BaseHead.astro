@@ -13,33 +13,57 @@ import "~/styles/global/theme.css";
 export interface Props {
 	title: string;
 	description?: string;
+	image?: string;
+	withBaseHref?: boolean;
 }
+
+const url = Astro.url.href;
+
+const baseHref = url.endsWith("/") ? url : `${url}/`;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const {
 	title = "Chaos Softball San Diego",
 	description = "Chaos Softball San Diego 10U girls travel team develops young athletes through competitive softball, elite coaching, and strong team values.",
+	withBaseHref,
+	image,
 } = Astro.props;
 ---
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="description" content={description || "Best Buy Health"} />
-  <meta name="viewport" content="width=device-width" />
-  <meta name="theme-color" content="#ffffff" />
-  <link rel="sitemap" href="/sitemap-index.xml" />
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <meta name="generator" content={Astro.generator} />
-  <GoogleAnalytics measurementId={"G-C3WFCBGF96"} />
-  <title>{title}</title>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js', { scope: '/' });
-      });
-    }
-  </script>
-</head>
+{withBaseHref && <base href={baseHref} />}
+
+<meta charset="UTF-8" />
+<meta name="description" content={description || "Best Buy Health"} />
+<meta name="viewport" content="width=device-width" />
+<meta name="theme-color" content="#ffffff" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="generator" content={Astro.generator} />
+
+<link rel="canonical" href={canonicalURL} />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+{image && <meta property="og:image" content={image} />}
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+{image && <meta property="twitter:image" content={new URL(image, Astro.url)} />}
+
+<GoogleAnalytics measurementId={"G-C3WFCBGF96"} />
+<title>{title}</title>
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("/sw.js", { scope: "/" });
+    });
+  }
+</script>

@@ -35,4 +35,11 @@ const {
   <meta name="generator" content={Astro.generator} />
   <GoogleAnalytics measurementId={"G-C3WFCBGF96"} />
   <title>{title}</title>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' });
+      });
+    }
+  </script>
 </head>

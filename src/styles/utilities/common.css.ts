@@ -39,15 +39,6 @@ export const subPageWrapper = style([
 	contentPadding,
 ]);
 
-export const centerContent = style([
-	tokens({
-		display: "flex",
-		justifyContent: "center",
-		alignItems: "center",
-		padding: 12,
-	}),
-]);
-
 export const image = style({
 	maxWidth: "100%",
 	height: "auto",

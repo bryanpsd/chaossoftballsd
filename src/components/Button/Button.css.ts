@@ -65,6 +65,7 @@ export const button = recipe({
 		variant: {
 			outlined: tokens({ minWidth: { "xs-min": 32, "md-min": 96 } }),
 			contained: tokens({ minWidth: { "xs-min": 32, "md-min": 96 } }),
+			round: tokens({ minWidth: 32 }),
 			text: tokens({ minWidth: "none" }),
 		},
 	},
@@ -76,6 +77,21 @@ export const button = recipe({
 			variants: {
 				color: "primary",
 				variant: "contained",
+			},
+			style: tokens({
+				color: { default: "white", hover: "white", disabled: "gray" },
+				borderColor: { default: "purple", hover: "purple", disabled: "gray" },
+				backgroundColor: {
+					default: "purple",
+					hover: "darkPurple",
+					disabled: "gray",
+				},
+			}),
+		},
+		{
+			variants: {
+				color: "primary",
+				variant: "round",
 			},
 			style: tokens({
 				color: { default: "white", hover: "white", disabled: "gray" },

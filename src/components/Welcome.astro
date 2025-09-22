@@ -11,13 +11,13 @@ import type { TypePageSectionSkeleton } from "~/types/contentful";
 import type { TypeList, TypeListSkeleton } from "~/types/contentful/TypeList";
 
 const entries = await contentfulClient.getEntries<TypePageSectionSkeleton>({
-  content_type: "pageSection",
-  "fields.title": "Home Section",
+	content_type: "pageSection",
+	"fields.title": "Home Section",
 });
 
 const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
-  content_type: "list",
-  "fields.title": "FAQs",
+	content_type: "list",
+	"fields.title": "FAQs",
 });
 ---
 

@@ -24,7 +24,7 @@ export const BackToTopButton = () => {
 			type="button"
 			color="primary"
 			size="medium"
-			variant="contained"
+			variant="round"
 			className={styles.backToTopButton}
 			aria-label="Back to top"
 			onClick={scrollToTop}

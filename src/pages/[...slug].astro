@@ -9,14 +9,14 @@ import type { TypePageSkeleton } from "../types/contentful";
 const { slug = "" } = Astro.params;
 
 const entry = await contentfulClient.getEntries<TypePageSkeleton>({
-    content_type: "page",
-    "fields.slug": slug,
-    limit: 1,
+	content_type: "page",
+	"fields.slug": slug,
+	limit: 1,
 });
 
 if (!slug || !entry.items || entry.items.length === 0) {
-    Astro.response.status = 404;
-    throw new Error("Not Found");
+	Astro.response.status = 404;
+	throw new Error("Not Found");
 }
 
 const pageContent = entry.items[0]?.fields || {};

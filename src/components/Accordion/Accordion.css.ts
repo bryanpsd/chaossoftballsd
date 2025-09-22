@@ -1,37 +1,51 @@
 import { style } from "@vanilla-extract/css";
 import { color } from "../../styles/tokens/colors";
+import { tokens } from "../../styles/tokens/designTokens.css";
 
-export const accordionRoot = style({
-	width: "100%",
-});
+export const accordionRoot = style([
+	tokens({
+		width: "col-12",
+	}),
+]);
 
-export const accordionItem = style({
-	borderBottom: `1px solid ${color.brand.gray}`,
-	width: "100%",
-	selectors: {
-		"&:last-child": {
-			borderBottom: "none",
+export const accordionItem = style([
+	tokens({
+		width: "col-12",
+	}),
+	{
+		borderBottom: `1px solid ${color.brand.gray}`,
+		selectors: {
+			"&:last-child": {
+				borderBottom: "none",
+			},
 		},
 	},
-});
+]);
 
-export const accordionTrigger = style({
-	background: color.brand.black,
-	color: color.brand.white,
-	fontWeight: 600,
-	fontSize: 16,
-	padding: "12px 16px",
-	border: "none",
-	cursor: "pointer",
-	width: "100%",
-	textAlign: "left",
-	transition: "background 0.2s, color 0.2s",
-});
+export const accordionTrigger = style([
+	tokens({
+		cursor: "pointer",
+		width: "col-12",
+		textAlign: "left",
+		paddingY: 12,
+		paddingX: 16,
+		gap: 8,
+	}),
+	{
+		background: color.brand.black,
+		color: color.brand.white,
+		fontWeight: 600,
+		border: "none",
+		transition: "background 0.2s, color 0.2s",
+	},
+]);
 
-export const accordionContent = style({
-	background: color.brand.gray,
-	color: color.brand.black,
-	padding: "16px",
-	borderRadius: "0 0 8px 8px",
-	fontSize: 16,
-});
+export const accordionContent = style([
+	tokens({
+		padding: 16,
+	}),
+	{
+		background: color.brand.gray,
+		color: color.brand.black,
+	},
+]);

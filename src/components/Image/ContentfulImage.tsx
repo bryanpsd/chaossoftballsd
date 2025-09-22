@@ -1,27 +1,27 @@
-import type { ComponentPropsWithRef, CSSProperties } from "react"
+import type { ComponentPropsWithRef, CSSProperties } from "react";
 
 export interface ContentfulImageProps {
-	id?: string
-	className?: string
-	style?: CSSProperties
+	id?: string;
+	className?: string;
+	style?: CSSProperties;
 	/** Path to the image. */
-	src?: string
+	src?: string;
 	/** A textual replacement for the image. Required for accessibility. */
-	alt: string
+	alt: string;
 	/** Props that will be passed to the underlying "img" element. */
-	imgProps?: Omit<ComponentPropsWithRef<"img">, "src" | "alt">
+	imgProps?: Omit<ComponentPropsWithRef<"img">, "src" | "alt">;
 }
 
-const isContentfulSrc = (src = "") => src.startsWith("//images.ctfassets.net")
+const isContentfulSrc = (src = "") => src.startsWith("//images.ctfassets.net");
 
 const getProxySrc = (src = "", imgFormat = "") => {
 	if (!src) {
-		return ""
+		return "";
 	}
 
-	const format = imgFormat ? imgFormat : src.split(".").pop()
-	return `/api/contentful-image?url=${encodeURIComponent(`${src}?fm=${format}`)}`
-}
+	const format = imgFormat ? imgFormat : src.split(".").pop();
+	return `/api/contentful-image?url=${encodeURIComponent(`${src}?fm=${format}`)}`;
+};
 
 /**
  * Renders a "picture" element with optimizations for images from Contentful.
@@ -40,8 +40,8 @@ export const ContentfulImage = ({
 	alt,
 	imgProps,
 }: ContentfulImageProps) => {
-	const isContenfulImage = isContentfulSrc(src)
-	const defaultImgSrc = isContenfulImage ? getProxySrc(src) : src
+	const isContenfulImage = isContentfulSrc(src);
+	const defaultImgSrc = isContenfulImage ? getProxySrc(src) : src;
 
 	return (
 		<picture id={id} className={className} style={style}>
@@ -53,5 +53,5 @@ export const ContentfulImage = ({
 			)}
 			<img src={defaultImgSrc} alt={alt} {...imgProps} />
 		</picture>
-	)
-}
+	);
+};

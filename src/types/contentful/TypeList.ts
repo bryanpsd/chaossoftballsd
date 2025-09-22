@@ -5,13 +5,13 @@ import type {
 	EntrySkeletonType,
 	LocaleCode,
 } from "contentful";
-
+import type { TypeLinkSkeleton } from "./TypeLink";
 import type { TypeQuestionAnswerSkeleton } from "./TypeQuestionAnswer";
 
 export interface TypeListFields {
 	title: EntryFieldTypes.Symbol;
 	type: EntryFieldTypes.Array<
-		EntryFieldTypes.EntryLink<TypeQuestionAnswerSkeleton>
+		EntryFieldTypes.EntryLink<TypeLinkSkeleton | TypeQuestionAnswerSkeleton>
 	>;
 }
 

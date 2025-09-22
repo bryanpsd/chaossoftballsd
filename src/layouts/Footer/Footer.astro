@@ -1,8 +1,19 @@
 ---
 import { Typography } from "~/components/Typography";
+import { contentfulClient } from "../../services/contentful/contentful";
+
+import type { TypeLinkFields } from "../../types/contentful/TypeLink";
 
 const currentDate = new Date();
 const year = currentDate.getFullYear();
+
+import type { TypeListSkeleton } from "../../types/contentful/TypeList";
+
+const entry = await contentfulClient.getEntries<TypeListSkeleton>({
+	content_type: "list",
+	"fields.title": "Footer Links",
+	limit: 1,
+});
 
 import { menuItems } from "../Header/utils/headerItems";
 import * as styles from "./Footer.css";
@@ -20,22 +31,28 @@ import * as styles from "./Footer.css";
                     </li>
                 ))
             }
-            <li>
-                <a
-                    href="https://www.team.shop/en-us/team/chaos-softball-1"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class={styles.footerNavLink}>Shop</a
-                >
-            </li>
-            <li>
-                <a
-                    href="https://www.instagram.com/chaossoftballsd/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class={styles.footerNavLink}>Instagram</a
-                >
-            </li>
+            {
+                entry.items[0]?.fields?.type?.map((linkEntry) => {
+                    if (!linkEntry || !('fields' in linkEntry)) return null;
+                    if (linkEntry.sys.contentType.sys.id !== 'link') return null;
+                    const link = linkEntry.fields as TypeLinkFields;
+                    const url: string = link.ctaLink ? String(link.ctaLink.valueOf()) : "#";
+                    const label: string = link.label ? String(link.label.valueOf()) : (link.name ? String(link.name.valueOf()) : "Link");
+                    const openInNewWindow: boolean = typeof link.openInNewWindow === "boolean" ? link.openInNewWindow : !!link.openInNewWindow?.valueOf();
+                    return (
+                        <li>
+                            <a
+                                href={url}
+                                target={openInNewWindow ? "_blank" : undefined}
+                                rel={openInNewWindow ? "noopener noreferrer" : undefined}
+                                class={styles.footerNavLink}
+                            >
+                                {label}
+                            </a>
+                        </li>
+                    );
+                })
+            }
         </ul>
     </nav>
     <Typography className={styles.footerCopyright}>

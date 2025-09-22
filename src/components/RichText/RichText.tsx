@@ -123,13 +123,21 @@ const options: Options = {
 			const thead: string[] = [];
 			const tbody: Array<Array<string | React.ReactNode>> = [];
 
-			tableRows.forEach((rowNode: any, rowIndex: number) => {
+			type ContentfulTableCellNode = {
+				nodeType: string;
+				content?: Array<{ value?: string; content?: Array<{ value?: string }> }>;
+			};
+			type ContentfulTableRowNode = {
+				nodeType: string;
+				content?: ContentfulTableCellNode[];
+			};
+			(tableRows as ContentfulTableRowNode[]).forEach((rowNode, rowIndex) => {
 				// Table header row
 				if (rowIndex === 0 && rowNode.nodeType === BLOCKS.TABLE_ROW) {
-					const headerCells = (rowNode.content || []).map((cellNode: any) => {
+					const headerCells = (rowNode.content || []).map((cellNode) => {
 						if (cellNode.nodeType === BLOCKS.TABLE_HEADER_CELL) {
 							return (cellNode.content || [])
-								.map((c: any) => c?.value ?? c?.content?.[0]?.value ?? "")
+								.map((c) => c?.value ?? c?.content?.[0]?.value ?? "")
 								.join("");
 						}
 						return "";
@@ -137,10 +145,10 @@ const options: Options = {
 					thead.push(...headerCells);
 				} else if (rowNode.nodeType === BLOCKS.TABLE_ROW) {
 					// Table body rows
-					const bodyCells = (rowNode.content || []).map((cellNode: any) => {
+					const bodyCells = (rowNode.content || []).map((cellNode) => {
 						if (cellNode.nodeType === BLOCKS.TABLE_CELL) {
 							return (cellNode.content || [])
-								.map((c: any) => c?.value ?? c?.content?.[0]?.value ?? "")
+								.map((c) => c?.value ?? c?.content?.[0]?.value ?? "")
 								.join("");
 						}
 						return "";

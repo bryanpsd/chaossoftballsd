@@ -8,10 +8,13 @@ export const body = style([
 		marginBottom: "1.5em",
 		lineHeight: 1.3,
 	},
-	tokens({ marginBottom: "col-6" }),
 ]);
 
 export const heading = style({
+	marginBottom: "18px",
+});
+
+export const hr = style({
 	marginBottom: "18px",
 });
 
@@ -39,4 +42,17 @@ export const image = style({
 	display: "block",
 	width: "100%",
 	height: "auto",
+});
+
+export const blockquote = style({
+	borderLeft: "4px solid #e0e0e0",
+	background: "#fafafa",
+	padding: "12px 20px",
+	margin: "18px 0",
+	fontStyle: "italic",
+	color: "#444",
+});
+
+export const blockquoteParagraph = style({
+	marginBottom: 0,
 });

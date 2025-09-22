@@ -6,7 +6,7 @@ import { TextBlockSection } from "../../components/TextBlockSection";
 import { List } from "../../components/TextBlockSection/List";
 import type { TypographyProps } from "../../components/Typography";
 import { Typography } from "../../components/Typography";
-
+import { Table } from "../Table";
 import * as styles from "./RichText.css";
 
 // Contentful rich text constants (ESM-compatible)
@@ -95,6 +95,65 @@ const options: Options = {
 				{children}
 			</List>
 		),
+
+		[BLOCKS.QUOTE]: (_node, children) => (
+			<blockquote className={styles.blockquote}>
+				{Array.isArray(children)
+					? children.map((child, i) =>
+							typeof child === "string" ? (
+								child
+							) : child && child.type === "p" ? (
+								<p
+									className={styles.blockquoteParagraph}
+									key={child.key ?? `blockquote-paragraph-${i}`}
+								>
+									{child.props.children}
+								</p>
+							) : (
+								child
+							),
+						)
+					: children}
+			</blockquote>
+		),
+
+		[BLOCKS.TABLE]: (node, _children) => {
+			// Extract table rows and cells from Contentful node structure
+			const tableRows = node.content || [];
+			const thead: string[] = [];
+			const tbody: Array<Array<string | React.ReactNode>> = [];
+
+			tableRows.forEach((rowNode: any, rowIndex: number) => {
+				// Table header row
+				if (rowIndex === 0 && rowNode.nodeType === BLOCKS.TABLE_ROW) {
+					const headerCells = (rowNode.content || []).map((cellNode: any) => {
+						if (cellNode.nodeType === BLOCKS.TABLE_HEADER_CELL) {
+							return (cellNode.content || [])
+								.map((c: any) => c?.value ?? c?.content?.[0]?.value ?? "")
+								.join("");
+						}
+						return "";
+					});
+					thead.push(...headerCells);
+				} else if (rowNode.nodeType === BLOCKS.TABLE_ROW) {
+					// Table body rows
+					const bodyCells = (rowNode.content || []).map((cellNode: any) => {
+						if (cellNode.nodeType === BLOCKS.TABLE_CELL) {
+							return (cellNode.content || [])
+								.map((c: any) => c?.value ?? c?.content?.[0]?.value ?? "")
+								.join("");
+						}
+						return "";
+					});
+					// Only push non-header rows
+					if (rowIndex !== 0) tbody.push(bodyCells);
+				}
+			});
+			return <Table thead={thead} tbody={tbody} />;
+		},
+
+		[BLOCKS.HR]: () => <hr className={styles.hr} />,
+
 		[BLOCKS.EMBEDDED_ASSET]: (node) => {
 			const { url } = node.data.target.fields.file;
 			const description = node.data.target.fields.description || "";

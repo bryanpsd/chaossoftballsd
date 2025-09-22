@@ -39,6 +39,29 @@ export const accordionTrigger = style([
 		transition: "background 0.2s, color 0.2s",
 	},
 ]);
+export const plusIcon = style({
+	selectors: {
+		[`${accordionTrigger}[data-state="open"] &`]: { display: "none" },
+		[`${accordionTrigger}[data-state="closed"] &`]: { display: "inline" },
+	},
+});
+
+export const minusIcon = style({
+	selectors: {
+		[`${accordionTrigger}[data-state="open"] &`]: { display: "inline" },
+		[`${accordionTrigger}[data-state="closed"] &`]: { display: "none" },
+	},
+});
+
+export const accordionIcon = style({
+	display: "flex",
+	alignItems: "center",
+	marginLeft: "0.5em",
+	minWidth: "18px",
+	minHeight: "18px",
+	width: "18px",
+	height: "18px",
+});
 
 export const accordionContent = style([
 	tokens({

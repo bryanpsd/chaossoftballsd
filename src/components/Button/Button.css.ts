@@ -65,7 +65,7 @@ export const button = recipe({
 		variant: {
 			outlined: tokens({ minWidth: { "xs-min": 32, "md-min": 96 } }),
 			contained: tokens({ minWidth: { "xs-min": 32, "md-min": 96 } }),
-			round: tokens({ minWidth: 32 }),
+			round: tokens({ minWidth: 32, fontSize: 6 }),
 			text: tokens({ minWidth: "none" }),
 		},
 	},

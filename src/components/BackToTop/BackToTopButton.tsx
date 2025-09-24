@@ -23,7 +23,7 @@ export const BackToTopButton = () => {
 		<Button
 			type="button"
 			color="primary"
-			size="medium"
+			size="small"
 			variant="round"
 			className={styles.backToTopButton}
 			aria-label="Back to top"

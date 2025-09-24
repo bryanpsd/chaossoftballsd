@@ -10,10 +10,10 @@ type TableCell =
 	  };
 
 type Props = {
-	thead: string[];
+	thead: TableCell[];
 	colSpan?: number;
 	tbody: Array<Array<TableCell>>;
-	tfoot?: string[];
+	tfoot?: TableCell[];
 };
 
 export const Table: React.FC<Props> = ({
@@ -27,15 +27,27 @@ export const Table: React.FC<Props> = ({
 			{Array.isArray(thead) && (
 				<thead className={styles.thead}>
 					<tr>
-						{thead.map((header) => (
-							<th
-								key={typeof header === "string" ? header : undefined}
-								colSpan={colSpan}
-								className={styles.th}
-							>
-								{header}
-							</th>
-						))}
+						{thead.map((header, idx) => {
+							let content: ReactNode;
+							let className = styles.th;
+							if (header && typeof header === "object" && "value" in header) {
+								content = header.value;
+								if ("className" in header && header.className) {
+									className += ` ${header.className}`;
+								}
+							} else {
+								content = header as ReactNode;
+							}
+							return (
+								<th
+									key={typeof content === "string" ? `${content}-${idx}` : idx}
+									colSpan={colSpan}
+									className={className}
+								>
+									{content}
+								</th>
+							);
+						})}
 					</tr>
 				</thead>
 			)}
@@ -84,15 +96,23 @@ export const Table: React.FC<Props> = ({
 														? (cell as { className?: string }).className
 														: ""
 												}`}
-												{...(typeof cell === "string" && cell.includes("<a")
-													? { dangerouslySetInnerHTML: { __html: cell } }
-													: {})}
 											>
-												{cell && typeof cell === "object" && "value" in (cell as { value: unknown })
-													? (cell as { value: ReactNode }).value
-													: typeof cell === "string" && !cell.includes("<a")
-														? cell
-														: null}
+												{(() => {
+													if (
+														cell &&
+														typeof cell === "object" &&
+														"value" in cell
+													) {
+														return (cell as { value: ReactNode }).value;
+													}
+													if (
+														typeof cell === "string" ||
+														typeof cell === "number"
+													) {
+														return cell;
+													}
+													return null;
+												})()}
 											</th>
 										);
 									} else {
@@ -107,15 +127,23 @@ export const Table: React.FC<Props> = ({
 														? (cell as { className?: string }).className
 														: ""
 												}`}
-												{...(typeof cell === "string" && cell.includes("<a")
-													? { dangerouslySetInnerHTML: { __html: cell } }
-													: {})}
 											>
-												{cell && typeof cell === "object" && "value" in (cell as { value: unknown })
-													? (cell as { value: ReactNode }).value
-													: typeof cell === "string" || typeof cell === "number"
-														? cell
-														: null}
+												{(() => {
+													if (
+														cell &&
+														typeof cell === "object" &&
+														"value" in cell
+													) {
+														return (cell as { value: ReactNode }).value;
+													}
+													if (
+														typeof cell === "string" ||
+														typeof cell === "number"
+													) {
+														return cell;
+													}
+													return null;
+												})()}
 											</td>
 										);
 									}
@@ -128,15 +156,27 @@ export const Table: React.FC<Props> = ({
 			{Array.isArray(tfoot) && (
 				<tfoot className={styles.tfoot}>
 					<tr>
-						{tfoot.map((footer) => (
-							<th
-								key={typeof footer === "string" ? footer : undefined}
-								colSpan={colSpan}
-								className={styles.th}
-							>
-								{footer}
-							</th>
-						))}
+						{tfoot.map((footer, idx) => {
+							let content: ReactNode;
+							let className = styles.th;
+							if (footer && typeof footer === "object" && "value" in footer) {
+								content = footer.value;
+								if ("className" in footer && footer.className) {
+									className += ` ${footer.className}`;
+								}
+							} else {
+								content = footer as ReactNode;
+							}
+							return (
+								<th
+									key={typeof content === "string" ? `${content}-${idx}` : idx}
+									colSpan={colSpan}
+									className={className}
+								>
+									{content}
+								</th>
+							);
+						})}
 					</tr>
 				</tfoot>
 			)}

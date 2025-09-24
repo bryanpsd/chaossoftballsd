@@ -6,11 +6,11 @@ import { fontSize } from "../../styles/tokens/typography";
 export const table = style([
 	tokens({
 		width: "col-12",
+		marginBottom: 10,
 	}),
 	{
 		fontSize: fontSize.sizeFont4,
 		tableLayout: "auto",
-		marginBottom: "18px",
 	},
 ]);
 

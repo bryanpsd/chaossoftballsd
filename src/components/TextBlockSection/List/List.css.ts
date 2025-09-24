@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+import { globalStyle, style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { tokens } from "../../../styles/tokens/designTokens.css";
 
@@ -11,7 +11,7 @@ export const list = recipe({
 			marginBottom: 24,
 		}),
 		{
-			listStyleType: "disc", // reset.css is setting this to none
+			listStyleType: "disc",
 			":first-child": {
 				marginTop: 0,
 			},
@@ -20,7 +20,7 @@ export const list = recipe({
 	variants: {
 		ordered: {
 			true: {
-				listStyleType: "decimal", // reset.css is setting this to none
+				listStyleType: "decimal",
 			},
 		},
 	},
@@ -29,7 +29,11 @@ export const list = recipe({
 export const listItem = style({
 	selectors: {
 		"&:not(:first-child)": {
-			marginTop: 20,
+			marginTop: 10,
 		},
 	},
+});
+
+globalStyle(`${listItem} p`, {
+	marginBottom: 0,
 });

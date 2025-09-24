@@ -3,27 +3,29 @@ import { color } from "../../styles/tokens/colors";
 import { tokens } from "../../styles/tokens/designTokens.css";
 
 export const body = style([
-	{
-		maxWidth: "none",
-		marginBottom: "1.5em",
-		lineHeight: 1.3,
-	},
+	tokens({
+		marginBottom: 10,
+	}),
 ]);
 
-export const heading = style({
-	marginBottom: "18px",
-});
+export const heading = style([
+	tokens({
+		marginBottom: 10,
+	}),
+]);
 
-export const hr = style({
-	marginBottom: "18px",
-});
+export const hr = style([
+	tokens({
+		marginBottom: 10,
+	}),
+]);
 
 export const italic = style({
 	fontStyle: "italic",
 });
 
 export const bold = style({
-	fontWeight: "bold",
+	fontWeight: 600,
 });
 
 export const textBlock = style([
@@ -61,7 +63,3 @@ export const blockquote = style([
 		fontStyle: "italic",
 	},
 ]);
-
-export const blockquoteParagraph = style({
-	marginBottom: 0,
-});

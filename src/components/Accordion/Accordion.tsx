@@ -44,12 +44,20 @@ type AccordionProps = {
 };
 
 export const BasicAccordion = ({ list }: AccordionProps) => {
-	const items = Array.isArray(list.fields.type)
-		? list.fields.type.filter(
+	const rawType = list?.fields?.type;
+	const items = Array.isArray(rawType)
+		? rawType.filter(
 				(entry): entry is TypeQuestionAnswer<"WITHOUT_UNRESOLVABLE_LINKS"> =>
-					!!entry && !!entry.fields?.question && !!entry.fields?.answer,
+					!!entry &&
+					typeof entry.fields === "object" &&
+					"question" in entry.fields &&
+					"answer" in entry.fields,
 			)
 		: [];
+
+	if (!items.length) {
+		return <div>No valid question/answer items found in this list.</div>;
+	}
 
 	return (
 		<Accordion.Root type="single" collapsible className={styles.accordionRoot}>

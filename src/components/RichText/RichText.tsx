@@ -1,5 +1,8 @@
 import type { Options } from "@contentful/rich-text-react-renderer";
-import type { Document } from "@contentful/rich-text-types";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import type { Document, TopLevelBlock } from "@contentful/rich-text-types";
+import { BLOCKS } from "@contentful/rich-text-types";
+import { BasicAccordion } from "../../components/Accordion";
 import { ContentfulImage } from "../../components/Image/ContentfulImage";
 import { ResponsiveHeadline } from "../../components/ResponsiveHeadline";
 import { TextBlockSection } from "../../components/TextBlockSection";
@@ -9,28 +12,6 @@ import { Typography } from "../../components/Typography";
 import { Table } from "../Table";
 import * as styles from "./RichText.css";
 
-// Contentful rich text constants (ESM-compatible)
-const BLOCKS = {
-	DOCUMENT: "document",
-	PARAGRAPH: "paragraph",
-	HEADING_1: "heading-1",
-	HEADING_2: "heading-2",
-	HEADING_3: "heading-3",
-	HEADING_4: "heading-4",
-	HEADING_5: "heading-5",
-	HEADING_6: "heading-6",
-	OL_LIST: "ordered-list",
-	UL_LIST: "unordered-list",
-	LIST_ITEM: "list-item",
-	QUOTE: "blockquote",
-	HR: "hr",
-	EMBEDDED_ENTRY: "embedded-entry-block",
-	EMBEDDED_ASSET: "embedded-asset-block",
-	TABLE: "table",
-	TABLE_ROW: "table-row",
-	TABLE_CELL: "table-cell",
-	TABLE_HEADER_CELL: "table-header-cell",
-};
 const INLINES = {
 	HYPERLINK: "hyperlink",
 	ENTRY_HYPERLINK: "entry-hyperlink",
@@ -45,6 +26,16 @@ const MARKS = {
 };
 
 const BODY_TYPOGRAPHY_VARIANT: TypographyProps["variant"] = "bodyMd";
+
+const tableCellOptions: Options = {
+	renderMark: {
+		[MARKS.ITALIC]: (_text) => <em className={styles.italic}>{_text}</em>,
+		[MARKS.BOLD]: (_text) => <strong className={styles.bold}>{_text}</strong>,
+	},
+	renderNode: {
+		[BLOCKS.PARAGRAPH]: (_node, children) => <>{children}</>,
+	},
+};
 
 const options: Options = {
 	renderMark: {
@@ -101,10 +92,9 @@ const options: Options = {
 		),
 
 		[BLOCKS.TABLE]: (node, _children) => {
-			// Extract table rows and cells from Contentful node structure
 			const tableRows = node.content || [];
-			const thead: string[] = [];
-			const tbody: Array<Array<string | React.ReactNode>> = [];
+			const thead: Array<{ value: React.ReactNode }> = [];
+			const tbody: Array<Array<{ value: React.ReactNode }>> = [];
 
 			type ContentfulTableCellNode = {
 				nodeType: string;
@@ -118,28 +108,58 @@ const options: Options = {
 				content?: ContentfulTableCellNode[];
 			};
 			(tableRows as ContentfulTableRowNode[]).forEach((rowNode, rowIndex) => {
-				// Table header row
 				if (rowIndex === 0 && rowNode.nodeType === BLOCKS.TABLE_ROW) {
 					const headerCells = (rowNode.content || []).map((cellNode) => {
 						if (cellNode.nodeType === BLOCKS.TABLE_HEADER_CELL) {
-							return (cellNode.content || [])
-								.map((c) => c?.value ?? c?.content?.[0]?.value ?? "")
-								.join("");
+							return {
+								value: documentToReactComponents(
+									{
+										nodeType: BLOCKS.DOCUMENT,
+										data: {},
+										content: Array.isArray(cellNode.content)
+											? (cellNode.content.filter(
+													(c) =>
+														c &&
+														typeof c === "object" &&
+														"nodeType" in c &&
+														typeof (c as { nodeType?: string }).nodeType ===
+															"string",
+												) as TopLevelBlock[])
+											: [],
+									},
+									tableCellOptions,
+								),
+							};
 						}
-						return "";
+						return { value: "" };
 					});
 					thead.push(...headerCells);
 				} else if (rowNode.nodeType === BLOCKS.TABLE_ROW) {
-					// Table body rows
 					const bodyCells = (rowNode.content || []).map((cellNode) => {
 						if (cellNode.nodeType === BLOCKS.TABLE_CELL) {
-							return (cellNode.content || [])
-								.map((c) => c?.value ?? c?.content?.[0]?.value ?? "")
-								.join("");
+							return {
+								value: documentToReactComponents(
+									{
+										nodeType: BLOCKS.DOCUMENT,
+										data: {},
+										content: Array.isArray(cellNode.content)
+											? (cellNode.content.filter(
+													(c) =>
+														c &&
+														typeof c === "object" &&
+														"nodeType" in c &&
+														typeof (c as { nodeType?: string }).nodeType ===
+															"string",
+												) as TopLevelBlock[])
+											: [],
+									},
+									tableCellOptions,
+								),
+							};
 						}
-						return "";
+						return { value: "" };
 					});
-					// Only push non-header rows
+
 					if (rowIndex !== 0) tbody.push(bodyCells);
 				}
 			});
@@ -154,6 +174,14 @@ const options: Options = {
 			return (
 				<ContentfulImage className={styles.image} src={url} alt={description} />
 			);
+		},
+
+		[BLOCKS.EMBEDDED_ENTRY]: (node) => {
+			const entry = node?.data?.target;
+			if (entry?.sys?.contentType?.sys?.id === "list" && entry.fields) {
+				return <BasicAccordion list={entry} key={entry.sys.id} />;
+			}
+			return null;
 		},
 
 		[INLINES.HYPERLINK]: (node, children) => {
@@ -184,6 +212,7 @@ const options: Options = {
 					</a>
 				);
 			}
+			return null;
 		},
 	},
 };

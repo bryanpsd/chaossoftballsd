@@ -12,6 +12,7 @@ const entry = await contentfulClient.getEntries<TypePageSkeleton>({
 	content_type: "page",
 	"fields.slug": slug,
 	limit: 1,
+	include: 2,
 });
 
 if (!slug || !entry.items || entry.items.length === 0) {
@@ -30,6 +31,6 @@ const pageContent = entry.items[0]?.fields || {};
         <ResponsiveHeadline size={1} as="h1">
             {pageContent.title}
         </ResponsiveHeadline>
-        {pageContent.content && <RichText richText={pageContent.content} />}
+        {pageContent.content && <RichText richText={pageContent.content} client:load/>}
     </div>
 </Layout>

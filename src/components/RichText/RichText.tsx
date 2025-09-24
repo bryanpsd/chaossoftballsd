@@ -136,7 +136,7 @@ const options: Options = {
 							return {
 								value: documentToReactComponents(
 									{
-										nodeType: BLOCKS.DOCUMENT,
+										nodeType: "document",
 										data: {},
 										content: Array.isArray(cellNode.content)
 											? (cellNode.content.filter(
@@ -148,7 +148,7 @@ const options: Options = {
 															"string",
 												) as TopLevelBlock[])
 											: [],
-									},
+									} as Document,
 									tableCellOptions,
 								),
 							};
@@ -162,7 +162,7 @@ const options: Options = {
 							return {
 								value: documentToReactComponents(
 									{
-										nodeType: BLOCKS.DOCUMENT,
+										nodeType: "document",
 										data: {},
 										content: Array.isArray(cellNode.content)
 											? (cellNode.content.filter(
@@ -174,7 +174,7 @@ const options: Options = {
 															"string",
 												) as TopLevelBlock[])
 											: [],
-									},
+									} as Document,
 									tableCellOptions,
 								),
 							};

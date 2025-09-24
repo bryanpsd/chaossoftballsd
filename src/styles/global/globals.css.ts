@@ -25,7 +25,7 @@ globalStyle("*", {
 globalStyle("body", {
 	color: "#000000",
 	margin: 0,
-	fontSize: "1.2rem",
+	fontSize: "16px",
 });
 
 globalStyle(".sr-only", {

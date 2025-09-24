@@ -37,6 +37,7 @@ export const accordionTrigger = style([
 		fontWeight: 600,
 		border: "none",
 		transition: "background 0.2s, color 0.2s",
+		fontSize: "16px",
 	},
 ]);
 export const plusIcon = style({

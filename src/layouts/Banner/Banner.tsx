@@ -45,7 +45,7 @@ export const Banner = ({ banner, currentPath }: BannerProps) => {
 
 	return (
 		currentBanner && (
-			<section className={styles.bannerWrapper}>
+			<section className={styles.bannerWrapper} aria-label="Banner">
 				<TextBlockSection
 					text={currentBanner.body as Document}
 					options={bannerOptions}

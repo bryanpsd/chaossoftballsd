@@ -13,7 +13,7 @@ const { title, description, lang = "en-US" } = Astro.props;
   <BaseHead title={title} description={description} />
   <body>
     <Header />
-    <main id="main-content" class={styles.mainWrapper}>
+    <main id="main-content" role="main" class={styles.mainWrapper}>
       <slot />
     </main>
     <Footer />

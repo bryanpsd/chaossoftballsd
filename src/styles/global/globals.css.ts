@@ -13,10 +13,6 @@ globalStyle("html", {
 	MozOsxFontSmoothing: "grayscale",
 });
 
-globalStyle("strong, b", {
-	fontWeight: 700,
-});
-
 // Apply base font to all elements to override reset
 globalStyle("*", {
 	fontFamily: fontFamily.base,

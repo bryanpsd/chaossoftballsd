@@ -20,14 +20,6 @@ export const hr = style([
 	}),
 ]);
 
-export const italic = style({
-	fontStyle: "italic",
-});
-
-export const bold = style({
-	fontWeight: 600,
-});
-
 export const textBlock = style([
 	tokens({
 		marginX: "auto",

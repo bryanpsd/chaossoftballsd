@@ -5,6 +5,7 @@ import { tokens } from "../../styles/tokens/designTokens.css";
 export const accordionRoot = style([
 	tokens({
 		width: "col-12",
+		marginBottom: 10,
 	}),
 ]);
 

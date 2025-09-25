@@ -3,6 +3,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import type { Document, TopLevelBlock } from "@contentful/rich-text-types";
 import { BasicAccordion } from "../../components/Accordion";
 import { ContentfulImage } from "../../components/Image/ContentfulImage";
+import { Link } from "../../components/Link";
 import { ResponsiveHeadline } from "../../components/ResponsiveHeadline";
 import { TextBlockSection } from "../../components/TextBlockSection";
 import { List } from "../../components/TextBlockSection/List";
@@ -51,18 +52,48 @@ const BODY_TYPOGRAPHY_VARIANT: TypographyProps["variant"] = "bodyMd";
 
 const tableCellOptions: Options = {
 	renderMark: {
-		[MARKS.ITALIC]: (_text) => <em className={styles.italic}>{_text}</em>,
-		[MARKS.BOLD]: (_text) => <strong className={styles.bold}>{_text}</strong>,
+		[MARKS.ITALIC]: (_text) => <em>{_text}</em>,
+		[MARKS.BOLD]: (_text) => <strong>{_text}</strong>,
 	},
 	renderNode: {
 		[BLOCKS.PARAGRAPH]: (_node, children) => <>{children}</>,
+		[INLINES.HYPERLINK]: (_node, children) => {
+			const uri = _node.data.uri;
+			if (uri.startsWith("https://")) {
+				return (
+					<Link
+						className={styles.link}
+						target="_blank"
+						rel="noopener noreferrer"
+						href={uri}
+					>
+						{children}
+					</Link>
+				);
+			}
+			if (uri.startsWith("mailto:")) {
+				return (
+					<Link className={styles.link} href={uri}>
+						{children}
+					</Link>
+				);
+			}
+			if (uri.startsWith("/") || uri.startsWith("#")) {
+				return (
+					<Link className={styles.link} href={uri}>
+						{children}
+					</Link>
+				);
+			}
+			return null;
+		},
 	},
 };
 
 const options: Options = {
 	renderMark: {
-		[MARKS.ITALIC]: (_text) => <em className={styles.italic}>{_text}</em>,
-		[MARKS.BOLD]: (_text) => <strong className={styles.bold}>{_text}</strong>,
+		[MARKS.ITALIC]: (_text) => <em>{_text}</em>,
+		[MARKS.BOLD]: (_text) => <strong>{_text}</strong>,
 	},
 	renderNode: {
 		[BLOCKS.HEADING_2]: (_node, children) => (
@@ -210,28 +241,28 @@ const options: Options = {
 			const uri = node.data.uri;
 			if (uri.startsWith("https://")) {
 				return (
-					<a
+					<Link
 						className={styles.link}
 						target="_blank"
 						rel="noopener noreferrer"
 						href={uri}
 					>
 						{children}
-					</a>
+					</Link>
 				);
 			}
 			if (uri.startsWith("mailto:")) {
 				return (
-					<a className={styles.link} href={uri}>
+					<Link className={styles.link} href={uri}>
 						{children}
-					</a>
+					</Link>
 				);
 			}
 			if (uri.startsWith("/") || uri.startsWith("#")) {
 				return (
-					<a className={styles.link} href={uri}>
+					<Link className={styles.link} href={uri}>
 						{children}
-					</a>
+					</Link>
 				);
 			}
 			return null;

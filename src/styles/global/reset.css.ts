@@ -147,8 +147,12 @@ globalStyle("abbr[title]", {
  * Add the correct font weight in Chrome, Edge, and Safari.
  */
 
-globalStyle("b, strong", {
-	fontWeight: "bolder",
+globalStyle("strong, b", {
+	fontWeight: 600,
+});
+
+globalStyle("em, i", {
+	fontStyle: "italic",
 });
 
 /**

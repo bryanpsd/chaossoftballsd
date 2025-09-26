@@ -9,6 +9,7 @@ export const color = {
 		gray: "#eeeeee",
 		white: "#FFFFFF",
 		black: "#000000",
+		red: "#B00625",
 	},
 	action: {
 		active: "rgba(0, 0, 0, 0.54)",

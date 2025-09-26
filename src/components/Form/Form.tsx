@@ -2,6 +2,7 @@ import { useId } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { Button } from "~/components/Button";
+import { concatClasses } from "~/utils/concatClasses";
 import { useCaptcha } from "~/utils/useCaptcha";
 import "react-toastify/dist/ReactToastify.css";
 import * as styles from "~/components/Form/Form.css";
@@ -18,9 +19,10 @@ export const Form = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
+		formState: { errors, isSubmitted },
 		reset,
-	} = useForm<FormData>();
+		getFieldState,
+	} = useForm<FormData>({ mode: "onChange" });
 	const nameId = useId();
 	const emailId = useId();
 	const messageId = useId();
@@ -62,39 +64,72 @@ export const Form = () => {
 			<input type="hidden" {...register("bot-field")} />
 
 			<div className={styles.formField}>
-				<label htmlFor={nameId}>Name:</label>
-				<input
-					className={styles.input}
-					id={nameId}
-					type="text"
-					{...register("name", { required: true })}
-				/>
+				<label className={styles.label} htmlFor={nameId}>
+					Name:
+				</label>
+				<div className={styles.inputWrapper}>
+					<input
+						className={concatClasses([
+							styles.input,
+							getFieldState("name").isTouched && !errors.name ? "valid" : "",
+							(getFieldState("name").isTouched && errors.name) ||
+							(isSubmitted && errors.name)
+								? "invalid"
+								: "",
+						])}
+						id={nameId}
+						type="text"
+						{...register("name", { required: true })}
+					/>
+				</div>
 				{errors.name && <span className={styles.error}>Enter a Name</span>}
 			</div>
 
 			<div className={styles.formField}>
-				<label htmlFor={emailId}>Email:</label>
-				<input
-					className={styles.input}
-					id={emailId}
-					type="email"
-					{...register("email", {
-						required: "Enter an Email address",
-						pattern: {
-							value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-							message: "Enter a valid email address.",
-						},
-					})}
-				/>
+				<label className={styles.label} htmlFor={emailId}>
+					Email:
+				</label>
+				<div className={styles.inputWrapper}>
+					<input
+						className={concatClasses([
+							styles.input,
+							getFieldState("email").isTouched && !errors.email ? "valid" : "",
+							(getFieldState("email").isTouched && errors.email) ||
+							(isSubmitted && errors.email)
+								? "invalid"
+								: "",
+						])}
+						id={emailId}
+						type="email"
+						{...register("email", {
+							required: "Enter an Email address",
+							pattern: {
+								value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+								message: "Enter a valid email address.",
+							},
+						})}
+					/>
+				</div>
 				{errors.email && (
 					<span className={styles.error}>{errors.email.message}</span>
 				)}
 			</div>
 
 			<div className={styles.formField}>
-				<label htmlFor={messageId}>Message:</label>
+				<label className={styles.label} htmlFor={messageId}>
+					Message:
+				</label>
 				<textarea
-					className={styles.textarea}
+					className={concatClasses([
+						styles.textarea,
+						getFieldState("message").isTouched && !errors.message
+							? "valid"
+							: "",
+						(getFieldState("message").isTouched && errors.message) ||
+						(isSubmitted && errors.message)
+							? "invalid"
+							: "",
+					])}
 					id={messageId}
 					{...register("message", { required: "Enter a message." })}
 				/>
@@ -103,7 +138,13 @@ export const Form = () => {
 				)}
 			</div>
 			<div>
-				<Button type="submit" color="primary" size="small" variant="contained">
+				<Button
+					className={styles.submitButton}
+					type="submit"
+					color="primary"
+					size="small"
+					variant="contained"
+				>
 					Submit
 				</Button>
 			</div>

@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { color } from "../../styles/tokens/colors";
 import { tokens } from "../../styles/tokens/designTokens.css";
 
 export const formWrapper = style([
@@ -15,7 +16,24 @@ export const formField = style([
 		display: "flex",
 		flexDirection: "column",
 		width: "col-12",
-		gap: 4,
+		gap: 6,
+		boxSizing: "border-box",
+		flexWrap: "wrap",
+	}),
+]);
+
+export const label = style([
+	tokens({
+		fontWeight: "fontWeight700",
+	}),
+]);
+
+export const inputWrapper = style([
+	tokens({
+		display: "flex",
+		flexDirection: "column",
+		width: "col-12",
+		boxSizing: "border-box",
 	}),
 ]);
 
@@ -23,14 +41,21 @@ export const input = style([
 	tokens({
 		padding: 10,
 		outline: "none",
+		borderRadius: "xxl",
 	}),
 	{
-		borderRadius: 4,
 		border: "1px solid #ccc",
 		transition: "border-color 0.2s",
+		boxSizing: "border-box",
 		selectors: {
 			"&:focus": {
-				borderColor: "#0070f3",
+				borderColor: color.brand.purple,
+			},
+			"&.valid": {
+				borderColor: color.brand.green,
+			},
+			"&.invalid": {
+				borderColor: color.brand.red,
 			},
 		},
 	},
@@ -41,19 +66,31 @@ export const textarea = style([
 		padding: 10,
 		minHeight: 80,
 		outline: "none",
+		borderRadius: "xxl",
 	}),
 	{
-		borderRadius: 4,
 		border: "1px solid #ccc",
 		transition: "border-color 0.2s",
 		selectors: {
 			"&:focus": {
-				borderColor: "#0070f3",
+				borderColor: color.brand.purple,
+			},
+			"&.valid": {
+				borderColor: color.brand.green,
+			},
+			"&.invalid": {
+				borderColor: color.brand.red,
 			},
 		},
 	},
 ]);
 
+export const submitButton = style([
+	tokens({
+		paddingX: 20,
+	}),
+]);
+
 export const error = style({
-	color: "#d32f2f",
+	color: color.brand.red,
 });

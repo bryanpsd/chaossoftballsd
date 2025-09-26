@@ -12,7 +12,9 @@ export const backToTopButton = style([
 		bottom: "2rem",
 		right: "2rem",
 		zIndex: 1000,
-		fontSize: "24px !important",
-		boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
 	},
 ]);
+
+export const backToTopButtonIcon = style({
+	display: "block",
+});

@@ -14,6 +14,7 @@ export const baseButton = style([
 		cursor: { hover: "pointer", disabled: "not-allowed" },
 		fontFamily: "base",
 		borderStyle: "solid",
+		borderRadius: "round",
 	}),
 	{
 		boxSizing: "border-box",
@@ -21,6 +22,8 @@ export const baseButton = style([
 		transitionDuration: "250ms",
 		transitionTimingFunction: "ease-in",
 		outlineOffset: ".2rem",
+		boxShadow: "0 .1rem .8rem -.4rem #000000",
+		border: "1px solid #000000",
 	},
 ]);
 
@@ -37,12 +40,12 @@ export const button = recipe({
 			small: tokens({
 				fontSize: "sizeFont4",
 				lineHeight: "sizeLineHeight4",
-				gap: 6,
-				padding: 6,
+				gap: 8,
+				padding: 8,
 			}),
 			medium: tokens({
-				fontSize: "sizeFont16",
-				lineHeight: "sizeLineHeight16",
+				fontSize: "sizeFont6",
+				lineHeight: "sizeLineHeight6",
 				gap: 16,
 				paddingY: 11,
 				paddingX: 10,
@@ -65,7 +68,7 @@ export const button = recipe({
 		variant: {
 			outlined: tokens({ minWidth: { "xs-min": 32, "md-min": 96 } }),
 			contained: tokens({ minWidth: { "xs-min": 32, "md-min": 96 } }),
-			round: tokens({ minWidth: 32, fontSize: 8 }),
+			round: tokens({ minWidth: 32 }),
 			text: tokens({ minWidth: "none" }),
 		},
 	},

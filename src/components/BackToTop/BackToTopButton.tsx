@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FiArrowUp } from "react-icons/fi";
 import * as styles from "~/components/BackToTop/BackToTopButton.css";
 import { Button } from "~/components/Button";
 
@@ -28,7 +29,7 @@ export const BackToTopButton = () => {
 			aria-label="Back to top"
 			onClick={scrollToTop}
 		>
-			↑
+			<FiArrowUp size={48} className={styles.backToTopButtonIcon} />
 		</Button>
 	);
 };

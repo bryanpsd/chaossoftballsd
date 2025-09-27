@@ -11,26 +11,16 @@ import type { TypeListSkeleton } from "../../types/contentful/TypeList";
 
 const entry = await contentfulClient.getEntries<TypeListSkeleton>({
 	content_type: "list",
-	"fields.title": "Footer Links",
+	"fields.title": "Navigation",
 	limit: 1,
 });
 
-import { menuItems } from "../Header/utils/headerItems";
 import * as styles from "./Footer.css";
 ---
 
 <footer class={styles.footerWrapper}>
     <nav aria-label="Footer Navigation">
         <ul class={styles.footerNav}>
-            {
-                menuItems.menuItems.map((item) => (
-                    <li>
-                        <a class={styles.footerNavLink} href={item.href}>
-                            {item.label}
-                        </a>
-                    </li>
-                ))
-            }
             {
                 entry.items[0]?.fields?.type?.map((linkEntry) => {
                     if (!linkEntry || !('fields' in linkEntry)) return null;

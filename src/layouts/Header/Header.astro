@@ -6,10 +6,59 @@ import { Banner } from "~/layouts/Banner";
 import { MainNav } from "~/layouts/MainNav";
 import { MobileNav } from "~/layouts/MobileNav";
 import * as commonStyles from "~/styles/utilities/common.css";
+import { contentfulClient } from "../../services/contentful/contentful";
+import type { TypeListSkeleton } from "../../types/contentful/TypeList";
 import * as styles from "./Header.css";
-import { menuItems } from "./utils/headerItems";
 
 const banners = await Astro.callAction(server.getHeaderBanners, null);
+
+const entry = await contentfulClient.getEntries<TypeListSkeleton>({
+	content_type: "list",
+	"fields.title": "Navigation",
+	limit: 1,
+});
+
+const navEntry = entry.items[0];
+function getLinkFields(obj: unknown): {
+	label?: string;
+	name?: string;
+	ctaLink?: string;
+	openInNewWindow?: boolean;
+} {
+	if (
+		typeof obj === "object" &&
+		obj !== null &&
+		("label" in obj ||
+			"name" in obj ||
+			"ctaLink" in obj ||
+			"openInNewWindow" in obj)
+	) {
+		return obj as {
+			label?: string;
+			name?: string;
+			ctaLink?: string;
+			openInNewWindow?: boolean;
+		};
+	}
+	return {};
+}
+
+const items = navEntry
+	? {
+			label: navEntry.fields.title ?? "Navigation",
+			menuItems: (navEntry.fields.type || [])
+				.filter((link) => link && "fields" in link)
+				.map((link) => {
+					const fields = getLinkFields(link.fields);
+					return {
+						label: fields.label ?? fields.name ?? "",
+						href: fields.ctaLink ?? undefined,
+						target: fields.openInNewWindow ? "_blank" : undefined,
+						links: [], // Add support for nested links if needed
+					};
+				}),
+		}
+	: { label: "", menuItems: [] };
 
 const { pathname } = Astro.url;
 ---
@@ -41,7 +90,7 @@ const { pathname } = Astro.url;
         />
       </a>
     </div>
-    <MainNav items={menuItems} currentPath={pathname} client:load />
-    <MobileNav navItems={{ menuItems: menuItems.menuItems }} client:load />
+    <MainNav items={items} currentPath={pathname} client:load />
+    <MobileNav navItems={items} client:load />
   </div>
 </header>

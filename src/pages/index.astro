@@ -1,10 +1,56 @@
 ---
 export const prerender = true;
 
-import Welcome from "~/components/Welcome.astro";
+import { ToastContainer } from "react-toastify";
+import { BasicAccordion } from "~/components/Accordion";
+import { Form } from "~/components/Form";
+import { Hero } from "~/components/Hero";
+import { ResponsiveHeadline } from "~/components/ResponsiveHeadline";
+import { RichText } from "~/components/RichText";
 import Layout from "~/layouts/Layout.astro";
+import { contentfulClient } from "~/services/contentful/contentful";
+import { contentPadding, pageMaxWidth } from "~/styles/utilities/common.css";
+import type { TypePageSectionSkeleton } from "~/types/contentful";
+import type { TypeList, TypeListSkeleton } from "~/types/contentful/TypeList";
+
+const entries = await contentfulClient.getEntries<TypePageSectionSkeleton>({
+	content_type: "pageSection",
+	"fields.title": "Home Section",
+});
+
+const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
+	content_type: "list",
+	"fields.title": "FAQs",
+});
 ---
 
 <Layout>
-  <Welcome />
+<ToastContainer position="top-center" client:load />
+<Hero />
+<section id="intro" class={`${pageMaxWidth} ${contentPadding}`}>
+  {
+    entries.items.map((item) => (
+      <div>
+        {item.fields.content && (
+          <RichText richText={item.fields.content} client:load />
+        )}
+      </div>
+    ))
+  }
+</section>
+<section id="form" class={`${pageMaxWidth} ${contentPadding}`}>
+  <ResponsiveHeadline size={2} as="h2" style={{ marginBottom: "18px" }}>
+    Contact Us
+  </ResponsiveHeadline>
+  <Form client:load />
+</section>
+<section id="faqs" class={`${pageMaxWidth} ${contentPadding}`}>
+  <ResponsiveHeadline size={2} as="h2" style={{ marginBottom: "18px" }}>
+    Faqs
+  </ResponsiveHeadline>
+  <BasicAccordion
+    list={faqs.items[0] as TypeList<"WITHOUT_UNRESOLVABLE_LINKS">}
+    client:load
+  />
+</section>
 </Layout>

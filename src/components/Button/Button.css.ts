@@ -82,12 +82,16 @@ export const button = recipe({
 				variant: "contained",
 			},
 			style: tokens({
-				color: { default: "white", hover: "white", disabled: "gray" },
-				borderColor: { default: "purple", hover: "purple", disabled: "gray" },
+				color: { default: "white", hover: "white", disabled: "darkGray" },
+				borderColor: {
+					default: "purple",
+					hover: "purple",
+					disabled: "black",
+				},
 				backgroundColor: {
 					default: "purple",
 					hover: "darkPurple",
-					disabled: "gray",
+					disabled: "black",
 				},
 			}),
 		},
@@ -116,12 +120,12 @@ export const button = recipe({
 				variant: "outlined",
 			},
 			style: tokens({
-				color: { default: "white", hover: "white", disabled: "gray" },
-				borderColor: { default: "purple", disabled: "gray" },
+				color: { default: "white", hover: "white", disabled: "darkPurple" },
+				borderColor: { default: "purple", disabled: "darkPurple" },
 				backgroundColor: {
 					default: "transparent",
 					hover: "darkPurple",
-					disabled: "gray",
+					disabled: "darkPurple",
 				},
 			}),
 		},
@@ -131,12 +135,12 @@ export const button = recipe({
 				variant: "outlined",
 			},
 			style: tokens({
-				color: { default: "white", hover: "white", disabled: "gray" },
-				borderColor: { default: "yellow", disabled: "gray" },
+				color: { default: "white", hover: "white", disabled: "darkPurple" },
+				borderColor: { default: "yellow", disabled: "darkPurple" },
 				backgroundColor: {
 					default: "transparent",
 					hover: "purple",
-					disabled: "gray",
+					disabled: "darkPurple",
 				},
 			}),
 		},
@@ -145,14 +149,19 @@ export const button = recipe({
 		// *******************************************************************
 		{
 			variants: {
-				color: "default",
 				variant: "text",
 			},
-			style: tokens({
-				color: { default: "inherit", disabled: "gray" },
-				borderColor: "transparent",
-				backgroundColor: "transparent",
-			}),
+			style: [
+				tokens({
+					color: { default: "inherit", disabled: "gray" },
+					borderColor: "transparent",
+					backgroundColor: "transparent",
+				}),
+				{
+					boxShadow: "none",
+					border: "none",
+				},
+			],
 		},
 		{
 			variants: {

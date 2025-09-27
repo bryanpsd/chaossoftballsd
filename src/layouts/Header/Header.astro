@@ -4,6 +4,7 @@ import { server } from "~/actions";
 import logo from "~/assets/chaos-logo-small.png";
 import { Banner } from "~/layouts/Banner";
 import { MainNav } from "~/layouts/MainNav";
+import { MobileNav } from "~/layouts/MobileNav";
 import * as commonStyles from "~/styles/utilities/common.css";
 import * as styles from "./Header.css";
 import { menuItems } from "./utils/headerItems";
@@ -41,5 +42,6 @@ const { pathname } = Astro.url;
       </a>
     </div>
     <MainNav items={menuItems} currentPath={pathname} client:load />
+    <MobileNav navItems={{ menuItems: menuItems.menuItems }} client:load />
   </div>
 </header>

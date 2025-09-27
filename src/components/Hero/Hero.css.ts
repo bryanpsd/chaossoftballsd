@@ -1,4 +1,5 @@
 import { globalStyle, style } from "@vanilla-extract/css";
+import { color } from "../../styles/tokens/colors";
 
 export const hero = style({
 	position: "relative",
@@ -51,6 +52,10 @@ export const heroContainer = style({
 	flexDirection: "column",
 	justifyContent: "center",
 	textAlign: "center",
+});
+
+export const heroHeading = style({
+	color: color.brand.white,
 });
 
 globalStyle(`#faqs`, {

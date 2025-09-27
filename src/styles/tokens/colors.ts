@@ -10,6 +10,7 @@ export const color = {
 		white: "#FFFFFF",
 		black: "#000000",
 		red: "#B00625",
+		darkGray: "#575D64",
 	},
 	action: {
 		active: "rgba(0, 0, 0, 0.54)",

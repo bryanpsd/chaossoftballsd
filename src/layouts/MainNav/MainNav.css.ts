@@ -3,7 +3,7 @@ import { tokens } from "../../styles/tokens/designTokens.css";
 
 export const mainNavList = style([
 	tokens({
-		display: "flex",
+		display: { "xs-min": "none", "lg-min": "flex" },
 		height: "col-12",
 	}),
 	{

@@ -5,6 +5,12 @@ export type {
 } from "./TypeBanner";
 export { isTypeBanner } from "./TypeBanner";
 export type {
+	TypeGallery,
+	TypeGalleryFields,
+	TypeGallerySkeleton,
+} from "./TypeGallery";
+export { isTypeGallery } from "./TypeGallery";
+export type {
 	TypeLink,
 	TypeLinkFields,
 	TypeLinkSkeleton,

@@ -10,6 +10,7 @@ type NavigationLink = {
 	href?: string;
 	target?: string;
 	links?: NavigationLink[];
+	type?: string | string[];
 };
 
 type MobileNavProps = {

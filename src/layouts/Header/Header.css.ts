@@ -24,6 +24,7 @@ export const header = style([
 		alignItems: "center",
 		position: "relative",
 		width: "col-12",
+		flexDirection: "row",
 	}),
 	pageMaxWidth,
 	contentPadding,

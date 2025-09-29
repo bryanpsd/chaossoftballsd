@@ -25,7 +25,20 @@ export const pageMaxWidth = style([
 export const contentPadding = style([
 	tokens({
 		paddingX: { "xs-min": 16, "md-min": 24, "lg-min": 48 },
+		display: "flex",
+		gap: 16,
 	}),
+]);
+
+export const section = style([
+	tokens({
+		display: "flex",
+		flexDirection: "column",
+		gap: 16,
+		marginBottom: 12,
+	}),
+	pageMaxWidth,
+	contentPadding,
 ]);
 
 export const subPageWrapper = style([

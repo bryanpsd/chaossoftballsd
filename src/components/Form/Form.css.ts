@@ -8,6 +8,7 @@ export const formWrapper = style([
 		flexDirection: "column",
 		width: { "xs-min": "col-12", "md-min": "col-8" },
 		gap: 16,
+		marginBottom: 10,
 	}),
 ]);
 

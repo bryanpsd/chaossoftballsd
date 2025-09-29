@@ -1,7 +1,8 @@
 ---
+import { Link } from "~/components/Link";
 import { Typography } from "~/components/Typography";
+import { iconMap } from "~/utils/iconMap";
 import { contentfulClient } from "../../services/contentful/contentful";
-
 import type { TypeLinkFields } from "../../types/contentful/TypeLink";
 
 const currentDate = new Date();
@@ -10,10 +11,13 @@ const year = currentDate.getFullYear();
 import type { TypeListSkeleton } from "../../types/contentful/TypeList";
 
 const entry = await contentfulClient.getEntries<TypeListSkeleton>({
-	content_type: "list",
-	"fields.title": "Navigation",
-	limit: 1,
+    content_type: "list",
+    "fields.title": "Navigation",
+    limit: 1,
 });
+
+const ContactIcon = iconMap.Contact;
+const InstagramIcon = iconMap.Instagram;
 
 import * as styles from "./Footer.css";
 ---
@@ -23,22 +27,54 @@ import * as styles from "./Footer.css";
         <ul class={styles.footerNav}>
             {
                 entry.items[0]?.fields?.type?.map((linkEntry) => {
-                    if (!linkEntry || !('fields' in linkEntry)) return null;
-                    if (linkEntry.sys.contentType.sys.id !== 'link') return null;
+                    if (!linkEntry || !("fields" in linkEntry)) return null;
+                    if (linkEntry.sys.contentType.sys.id !== "link")
+                        return null;
                     const link = linkEntry.fields as TypeLinkFields;
-                    const url: string = link.ctaLink ? String(link.ctaLink.valueOf()) : "#";
-                    const label: string = link.label ? String(link.label.valueOf()) : (link.name ? String(link.name.valueOf()) : "Link");
-                    const openInNewWindow: boolean = typeof link.openInNewWindow === "boolean" ? link.openInNewWindow : !!link.openInNewWindow?.valueOf();
+                    const url: string = link.ctaLink
+                        ? String(link.ctaLink.valueOf())
+                        : "#";
+                    const label: string = link.label
+                        ? String(link.label.valueOf())
+                        : link.name
+                          ? String(link.name.valueOf())
+                          : "Link";
+                    const openInNewWindow: boolean =
+                        typeof link.openInNewWindow === "boolean"
+                            ? link.openInNewWindow
+                            : !!link.openInNewWindow?.valueOf();
                     return (
                         <li>
-                            <a
+                            <Link
                                 href={url}
                                 target={openInNewWindow ? "_blank" : undefined}
-                                rel={openInNewWindow ? "noopener noreferrer" : undefined}
-                                class={styles.footerNavLink}
+                                rel={
+                                    openInNewWindow
+                                        ? "noopener noreferrer"
+                                        : undefined
+                                }
+                                className={styles.footerNavLink}
                             >
-                                {label}
-                            </a>
+                                {label === "Contact" && ContactIcon ? (
+                                    <>
+                                        <ContactIcon
+                                            aria-hidden="true"
+                                            focusable="false"
+                                        />
+                                        <span class="sr-only">Contact</span>
+                                    </>
+                                ) : label === "Instagram" && InstagramIcon ? (
+                                    <>
+                                        <InstagramIcon
+                                            aria-hidden="true"
+                                            focusable="false"
+                                        />
+                                        <span class="sr-only">Instagram</span>
+                                    </>
+                                ) : (
+                                    label
+                                )}
+                            </Link>
                         </li>
                     );
                 })

@@ -10,7 +10,7 @@
  */
 
 export const fontFamily = {
-	base: '"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+	base: '"Inter", "Anton",system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
 };
 
 export const fontWeight = {

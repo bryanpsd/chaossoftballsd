@@ -10,7 +10,7 @@ import * as styles from "~/components/Form/Form.css";
 type FormData = {
 	name: string;
 	email: string;
-	message?: string;
+	message: string;
 	"bot-field"?: string;
 };
 
@@ -27,9 +27,22 @@ export const Form = () => {
 	const emailId = useId();
 	const messageId = useId();
 
+	// SSR-safe: check if captcha is ready
+	let captchaError: string | null = null;
+	let isCaptchaReady = false;
+	try {
+		isCaptchaReady = captcha && typeof captcha.execute === "function";
+	} catch (err) {
+		captchaError = `Captcha error: ${String(err)}`;
+		console.error(captchaError);
+	}
+
 	const onSubmit: SubmitHandler<FormData> = async (data) => {
 		try {
-			const captchaToken = await captcha.execute();
+			let captchaToken = "";
+			if (typeof window !== "undefined" && captcha?.execute) {
+				captchaToken = await captcha.execute();
+			}
 
 			const response = await fetch("/api/contactchaos", {
 				method: "POST",
@@ -49,6 +62,19 @@ export const Form = () => {
 			console.error("Error sending form:", error);
 		}
 	};
+
+	// Error fallback for captcha
+	if (captchaError) {
+		return (
+			<div style={{ color: "red" }}>
+				Error initializing captcha: {captchaError}
+			</div>
+		);
+	}
+	// Only render form when captcha is ready
+	if (!isCaptchaReady) {
+		return <div>Loading form...</div>;
+	}
 
 	return (
 		<form

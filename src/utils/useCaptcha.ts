@@ -20,10 +20,16 @@ async function getConfig() {
 type CaptchaConfig = Awaited<ReturnType<typeof getConfig>>;
 
 export const useCaptcha = () => {
-	const [captcha, setCaptcha] = useState<ReCaptchaInstance>(getInstance());
+	const [captcha, setCaptcha] = useState<ReCaptchaInstance | null>(null);
 	const [config, setConfig] = useState<CaptchaConfig>();
 
 	useEffect(() => {
+		if (typeof window === "undefined") return;
+		setCaptcha(getInstance());
+	}, []);
+
+	useEffect(() => {
+		if (typeof window === "undefined") return;
 		async function loadConfig() {
 			const config = await getConfig();
 			setConfig(config);
@@ -32,24 +38,30 @@ export const useCaptcha = () => {
 	}, []);
 
 	useEffect(() => {
-		if (config) {
-			const { SITE_KEY } = config;
-			if (captcha) {
-				// Page transitions unload the captcha container.
-				// We need to check if it exists and re-render
-				const current = document.getElementsByClassName("grecaptcha-badge");
-				if (current.length === 0 && SITE_KEY) {
-					window.grecaptcha.enterprise.render({ sitekey: SITE_KEY });
-				}
-			} else {
-				const loadCaptcha = async () => {
-					const captchaInstance = await load(SITE_KEY);
-					setCaptcha(captchaInstance);
-				};
-				loadCaptcha();
+		if (typeof window === "undefined" || !config) return;
+		const { SITE_KEY } = config;
+		if (captcha) {
+			// Page transitions unload the captcha container.
+			// We need to check if it exists and re-render
+			const current = document.getElementsByClassName("grecaptcha-badge");
+			if (
+				current.length === 0 &&
+				SITE_KEY &&
+				typeof window !== "undefined" &&
+				window.grecaptcha &&
+				window.grecaptcha.enterprise &&
+				typeof window.grecaptcha.enterprise.render === "function"
+			) {
+				window.grecaptcha.enterprise.render({ sitekey: SITE_KEY });
 			}
+		} else if (SITE_KEY) {
+			const loadCaptcha = async () => {
+				const captchaInstance = await load(SITE_KEY);
+				setCaptcha(captchaInstance);
+			};
+			loadCaptcha();
 		}
 	}, [config, captcha]);
 
-	return captcha;
+	return captcha || { execute: async () => "" };
 };

@@ -9,7 +9,7 @@ import { ResponsiveHeadline } from "~/components/ResponsiveHeadline";
 import { RichText } from "~/components/RichText";
 import Layout from "~/layouts/Layout.astro";
 import { contentfulClient } from "~/services/contentful/contentful";
-import { contentPadding, pageMaxWidth } from "~/styles/utilities/common.css";
+import { section } from "~/styles/utilities/common.css";
 import type { TypePageSectionSkeleton } from "~/types/contentful";
 import type { TypeList, TypeListSkeleton } from "~/types/contentful/TypeList";
 
@@ -25,32 +25,30 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
 ---
 
 <Layout>
-<ToastContainer position="top-center" client:load />
-<Hero />
-<section id="intro" class={`${pageMaxWidth} ${contentPadding}`}>
-  {
-    entries.items.map((item) => (
-      <div>
-        {item.fields.content && (
-          <RichText richText={item.fields.content} client:load />
-        )}
-      </div>
-    ))
-  }
-</section>
-<section id="form" class={`${pageMaxWidth} ${contentPadding}`}>
-  <ResponsiveHeadline size={2} as="h2" style={{ marginBottom: "18px" }}>
-    Contact Us
-  </ResponsiveHeadline>
-  <Form client:load />
-</section>
-<section id="faqs" class={`${pageMaxWidth} ${contentPadding}`}>
-  <ResponsiveHeadline size={2} as="h2" style={{ marginBottom: "18px" }}>
-    Faqs
-  </ResponsiveHeadline>
-  <BasicAccordion
-    list={faqs.items[0] as TypeList<"WITHOUT_UNRESOLVABLE_LINKS">}
-    client:load
-  />
-</section>
+  <ToastContainer position="top-center" client:load />
+  <Hero />
+  <section id="intro" class={`${section}`}>
+    {
+      entries.items.map((item) => (
+        <div>
+          {item.fields.content && (
+            <RichText richText={item.fields.content} client:load />
+          )}
+        </div>
+      ))
+    }
+  </section>
+  <section id="faqs" class={`${section}`}>
+    <ResponsiveHeadline size={2} as="h2">
+      Frequently Asked Questions
+    </ResponsiveHeadline>
+    <BasicAccordion
+      list={faqs.items[0] as TypeList<"WITHOUT_UNRESOLVABLE_LINKS">}
+      client:load
+    />
+  </section>
+  <section id="contact" class={`${section}`}>
+    <ResponsiveHeadline size={2} as="h2"> Contact Us </ResponsiveHeadline>
+     <Form client:load />
+  </section>
 </Layout>

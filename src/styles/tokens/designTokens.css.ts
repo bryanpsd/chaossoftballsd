@@ -255,6 +255,7 @@ const displayProperties = defineProperties({
 			"none",
 			"inherit",
 			"initial",
+			"background",
 		],
 		boxSizing: ["border-box", "content-box"],
 		flexBasis: {

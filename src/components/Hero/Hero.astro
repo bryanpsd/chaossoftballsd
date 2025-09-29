@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import background from "~/assets/chaos-bg.webp";
 import heroLogo from "~/assets/chaos-logo-large.png";
+import { Button } from "~/components/Button";
 import * as styles from "~/components/Hero/Hero.css";
 import { ResponsiveHeadline } from "~/components/ResponsiveHeadline";
 import * as commonStyles from "~/styles/utilities/common.css";
@@ -28,5 +29,42 @@ import * as commonStyles from "~/styles/utilities/common.css";
             fetchpriority="high"
             class={commonStyles.image}
         />
+    </div>
+    <div class={styles.heroSVG}>
+        <div class={styles.heroCTAWrapper}>
+            <ResponsiveHeadline
+                size={4}
+                as="h2"
+                className={styles.heroHeadingSmall}
+            >
+                Are you ready for Chaos?
+            </ResponsiveHeadline>
+            <div>
+                <Button
+                    as="a"
+                    size="small"
+                    href="/#form"
+                    color="primary"
+                    variant="contained"
+                    class={styles.heroButton}
+                >
+                    Get Info
+                </Button>
+            </div>
+        </div>
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 185"
+            width="100%"
+            height="185"
+            preserveAspectRatio="none"
+            style="pointer-events:none;z-index:0;display:block; width:100%;"
+        >
+            <path
+                fill="#532293"
+                fill-opacity="1"
+                d="M0,16L80,18.65C185,21.5,320,26.5,480,45.35C640,64,800,96,960,112C1120,128,1280,128,1360,128L1440,128L1440,185L1360,185C1280,185,1120,185,960,185C800,185,640,185,480,185C320,185,185,185,80,185L0,185Z"
+            ></path>
+        </svg>
     </div>
 </section>

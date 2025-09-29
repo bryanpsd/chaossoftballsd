@@ -11,7 +11,9 @@ export interface TypeLinkFields {
 	label?: EntryFieldTypes.Symbol;
 	ctaLink?: EntryFieldTypes.Symbol;
 	openInNewWindow?: EntryFieldTypes.Boolean;
-	type?: EntryFieldTypes.Array<EntryFieldTypes.Symbol<"button" | "link">>;
+	type?: EntryFieldTypes.Array<
+		EntryFieldTypes.Symbol<"button" | "icon" | "link">
+	>;
 	asset?: EntryFieldTypes.AssetLink;
 }
 

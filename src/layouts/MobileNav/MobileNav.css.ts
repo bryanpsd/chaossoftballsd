@@ -68,6 +68,9 @@ export const mobileNavListItem = style([
 export const mobileNavLink = style([
 	tokens({
 		fontSize: 24,
+		display: "flex",
+		alignItems: "center",
+		gap: 8,
 	}),
 	{
 		color: color.brand.white,

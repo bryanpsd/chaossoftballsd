@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
 import { color } from "../../styles/tokens/colors";
 import { tokens } from "../../styles/tokens/designTokens.css";
-import { fontFamily } from "../../styles/tokens/typography";
+import { fontFamily, fontSize } from "../../styles/tokens/typography";
 import {
 	contentPadding,
 	pageMaxWidth,
@@ -21,16 +21,18 @@ export const footerWrapper = style([
 	pageMaxWidth,
 ]);
 
-export const footerNav = style({
-	display: "flex",
-	gap: 8,
-});
+export const footerNav = style([
+	tokens({
+		display: "flex",
+		gap: 12,
+	}),
+]);
 
 export const footerNavLink = style({
 	color: color.brand.purple,
 	fontFamily: fontFamily.base,
+	fontSize: fontSize.sizeFont6,
 	textDecoration: "none",
-	transition: "color 0.2s",
 	selectors: {
 		"&:hover, &:focus": {
 			textDecoration: "underline",

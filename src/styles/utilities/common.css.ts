@@ -35,6 +35,7 @@ export const section = style([
 		display: "flex",
 		flexDirection: "column",
 		gap: 16,
+		marginBottom: 12,
 	}),
 	pageMaxWidth,
 	contentPadding,

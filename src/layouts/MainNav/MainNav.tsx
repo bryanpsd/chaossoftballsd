@@ -2,7 +2,7 @@ import * as NavMenu from "@radix-ui/react-navigation-menu";
 import * as React from "react";
 import { useState } from "react";
 import { Button } from "~/components/Button";
-import { iconMap } from "./iconMap";
+import { iconMap } from "~/utils/iconMap";
 import * as styles from "./MainNav.css";
 
 type NavigationLink = {
@@ -46,11 +46,17 @@ export const MainNav = ({ items, currentPath }: MainNavProps) => {
 							>
 								{Array.isArray(item.type) &&
 								item.type.includes("icon") &&
-								iconMap[item.label]
-									? React.createElement(iconMap[item.label], {
-											"aria-label": item.label,
-										})
-									: item.label}
+								iconMap[item.label] ? (
+									<>
+										{React.createElement(iconMap[item.label], {
+											"aria-hidden": "true",
+											focusable: "false",
+										})}
+										<span className="sr-only">{item.label}</span>
+									</>
+								) : (
+									item.label
+								)}
 							</Button>
 						</NavMenu.Link>
 					</NavMenu.Item>

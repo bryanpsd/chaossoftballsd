@@ -108,6 +108,7 @@ export const heroHeadingSmall = style({
 	flex: 1,
 	textAlign: "left",
 	color: color.brand.white,
+	fontFamily: '"Anton", sans-serif',
 });
 
 export const heroButton = style({

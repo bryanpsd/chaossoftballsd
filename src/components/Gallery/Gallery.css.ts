@@ -181,7 +181,10 @@ export const lightboxContent = style([
 		flexDirection: "column",
 		alignItems: "center",
 		overflow: "auto",
-		width: "fit-content",
+		width: "90%",
+		"@media": {
+			"(min-width: 728px)": { width: "fit-content" },
+		},
 		maxHeight: "90vh",
 	},
 ]);

@@ -1,4 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
+import { useId } from "react";
 
 // Visually hidden utility
 const visuallyHidden: React.CSSProperties = {
@@ -33,20 +34,9 @@ export const Lightbox: React.FC<LightboxProps> = ({
 	onOpenChange,
 	media,
 }) => {
+	const fallbackDescId = useId();
 	if (!media) return null;
-	// Only set width/height if available, do not stretch
-	// Clamp to viewport for large images/videos
-	const contentStyle: React.CSSProperties = {};
-	if (media.width)
-		contentStyle.width = Math.min(media.width, window.innerWidth * 0.95);
-	if (media.height)
-		contentStyle.height = Math.min(media.height, window.innerHeight * 0.9);
-	// For accessibility: always provide a non-empty aria-describedby
-	const descId = media?.title
-		? `${media.id}-caption`
-		: media
-			? `${media.id}-desc`
-			: "lightbox-desc-fallback";
+	const descId = media?.title ? `${media.id}-caption` : fallbackDescId;
 
 	return (
 		<Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -54,15 +44,13 @@ export const Lightbox: React.FC<LightboxProps> = ({
 				<Dialog.Overlay className={styles.lightboxOverlay} />
 				<Dialog.Content
 					className={styles.lightboxContent}
-					style={contentStyle}
-					aria-describedby={descId || "lightbox-desc-fallback"}
+					aria-describedby={descId}
 				>
-					{/* Accessible dialog title (visually hidden if no media.title) */}
 					{media.title ? (
-						<Dialog.Title>{media.title}</Dialog.Title>
+						<Dialog.Title className="sr-only">{media.title}</Dialog.Title>
 					) : (
 						<Dialog.Title asChild>
-							<span style={visuallyHidden}>
+							<span className="sr-only" style={visuallyHidden}>
 								{media.type === "video" ? "Gallery video" : "Gallery image"}
 							</span>
 						</Dialog.Title>
@@ -77,24 +65,21 @@ export const Lightbox: React.FC<LightboxProps> = ({
 						</button>
 					</Dialog.Close>
 					<div className={styles.lightboxMediaWrapper}>
-						{/* Visually hidden fallback description for a11y if no title or no media */}
-						{(!media || !media.title) && (
-							<span
-								id={descId || "lightbox-desc-fallback"}
-								style={{
-									position: "absolute",
-									left: "-9999px",
-									width: 1,
-									height: 1,
-									overflow: "hidden",
-								}}
-							>
-								{media
-									? media.type === "video"
-										? "Gallery video"
-										: "Gallery image"
-									: "Gallery media"}
-							</span>
+						<span
+							id={fallbackDescId}
+							className="sr-only"
+							style={visuallyHidden}
+						>
+							{media
+								? media.type === "video"
+									? "Gallery video"
+									: "Gallery image"
+								: "Gallery media"}
+						</span>
+						{media.title && (
+							<div id={`${media.id}-caption`} className="sr-only">
+								{media.title}
+							</div>
 						)}
 						{media.type === "video" ? (
 							<video
@@ -105,14 +90,6 @@ export const Lightbox: React.FC<LightboxProps> = ({
 								title={media.title || "Gallery video"}
 								aria-label={media.title || "Gallery video"}
 								style={{
-									width: media.width
-										? Math.min(media.width, window.innerWidth * 0.95)
-										: "95vw",
-									height: media.height
-										? Math.min(media.height, window.innerHeight * 0.9)
-										: "auto",
-									maxWidth: "95vw",
-									maxHeight: "90vh",
 									borderRadius: 8,
 									background: "#000",
 								}}
@@ -138,23 +115,15 @@ export const Lightbox: React.FC<LightboxProps> = ({
 									height: media.height,
 									className: styles.lightboxMedia,
 									style: {
-										width: media.width
-											? Math.min(media.width, window.innerWidth * 0.95)
-											: "95vw",
-										height: media.height
-											? Math.min(media.height, window.innerHeight * 0.9)
-											: "auto",
-										maxWidth: "95vw",
-										maxHeight: "90vh",
-										borderRadius: 8,
-										background: "#000",
+										objectFit: "contain",
+										display: "block",
+										margin: "0 auto",
 									},
 								}}
 							/>
 						)}
-						{/* Caption for screen readers and visible users if present */}
 						{media.title && (
-							<div id={descId} className={styles.lightboxCaption}>
+							<div id={descId} className="sr-only">
 								{media.title}
 							</div>
 						)}

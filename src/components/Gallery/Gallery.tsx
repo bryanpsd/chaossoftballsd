@@ -9,7 +9,6 @@ import { Button } from "../Button/Button.tsx";
 import * as styles from "./Gallery.css.ts";
 import { Lightbox } from "./Lightbox";
 
-
 // Shared type for gallery media
 type MediaType = {
 	id: string;
@@ -27,12 +26,11 @@ interface GalleryProps {
 	limit?: number;
 }
 
-
 export const Gallery = ({ galleryId }: GalleryProps) => {
 	const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
-	const [videoDimensions, setVideoDimensions] = useState<Record<string, { width: number; height: number }>>({});
 	const [lightboxOpen, setLightboxOpen] = useState(false);
 	const [lightboxMedia, setLightboxMedia] = useState<MediaType | null>(null);
+	// Removed unused videoDimensions state
 
 	const handleOpenLightbox = (media: MediaType) => {
 		setLightboxMedia(media);
@@ -47,16 +45,7 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
 		setLoadedImages((prev) => ({ ...prev, [id]: true }));
 	};
 
-	const handleVideoLoaded = (id: string, videoEl: HTMLVideoElement) => {
-		setVideoDimensions((prev) => ({
-			...prev,
-			[id]: {
-				width: videoEl.videoWidth,
-				height: videoEl.videoHeight,
-			},
-		}));
-		handleMediaLoad(id);
-	};
+	// Removed unused handleVideoLoaded
 	const PAGE_SIZE = 10;
 	const [photos, setPhotos] = useState<MediaType[]>([]);
 	const [loading, setLoading] = useState(true);
@@ -134,14 +123,7 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
 				{photos.map((media) => {
 					let containerClass = styles.galleryItemLandscape;
 					if (media.type === "video") {
-						// Prefer loaded video dimensions if available
-						const dims = videoDimensions[media.id];
-						if (dims?.width && dims?.height) {
-							containerClass =
-								dims.width > dims.height
-									? styles.galleryItemLandscape
-									: styles.galleryItemPortrait;
-						} else if (media.width && media.height) {
+						if (media.width && media.height) {
 							containerClass =
 								media.width > media.height
 									? styles.galleryItemLandscape
@@ -176,42 +158,49 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
 									}
 								>
 									{media.type === "video" ? (
-										<video
-											src={media.url}
-											controls
+										<div
 											className={
 												loadedImages[media.id]
 													? styles.videoLoaded
 													: styles.videoNotLoaded
-											}
-											title={media.title || "Gallery video"}
-											aria-label={media.title || "Gallery video"}
-											aria-describedby={
-												media.title ? `${media.id}-caption` : undefined
-											}
-											onLoadedData={(e) =>
-												handleVideoLoaded(media.id, e.currentTarget)
 											}
 											style={{
 												width: "100%",
 												height: "100%",
 												objectFit: "cover",
 												display: "block",
+												position: "relative",
+												background: "#000",
 											}}
-											tabIndex={-1}
 										>
-											<track
-												kind="captions"
-												src={
-													media.captionsSrc && media.captionsSrc.trim() !== ""
-														? media.captionsSrc
-														: undefined
-												}
-												srcLang="en"
-												label="English captions"
-												default
-											/>
-										</video>
+											{media.captionsSrc ? (
+												<img
+													src={media.captionsSrc}
+													alt={media.title || "Video thumbnail"}
+													style={{
+														width: "100%",
+														height: "100%",
+														objectFit: "cover",
+														display: "block",
+													}}
+													tabIndex={-1}
+													onLoad={() => handleMediaLoad(media.id)}
+												/>
+											) : (
+												<span
+													style={{
+														position: "absolute",
+														top: "50%",
+														left: "50%",
+														transform: "translate(-50%, -50%)",
+														color: "#fff",
+														fontSize: "2rem",
+													}}
+												>
+													▶
+												</span>
+											)}
+										</div>
 									) : (
 										<ContentfulImage
 											src={media.url}
@@ -239,7 +228,6 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
 					);
 				})}
 			</div>
-			{/* Lightbox Dialog (rendered once, outside the map) */}
 			<Lightbox
 				open={lightboxOpen}
 				onOpenChange={(open) =>

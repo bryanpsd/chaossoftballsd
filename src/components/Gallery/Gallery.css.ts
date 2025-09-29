@@ -7,13 +7,15 @@ export const galleryWrapper = style([
 		width: "col-12",
 		paddingY: 10,
 		paddingX: 0,
+		display: "block",
 	}),
 	{
 		columnCount: 3,
 		columnGap: "1.5rem",
 		"@media": {
-			"(max-width: 900px)": { columnCount: 2 },
-			"(max-width: 600px)": { columnCount: 1 },
+			"(max-width: 1280px)": { columnCount: 3 },
+			"(max-width: 1024px)": { columnCount: 2 },
+			"(max-width: 768px)": { columnCount: 1 },
 		},
 	},
 ]);
@@ -161,24 +163,28 @@ export const lightboxOverlay = style({
 	animation: "fadeIn 0.2s",
 });
 
-export const lightboxContent = style({
-	position: "fixed",
-	top: "50%",
-	left: "50%",
-	transform: "translate(-50%, -50%)",
-	background: "#fff",
-	borderRadius: 12,
-	boxShadow: "0 8px 32px rgba(0,0,0,0.25)",
-	zIndex: 1001,
-	padding: 0,
-	outline: "none",
-	maxWidth: "95vw",
-	maxHeight: "90vh",
-	display: "flex",
-	flexDirection: "column",
-	alignItems: "center",
-	overflow: "auto",
-});
+export const lightboxContent = style([
+	tokens({
+		position: "fixed",
+	}),
+	{
+		top: "50%",
+		left: "50%",
+		transform: "translate(-50%, -50%)",
+		background: "transparent",
+		borderRadius: 12,
+		boxShadow: "0 8px 32px rgba(0,0,0,0.25)",
+		zIndex: 1001,
+		padding: 0,
+		outline: "none",
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+		overflow: "auto",
+		width: "fit-content",
+		maxHeight: "90vh",
+	},
+]);
 
 export const lightboxCloseBtn = style({
 	position: "absolute",
@@ -210,12 +216,14 @@ export const lightboxMediaWrapper = style({
 });
 
 export const lightboxMedia = style({
-	maxWidth: "90vw",
-	maxHeight: "80vh",
 	borderRadius: 8,
 	boxShadow: "0 2px 16px rgba(0,0,0,0.18)",
 	background: "#000",
-	marginBottom: 12,
+	display: "block",
+	width: "auto",
+	height: "auto",
+	maxWidth: "100%",
+	maxHeight: "90vh",
 });
 
 export const lightboxCaption = style({
@@ -223,6 +231,5 @@ export const lightboxCaption = style({
 	fontSize: "1.1rem",
 	marginTop: 8,
 	textAlign: "center",
-	maxWidth: "90vw",
 	wordBreak: "break-word",
 });

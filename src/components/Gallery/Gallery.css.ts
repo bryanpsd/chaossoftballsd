@@ -18,7 +18,7 @@ export const galleryWrapper = style([
 	},
 ]);
 
-export const galleryItem = style([
+export const galleryItemWrapper = style([
 	tokens({
 		overflow: "hidden",
 		display: "flex",
@@ -26,9 +26,44 @@ export const galleryItem = style([
 		alignItems: "center",
 	}),
 	{
-		borderRadius: "8px",
 		marginBottom: "1.5rem",
 		breakInside: "avoid",
+	},
+]);
+
+export const galleryItemLandscape = style([
+	tokens({
+		maxWidth: "col-12",
+		position: "relative",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+	}),
+	{
+		aspectRatio: "16/9",
+		minHeight: "180px",
+		background: "#f6f6f6",
+		overflow: "hidden",
+		width: "100%",
+		height: "auto",
+	},
+]);
+
+export const galleryItemPortrait = style([
+	tokens({
+		maxWidth: "col-12",
+		position: "relative",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+	}),
+	{
+		aspectRatio: "3/4",
+		minHeight: "180px",
+		background: "#f6f6f6",
+		overflow: "hidden",
+		width: "100%",
+		height: "auto",
 	},
 ]);
 
@@ -44,11 +79,43 @@ export const buttonWrapper = style([
 	},
 ]);
 
-export const video = style([
-	tokens({
-		width: "col-12",
-	}),
-]);
+export const videoLoaded = style({
+	opacity: 1,
+	transition: "opacity 0.4s",
+	pointerEvents: "auto",
+	width: "100%",
+	height: "100%",
+	objectFit: "cover",
+	display: "block",
+});
+
+export const videoNotLoaded = style({
+	opacity: 0,
+	transition: "opacity 0.4s",
+	pointerEvents: "auto",
+	width: "100%",
+	height: "100%",
+	objectFit: "cover",
+	display: "block",
+});
+export const galleryImageLoaded = style({
+	opacity: 1,
+	transition: "opacity 0.4s",
+	pointerEvents: "auto",
+	width: "100%",
+	height: "100%",
+	objectFit: "cover",
+	display: "block",
+});
+export const galleryImageNotLoaded = style({
+	opacity: 0,
+	transition: "opacity 0.4s",
+	pointerEvents: "auto",
+	width: "100%",
+	height: "100%",
+	objectFit: "cover",
+	display: "block",
+});
 
 export const loading = style([
 	tokens({

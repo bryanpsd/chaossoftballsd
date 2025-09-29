@@ -37,6 +37,7 @@ export const image = style([
 		display: "block",
 		width: "col-12",
 		height: "auto",
+		marginBottom: 16,
 	}),
 ]);
 

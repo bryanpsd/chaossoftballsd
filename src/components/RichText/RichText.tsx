@@ -2,6 +2,7 @@ import type { Options } from "@contentful/rich-text-react-renderer";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import type { Document, TopLevelBlock } from "@contentful/rich-text-types";
 import { BasicAccordion } from "../../components/Accordion";
+import { Gallery } from "../../components/Gallery";
 import { ContentfulImage } from "../../components/Image/ContentfulImage";
 import { Link } from "../../components/Link";
 import { ResponsiveHeadline } from "../../components/ResponsiveHeadline";
@@ -233,6 +234,9 @@ const options: Options = {
 			const entry = node?.data?.target;
 			if (entry?.sys?.contentType?.sys?.id === "list" && entry.fields) {
 				return <BasicAccordion list={entry} key={entry.sys.id} />;
+			}
+			if (entry?.sys?.contentType?.sys?.id === "gallery" && entry.fields) {
+				return <Gallery galleryId={entry.sys.id} />;
 			}
 			return null;
 		},

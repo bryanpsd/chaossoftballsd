@@ -101,12 +101,12 @@ export const button = recipe({
 				variant: "round",
 			},
 			style: tokens({
-				color: { default: "white", hover: "white", disabled: "gray" },
-				borderColor: { default: "purple", hover: "purple", disabled: "gray" },
+				color: { default: "white", hover: "white", disabled: "darkGray" },
+				borderColor: { default: "purple", hover: "purple", disabled: "black" },
 				backgroundColor: {
 					default: "purple",
 					hover: "darkPurple",
-					disabled: "gray",
+					disabled: "black",
 				},
 			}),
 		},

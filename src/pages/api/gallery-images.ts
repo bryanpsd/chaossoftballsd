@@ -59,6 +59,8 @@ export const GET: APIRoute = async ({ url }) => {
 					title: assetData.fields.title || "",
 					mimeType: file?.contentType || "",
 					type,
+					width: file?.details?.image?.width,
+					height: file?.details?.image?.height,
 				};
 			})
 			.filter(Boolean);

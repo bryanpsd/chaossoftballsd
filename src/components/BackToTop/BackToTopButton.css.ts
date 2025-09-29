@@ -15,6 +15,8 @@ export const backToTopButton = style([
 	},
 ]);
 
-export const backToTopButtonIcon = style({
-	display: "block",
-});
+export const backToTopButtonIcon = style([
+	tokens({
+		display: "block",
+	}),
+]);

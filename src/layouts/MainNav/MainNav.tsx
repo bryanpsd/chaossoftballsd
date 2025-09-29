@@ -1,6 +1,8 @@
 import * as NavMenu from "@radix-ui/react-navigation-menu";
+import * as React from "react";
 import { useState } from "react";
 import { Button } from "~/components/Button";
+import { iconMap } from "./iconMap";
 import * as styles from "./MainNav.css";
 
 type NavigationLink = {
@@ -8,6 +10,7 @@ type NavigationLink = {
 	href?: string;
 	target?: string;
 	links?: NavigationLink[];
+	type?: string | string[];
 };
 
 export type MainNavProps = {
@@ -35,9 +38,19 @@ export const MainNav = ({ items, currentPath }: MainNavProps) => {
 								target={item.target}
 								href={item.href}
 								color="primary"
-								variant="contained"
+								variant={
+									Array.isArray(item.type) && item.type.includes("icon")
+										? "round"
+										: "contained"
+								}
 							>
-								{item.label}
+								{Array.isArray(item.type) &&
+								item.type.includes("icon") &&
+								iconMap[item.label]
+									? React.createElement(iconMap[item.label], {
+											"aria-label": item.label,
+										})
+									: item.label}
 							</Button>
 						</NavMenu.Link>
 					</NavMenu.Item>

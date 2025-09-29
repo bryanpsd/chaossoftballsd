@@ -1,7 +1,7 @@
 ---
+import { Link } from "~/components/Link";
 import { Typography } from "~/components/Typography";
 import { contentfulClient } from "../../services/contentful/contentful";
-
 import type { TypeLinkFields } from "../../types/contentful/TypeLink";
 
 const currentDate = new Date();
@@ -31,14 +31,14 @@ import * as styles from "./Footer.css";
                     const openInNewWindow: boolean = typeof link.openInNewWindow === "boolean" ? link.openInNewWindow : !!link.openInNewWindow?.valueOf();
                     return (
                         <li>
-                            <a
+                            <Link
                                 href={url}
                                 target={openInNewWindow ? "_blank" : undefined}
                                 rel={openInNewWindow ? "noopener noreferrer" : undefined}
-                                class={styles.footerNavLink}
+                                className={styles.footerNavLink}
                             >
                                 {label}
-                            </a>
+                            </Link>
                         </li>
                     );
                 })

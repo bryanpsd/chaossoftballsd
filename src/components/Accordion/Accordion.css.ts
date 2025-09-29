@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+import { keyframes, style } from "@vanilla-extract/css";
 import { color } from "../../styles/tokens/colors";
 import { tokens } from "../../styles/tokens/designTokens.css";
 
@@ -55,14 +55,28 @@ export const minusIcon = style({
 	},
 });
 
-export const accordionIcon = style({
-	display: "flex",
-	alignItems: "center",
-	marginLeft: "0.5em",
-	minWidth: "18px",
-	minHeight: "18px",
-	width: "18px",
-	height: "18px",
+export const accordionIcon = style([
+	tokens({
+		display: "flex",
+		alignItems: "center",
+	}),
+	{
+		marginLeft: "0.5em",
+		minWidth: "18px",
+		minHeight: "18px",
+		width: "18px",
+		height: "18px",
+	},
+]);
+
+const slideDown = keyframes({
+	from: { height: "0" },
+	to: { height: "var(--radix-accordion-content-height)" },
+});
+
+const slideUp = keyframes({
+	from: { height: "var(--radix-accordion-content-height)" },
+	to: { height: "0" },
 });
 
 export const accordionContent = style([
@@ -72,5 +86,14 @@ export const accordionContent = style([
 	{
 		background: color.brand.gray,
 		color: color.brand.black,
+		overflow: "hidden",
+		selectors: {
+			'&[data-state="open"]': {
+				animation: `${slideDown} 300ms cubic-bezier(0.4, 0, 0.2, 1)`,
+			},
+			'&[data-state="closed"]': {
+				animation: `${slideUp} 300ms cubic-bezier(0.4, 0, 0.2, 1)`,
+			},
+		},
 	},
 ]);

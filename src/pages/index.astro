@@ -9,7 +9,7 @@ import { ResponsiveHeadline } from "~/components/ResponsiveHeadline";
 import { RichText } from "~/components/RichText";
 import Layout from "~/layouts/Layout.astro";
 import { contentfulClient } from "~/services/contentful/contentful";
-import { contentPadding, pageMaxWidth } from "~/styles/utilities/common.css";
+import { section } from "~/styles/utilities/common.css";
 import type { TypePageSectionSkeleton } from "~/types/contentful";
 import type { TypeList, TypeListSkeleton } from "~/types/contentful/TypeList";
 
@@ -27,7 +27,7 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
 <Layout>
 <ToastContainer position="top-center" client:load />
 <Hero />
-<section id="intro" class={`${pageMaxWidth} ${contentPadding}`}>
+<section id="intro" class={`${section}`}>
   {
     entries.items.map((item) => (
       <div>
@@ -38,14 +38,14 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
     ))
   }
 </section>
-<section id="form" class={`${pageMaxWidth} ${contentPadding}`}>
-  <ResponsiveHeadline size={2} as="h2" style={{ marginBottom: "18px" }}>
+<section id="form" class={`${section}`}>
+  <ResponsiveHeadline size={2} as="h2">
     Contact Us
   </ResponsiveHeadline>
   <Form client:load />
 </section>
-<section id="faqs" class={`${pageMaxWidth} ${contentPadding}`}>
-  <ResponsiveHeadline size={2} as="h2" style={{ marginBottom: "18px" }}>
+<section id="faqs" class={`${section}`}>
+  <ResponsiveHeadline size={2} as="h2">
     Faqs
   </ResponsiveHeadline>
   <BasicAccordion

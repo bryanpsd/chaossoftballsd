@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import { server } from "~/actions";
 import logo from "~/assets/chaos-logo-small.png";
+import { Link } from "~/components/Link";
 import { Banner } from "~/layouts/Banner";
 import { MainNav } from "~/layouts/MainNav";
 import { MobileNav } from "~/layouts/MobileNav";
@@ -24,6 +25,7 @@ function getLinkFields(obj: unknown): {
 	name?: string;
 	ctaLink?: string;
 	openInNewWindow?: boolean;
+	type?: string | string[];
 } {
 	if (
 		typeof obj === "object" &&
@@ -31,13 +33,15 @@ function getLinkFields(obj: unknown): {
 		("label" in obj ||
 			"name" in obj ||
 			"ctaLink" in obj ||
-			"openInNewWindow" in obj)
+			"openInNewWindow" in obj ||
+			"type" in obj)
 	) {
 		return obj as {
 			label?: string;
 			name?: string;
 			ctaLink?: string;
 			openInNewWindow?: boolean;
+			type?: string | string[];
 		};
 	}
 	return {};
@@ -54,7 +58,8 @@ const items = navEntry
 						label: fields.label ?? fields.name ?? "",
 						href: fields.ctaLink ?? undefined,
 						target: fields.openInNewWindow ? "_blank" : undefined,
-						links: [], // Add support for nested links if needed
+						links: [],
+						type: fields.type ?? [],
 					};
 				}),
 		}
@@ -77,7 +82,7 @@ const { pathname } = Astro.url;
   <div class={styles.header}>
     <div class={styles.logoWrapper}>
       <span class="sr-only">chaossoftballsd.org</span>
-      <a href="/" aria-label="Home">
+      <Link href="/" aria-label="Home">
         <Image
           aria-hidden="true"
           src={logo}
@@ -88,7 +93,7 @@ const { pathname } = Astro.url;
           fetchpriority="high"
           class={commonStyles.image}
         />
-      </a>
+      </Link>
     </div>
     <MainNav items={items} currentPath={pathname} client:load />
     <MobileNav navItems={items} client:load />

@@ -11,13 +11,14 @@ const year = currentDate.getFullYear();
 import type { TypeListSkeleton } from "../../types/contentful/TypeList";
 
 const entry = await contentfulClient.getEntries<TypeListSkeleton>({
-    content_type: "list",
-    "fields.title": "Navigation",
-    limit: 1,
+	content_type: "list",
+	"fields.title": "Navigation",
+	limit: 1,
 });
 
 const ContactIcon = iconMap.Contact;
 const InstagramIcon = iconMap.Instagram;
+const GalleryIcon = iconMap.Gallery;
 
 import * as styles from "./Footer.css";
 ---
@@ -70,6 +71,14 @@ import * as styles from "./Footer.css";
                                             focusable="false"
                                         />
                                         <span class="sr-only">Instagram</span>
+                                    </>
+                                ) : label === "Gallery" && GalleryIcon ? (
+                                    <>
+                                        <GalleryIcon
+                                            aria-hidden="true"
+                                            focusable="false"
+                                        />
+                                        <span class="sr-only">Gallery</span>
                                     </>
                                 ) : (
                                     label

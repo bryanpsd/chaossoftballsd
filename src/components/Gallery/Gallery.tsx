@@ -228,13 +228,15 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
 					);
 				})}
 			</div>
-			<Lightbox
-				open={lightboxOpen}
-				onOpenChange={(open) =>
-					open ? setLightboxOpen(true) : handleCloseLightbox()
-				}
-				media={lightboxMedia}
-			/>
+			{lightboxOpen && lightboxMedia && (
+				<Lightbox
+					open={lightboxOpen}
+					onOpenChange={(open) =>
+						open ? setLightboxOpen(true) : handleCloseLightbox()
+					}
+					media={lightboxMedia}
+				/>
+			)}
 			<div className={styles.buttonWrapper}>
 				<Button
 					color="primary"

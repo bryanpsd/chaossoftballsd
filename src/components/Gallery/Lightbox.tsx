@@ -1,5 +1,4 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { useId } from "react";
 
 // Visually hidden utility
 const visuallyHidden: React.CSSProperties = {
@@ -34,10 +33,10 @@ export const Lightbox: React.FC<LightboxProps> = ({
 	onOpenChange,
 	media,
 }) => {
-	const fallbackDescId = useId();
+	const descId = "lightbox-modal-desc";
 	if (!media) return null;
-	const descId = media?.title ? `${media.id}-caption` : fallbackDescId;
 
+	// Always provide a non-empty, static description for accessibility
 	return (
 		<Dialog.Root open={open} onOpenChange={onOpenChange}>
 			<Dialog.Portal>
@@ -46,6 +45,9 @@ export const Lightbox: React.FC<LightboxProps> = ({
 					className={styles.lightboxContent}
 					aria-describedby={descId}
 				>
+					<span id={descId} className="sr-only" style={visuallyHidden}>
+						Media modal
+					</span>
 					{media.title ? (
 						<Dialog.Title className="sr-only">{media.title}</Dialog.Title>
 					) : (
@@ -65,22 +67,6 @@ export const Lightbox: React.FC<LightboxProps> = ({
 						</button>
 					</Dialog.Close>
 					<div className={styles.lightboxMediaWrapper}>
-						<span
-							id={fallbackDescId}
-							className="sr-only"
-							style={visuallyHidden}
-						>
-							{media
-								? media.type === "video"
-									? "Gallery video"
-									: "Gallery image"
-								: "Gallery media"}
-						</span>
-						{media.title && (
-							<div id={`${media.id}-caption`} className="sr-only">
-								{media.title}
-							</div>
-						)}
 						{media.type === "video" ? (
 							<video
 								src={media.url}
@@ -121,11 +107,6 @@ export const Lightbox: React.FC<LightboxProps> = ({
 									},
 								}}
 							/>
-						)}
-						{media.title && (
-							<div id={descId} className="sr-only">
-								{media.title}
-							</div>
 						)}
 					</div>
 				</Dialog.Content>

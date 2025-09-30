@@ -1,4 +1,5 @@
 import {
+	FaCameraRetro,
 	FaEnvelope,
 	FaFacebook,
 	FaInstagram,
@@ -16,4 +17,5 @@ export const iconMap: Record<string, React.ElementType> = {
 	TikTok: FaTiktok,
 	Shop: FaShoppingBag,
 	Contact: FaEnvelope,
+	Gallery: FaCameraRetro,
 };

@@ -10,7 +10,12 @@ export const GET: APIRoute = async ({ url }) => {
 	const offset = Number(url.searchParams.get("offset")) || 0;
 	const cacheKey = `${galleryId}:${limit}:${offset}`;
 	if (galleryCache.has(cacheKey)) {
-		return new Response(galleryCache.get(cacheKey), { status: 200 });
+		return new Response(galleryCache.get(cacheKey), {
+			status: 200,
+			headers: {
+				"Cache-Control": "public, max-age=300, stale-while-revalidate=600",
+			},
+		});
 	}
 
 	if (!galleryId) {
@@ -25,7 +30,12 @@ export const GET: APIRoute = async ({ url }) => {
 		if (!entry || !entry.fields.photos) {
 			const emptyRes = JSON.stringify({ photos: [] });
 			galleryCache.set(cacheKey, emptyRes);
-			return new Response(emptyRes, { status: 200 });
+			return new Response(emptyRes, {
+				status: 200,
+				headers: {
+					"Cache-Control": "public, max-age=300, stale-while-revalidate=600",
+				},
+			});
 		}
 		// Get asset IDs for the current page
 		const assetIds = entry.fields.photos
@@ -34,7 +44,12 @@ export const GET: APIRoute = async ({ url }) => {
 		if (assetIds.length === 0) {
 			const emptyRes = JSON.stringify({ photos: [] });
 			galleryCache.set(cacheKey, emptyRes);
-			return new Response(emptyRes, { status: 200 });
+			return new Response(emptyRes, {
+				status: 200,
+				headers: {
+					"Cache-Control": "public, max-age=300, stale-while-revalidate=600",
+				},
+			});
 		}
 		// Batch fetch assets, only needed fields
 		const assetsResponse = await contentfulClient.getAssets({
@@ -67,7 +82,12 @@ export const GET: APIRoute = async ({ url }) => {
 		const total = entry.fields.photos.length;
 		const result = JSON.stringify({ photos, total });
 		galleryCache.set(cacheKey, result);
-		return new Response(result, { status: 200 });
+		return new Response(result, {
+			status: 200,
+			headers: {
+				"Cache-Control": "public, max-age=300, stale-while-revalidate=600",
+			},
+		});
 	} catch {
 		return new Response(JSON.stringify({ error: "Gallery not found" }), {
 			status: 404,

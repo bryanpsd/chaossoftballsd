@@ -51,7 +51,13 @@ export const ContentfulImage = ({
 					<source srcSet={getProxySrc(src, "webp")} type="image/webp" />
 				</>
 			)}
-			<img src={defaultImgSrc} alt={alt} {...imgProps} />
+			<img
+				src={defaultImgSrc}
+				alt={alt}
+				loading="lazy"
+				sizes="(max-width: 600px) 100vw, 33vw"
+				{...imgProps}
+			/>
 		</picture>
 	);
 };

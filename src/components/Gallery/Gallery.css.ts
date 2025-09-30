@@ -182,8 +182,11 @@ export const lightboxContent = style([
 		alignItems: "center",
 		overflow: "auto",
 		width: "90%",
+		maxWidth: "100vw",
 		"@media": {
-			"(min-width: 728px)": { width: "fit-content" },
+			"(min-width: 728px)": {
+				maxWidth: "900px",
+			},
 		},
 		maxHeight: "90vh",
 	},
@@ -223,10 +226,10 @@ export const lightboxMedia = style({
 	boxShadow: "0 2px 16px rgba(0,0,0,0.18)",
 	background: "#000",
 	display: "block",
-	width: "auto",
+	width: "100%",
 	height: "auto",
 	maxWidth: "100%",
-	maxHeight: "90vh",
+	maxHeight: "80vh",
 });
 
 export const lightboxCaption = style({

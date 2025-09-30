@@ -14,6 +14,7 @@ import { Lightbox } from "./Lightbox";
 type MediaType = {
 	id: string;
 	url: string;
+	lqip?: string;
 	title?: string;
 	type?: string;
 	mimeType?: string;
@@ -167,13 +168,12 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
 	);
 };
 
-// --- Place this below the Gallery component ---
-
 interface GalleryItemProps {
 	media: MediaType;
 	loaded: boolean;
 	onLoad: (id: string) => void;
 	onOpenLightbox: (media: MediaType) => void;
+	lqip?: string; // Removed since media.lqip is already available
 }
 
 function GalleryItem({
@@ -262,6 +262,7 @@ function GalleryItem({
 							<ContentfulImage
 								src={media.url}
 								alt={media.title || "Gallery image"}
+								lqip={media.lqip}
 								imgProps={{
 									width: media.width,
 									height: media.height,

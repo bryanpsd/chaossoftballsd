@@ -1,63 +1,65 @@
-import type { ComponentPropsWithRef, CSSProperties } from "react";
+import type React from "react";
+import { useState } from "react";
 
-export interface ContentfulImageProps {
-	id?: string;
-	className?: string;
-	style?: CSSProperties;
-	/** Path to the image. */
-	src?: string;
-	/** A textual replacement for the image. Required for accessibility. */
+interface ContentfulImageProps {
+	src: string;
 	alt: string;
-	/** Props that will be passed to the underlying "img" element. */
-	imgProps?: Omit<ComponentPropsWithRef<"img">, "src" | "alt">;
+	imgProps?: React.ImgHTMLAttributes<HTMLImageElement>;
+	lqip?: string;
 }
 
-const isContentfulSrc = (src = "") => src.startsWith("//images.ctfassets.net");
-
-const getProxySrc = (src = "", imgFormat = "") => {
-	if (!src) {
-		return "";
-	}
-
-	const format = imgFormat ? imgFormat : src.split(".").pop();
-	return `/api/contentful-image?url=${encodeURIComponent(`${src}?fm=${format}`)}`;
-};
-
-/**
- * Renders a "picture" element with optimizations for images from Contentful.
- *
- * Note: When running the server in development mode, images will also appear in the "Fetch/XHR"
- * tab of the browser developer tools as a result of Astro's performance audit. These extra
- * requests don't happen in production builds. Currently, the fallback image is the raw image asset
- * in Contentful. In the future, we may want to consider further optimizations for the fallback image.
- * https://github.com/withastro/astro/blob/386efb33105272c2049d7573287fbe511b20616b/packages/astro/src/runtime/client/dev-toolbar/apps/audit/rules/perf.ts#L6-L28
- */
-export const ContentfulImage = ({
-	id,
-	className,
-	style,
+export const ContentfulImage: React.FC<ContentfulImageProps> = ({
 	src,
 	alt,
-	imgProps,
-}: ContentfulImageProps) => {
-	const isContenfulImage = isContentfulSrc(src);
-	const defaultImgSrc = isContenfulImage ? getProxySrc(src) : src;
+	imgProps = {},
+	lqip,
+}) => {
+	const [loaded, setLoaded] = useState(false);
+
+	// Responsive srcSet for Contentful CDN
+	const srcSet = [
+		`${src}?w=400&fm=webp 400w`,
+		`${src}?w=800&fm=webp 800w`,
+		`${src}?w=1200&fm=webp 1200w`,
+	].join(", ");
+	const sizes = "(max-width: 600px) 100vw, 33vw";
 
 	return (
-		<picture id={id} className={className} style={style}>
-			{isContenfulImage && (
-				<>
-					<source srcSet={getProxySrc(src, "avif")} type="image/avif" />
-					<source srcSet={getProxySrc(src, "webp")} type="image/webp" />
-				</>
+		<div style={{ position: "relative", width: "100%", height: "100%" }}>
+			{lqip && !loaded && (
+				<img
+					src={lqip}
+					alt=""
+					aria-hidden="true"
+					style={{
+						position: "absolute",
+						width: "100%",
+						height: "100%",
+						objectFit: "cover",
+						filter: "blur(16px)",
+						zIndex: 0,
+						transition: "opacity 0.3s",
+					}}
+				/>
 			)}
 			<img
-				src={defaultImgSrc}
+				src={src}
+				srcSet={srcSet}
+				sizes={sizes}
 				alt={alt}
 				loading="lazy"
-				sizes="(max-width: 600px) 100vw, 33vw"
+				style={{
+					position: lqip ? "relative" : undefined,
+					zIndex: 1,
+					background: lqip ? "transparent" : undefined,
+					...imgProps.style,
+				}}
 				{...imgProps}
+				onLoad={(e) => {
+					setLoaded(true);
+					imgProps.onLoad?.(e);
+				}}
 			/>
-		</picture>
+		</div>
 	);
 };

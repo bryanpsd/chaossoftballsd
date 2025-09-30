@@ -68,9 +68,11 @@ export const GET: APIRoute = async ({ url }) => {
 				const file = assetData.fields.file;
 				let type = "image";
 				if (file?.contentType?.startsWith("video")) type = "video";
+				const baseUrl = file?.url ? `https:${file.url}` : "";
 				return {
 					id: assetData.sys.id,
-					url: file?.url ? `https:${file.url}` : "",
+					url: baseUrl || "", // Use original image URL for main image
+					lqip: baseUrl ? `${baseUrl}?w=20&fm=webp&q=20` : "",
 					title: assetData.fields.title || "",
 					mimeType: file?.contentType || "",
 					type,

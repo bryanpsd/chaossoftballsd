@@ -13,10 +13,17 @@ import { section } from "~/styles/utilities/common.css";
 import type { TypePageSectionSkeleton } from "~/types/contentful";
 import type { TypeList, TypeListSkeleton } from "~/types/contentful/TypeList";
 
-const entries = await contentfulClient.getEntries<TypePageSectionSkeleton>({
+const entryIntro = await contentfulClient.getEntries<TypePageSectionSkeleton>({
 	content_type: "pageSection",
 	"fields.title": "Home Section",
 });
+
+const entryContact = await contentfulClient.getEntries<TypePageSectionSkeleton>(
+	{
+		content_type: "pageSection",
+		"fields.title": "Contact Us Section",
+	},
+);
 
 const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
 	content_type: "list",
@@ -29,7 +36,7 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
   <Hero />
   <section id="intro" class={`${section}`}>
     {
-      entries.items.map((item) => (
+      entryIntro.items.map((item) => (
         <div>
           {item.fields.content && (
             <RichText richText={item.fields.content} client:load />
@@ -48,7 +55,15 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
     />
   </section>
   <section id="contact" class={`${section}`}>
-    <ResponsiveHeadline size={2} as="h2"> Contact Us </ResponsiveHeadline>
-     <Form client:load />
+    {
+      entryContact.items.map((item) => (
+        <div>
+          {item.fields.content && (
+            <RichText richText={item.fields.content} client:load />
+          )}
+        </div>
+      ))
+    }
+    <Form client:load />
   </section>
 </Layout>

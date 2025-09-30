@@ -5,6 +5,7 @@ import {
 	MdSportsBaseball,
 } from "react-icons/md";
 import { ContentfulImage } from "~/components/Image/ContentfulImage";
+import { useInView } from "~/utils/useInView";
 import { Button } from "../Button/Button.tsx";
 import * as styles from "./Gallery.css.ts";
 import { Lightbox } from "./Lightbox";
@@ -30,7 +31,6 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
 	const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
 	const [lightboxOpen, setLightboxOpen] = useState(false);
 	const [lightboxMedia, setLightboxMedia] = useState<MediaType | null>(null);
-	// Removed unused videoDimensions state
 
 	const handleOpenLightbox = (media: MediaType) => {
 		setLightboxMedia(media);
@@ -45,7 +45,6 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
 		setLoadedImages((prev) => ({ ...prev, [id]: true }));
 	};
 
-	// Removed unused handleVideoLoaded
 	const PAGE_SIZE = 10;
 	const [photos, setPhotos] = useState<MediaType[]>([]);
 	const [loading, setLoading] = useState(true);
@@ -120,113 +119,15 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
 				}
 				style={{ transition: "opacity 0.25s" }}
 			>
-				{photos.map((media) => {
-					let containerClass = styles.galleryItemLandscape;
-					if (media.type === "video") {
-						if (media.width && media.height) {
-							containerClass =
-								media.width > media.height
-									? styles.galleryItemLandscape
-									: styles.galleryItemPortrait;
-						} else {
-							containerClass = styles.galleryItemLandscape;
-						}
-					} else {
-						if (media.width && media.height) {
-							containerClass =
-								media.width > media.height
-									? styles.galleryItemLandscape
-									: styles.galleryItemPortrait;
-						}
-					}
-					return (
-						<div key={media.id} className={styles.galleryItemWrapper}>
-							{media.url && media.url.trim() !== "" ? (
-								<button
-									type="button"
-									className={containerClass}
-									style={{
-										position: "relative",
-										cursor: "pointer",
-										padding: 0,
-										border: "none",
-										background: "none",
-									}}
-									onClick={() => handleOpenLightbox(media)}
-									aria-label={
-										media.title ? `Open ${media.title}` : "Open media"
-									}
-								>
-									{media.type === "video" ? (
-										<div
-											className={
-												loadedImages[media.id]
-													? styles.videoLoaded
-													: styles.videoNotLoaded
-											}
-											style={{
-												width: "100%",
-												height: "100%",
-												objectFit: "cover",
-												display: "block",
-												position: "relative",
-												background: "#000",
-											}}
-										>
-											{media.captionsSrc ? (
-												<img
-													src={media.captionsSrc}
-													alt={media.title || "Video thumbnail"}
-													style={{
-														width: "100%",
-														height: "100%",
-														objectFit: "cover",
-														display: "block",
-													}}
-													tabIndex={-1}
-													onLoad={() => handleMediaLoad(media.id)}
-												/>
-											) : (
-												<span
-													style={{
-														position: "absolute",
-														top: "50%",
-														left: "50%",
-														transform: "translate(-50%, -50%)",
-														color: "#fff",
-														fontSize: "2rem",
-													}}
-												>
-													▶
-												</span>
-											)}
-										</div>
-									) : (
-										<ContentfulImage
-											src={media.url}
-											alt={media.title || "Gallery image"}
-											imgProps={{
-												width: media.width,
-												height: media.height,
-												className: loadedImages[media.id]
-													? styles.galleryImageLoaded
-													: styles.galleryImageNotLoaded,
-												onLoad: () => handleMediaLoad(media.id),
-												style: {
-													width: "100%",
-													height: "100%",
-													objectFit: "cover",
-													display: "block",
-												},
-												tabIndex: -1,
-											}}
-										/>
-									)}
-								</button>
-							) : null}
-						</div>
-					);
-				})}
+				{photos.map((media) => (
+					<GalleryItem
+						key={media.id}
+						media={media}
+						loaded={!!loadedImages[media.id]}
+						onLoad={handleMediaLoad}
+						onOpenLightbox={handleOpenLightbox}
+					/>
+				))}
 			</div>
 			{lightboxOpen && lightboxMedia && (
 				<Lightbox
@@ -265,3 +166,132 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
 		</div>
 	);
 };
+
+// --- Place this below the Gallery component ---
+
+interface GalleryItemProps {
+	media: MediaType;
+	loaded: boolean;
+	onLoad: (id: string) => void;
+	onOpenLightbox: (media: MediaType) => void;
+}
+
+function GalleryItem({
+	media,
+	loaded,
+	onLoad,
+	onOpenLightbox,
+}: GalleryItemProps) {
+	let containerClass = styles.galleryItemLandscape;
+	if (media.type === "video") {
+		if (media.width && media.height) {
+			containerClass =
+				media.width > media.height
+					? styles.galleryItemLandscape
+					: styles.galleryItemPortrait;
+		} else {
+			containerClass = styles.galleryItemLandscape;
+		}
+	} else {
+		if (media.width && media.height) {
+			containerClass =
+				media.width > media.height
+					? styles.galleryItemLandscape
+					: styles.galleryItemPortrait;
+		}
+	}
+	const [ref, inView] = useInView<HTMLDivElement>({ rootMargin: "100px" });
+	return (
+		<div ref={ref} className={styles.galleryItemWrapper}>
+			{media.url && media.url.trim() !== "" ? (
+				<button
+					type="button"
+					className={containerClass}
+					style={{
+						position: "relative",
+						cursor: "pointer",
+						padding: 0,
+						border: "none",
+						background: "none",
+					}}
+					onClick={() => onOpenLightbox(media)}
+					aria-label={media.title ? `Open ${media.title}` : "Open media"}
+				>
+					{inView ? (
+						media.type === "video" ? (
+							<div
+								className={loaded ? styles.videoLoaded : styles.videoNotLoaded}
+								style={{
+									width: "100%",
+									height: "100%",
+									objectFit: "cover",
+									display: "block",
+									position: "relative",
+									background: "#000",
+								}}
+							>
+								{media.captionsSrc ? (
+									<img
+										src={media.captionsSrc}
+										alt={media.title || "Video thumbnail"}
+										style={{
+											width: "100%",
+											height: "100%",
+											objectFit: "cover",
+											display: "block",
+										}}
+										tabIndex={-1}
+										onLoad={() => onLoad(media.id)}
+									/>
+								) : (
+									<span
+										style={{
+											position: "absolute",
+											top: "50%",
+											left: "50%",
+											transform: "translate(-50%, -50%)",
+											color: "#fff",
+											fontSize: "2rem",
+										}}
+									>
+										▶
+									</span>
+								)}
+							</div>
+						) : (
+							<ContentfulImage
+								src={media.url}
+								alt={media.title || "Gallery image"}
+								imgProps={{
+									width: media.width,
+									height: media.height,
+									className: loaded
+										? styles.galleryImageLoaded
+										: styles.galleryImageNotLoaded,
+									onLoad: () => onLoad(media.id),
+									style: {
+										width: "100%",
+										height: "100%",
+										objectFit: "cover",
+										display: "block",
+									},
+									tabIndex: -1,
+								}}
+							/>
+						)
+					) : (
+						// Placeholder (could be a skeleton or blank)
+						<div
+							style={{
+								width: "100%",
+								height: 0,
+								paddingBottom: "66%",
+								background: "#f0f0f0",
+							}}
+						/>
+					)}
+				</button>
+			) : null}
+		</div>
+	);
+}

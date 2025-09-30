@@ -74,6 +74,21 @@ export const MobileNav = ({ navItems }: MobileNavProps) => {
 	const menuRef = useRef<HTMLDivElement>(null);
 	const menuId = useId();
 
+	// Disable body scroll when mobile nav is open
+	useEffect(() => {
+		if (open) {
+			document.body.style.overflow = "hidden";
+			document.body.classList.add("mobile-nav-open");
+		} else {
+			document.body.style.overflow = "";
+			document.body.classList.remove("mobile-nav-open");
+		}
+		return () => {
+			document.body.style.overflow = "";
+			document.body.classList.remove("mobile-nav-open");
+		};
+	}, [open]);
+
 	// Trap focus in menu when open
 	useEffect(() => {
 		if (open && menuRef.current) {

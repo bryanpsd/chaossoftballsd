@@ -12,6 +12,11 @@ export const backToTopButton = style([
 		bottom: "2rem",
 		right: "2rem",
 		zIndex: 1000,
+		selectors: {
+			"body.mobile-nav-open &": {
+				display: "none",
+			},
+		},
 	},
 ]);
 

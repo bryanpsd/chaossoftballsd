@@ -14,6 +14,10 @@ export const headerWrapper = style([
 	{
 		height: 90,
 		backgroundColor: "white",
+		position: "sticky",
+		top: 0,
+		zIndex: 1000,
+		borderBottom: "1px solid #eeeeee",
 	},
 ]);
 

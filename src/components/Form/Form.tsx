@@ -105,6 +105,7 @@ export const Form = () => {
 						])}
 						id={nameId}
 						type="text"
+						autoComplete="name"
 						{...register("name", { required: true })}
 					/>
 				</div>
@@ -127,6 +128,7 @@ export const Form = () => {
 						])}
 						id={emailId}
 						type="email"
+						autoComplete="email"
 						{...register("email", {
 							required: "Enter an Email address",
 							pattern: {
@@ -157,6 +159,7 @@ export const Form = () => {
 							: "",
 					])}
 					id={messageId}
+					autoComplete="message"
 					{...register("message", { required: "Enter a message." })}
 				/>
 				{errors.message && (

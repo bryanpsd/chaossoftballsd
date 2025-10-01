@@ -223,10 +223,18 @@ const options: Options = {
 		[BLOCKS.HR]: () => <hr className={styles.hr} />,
 
 		[BLOCKS.EMBEDDED_ASSET]: (node) => {
-			const { url } = node.data.target.fields.file;
+			const { url, details } = node.data.target.fields.file;
 			const description = node.data.target.fields.description || "";
+			const height = details?.image?.height;
 			return (
-				<ContentfulImage className={styles.image} src={url} alt={description} />
+				<ContentfulImage
+					src={url}
+					alt={description}
+					imgProps={{
+						className: styles.image,
+						height,
+					}}
+				/>
 			);
 		},
 

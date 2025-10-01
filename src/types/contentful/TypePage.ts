@@ -11,6 +11,7 @@ export interface TypePageFields {
 	seoTitle?: EntryFieldTypes.Symbol;
 	seoDescription?: EntryFieldTypes.Symbol;
 	slug?: EntryFieldTypes.Symbol;
+	noIndex?: EntryFieldTypes.Boolean;
 	class?: EntryFieldTypes.Symbol;
 	content?: EntryFieldTypes.RichText;
 }

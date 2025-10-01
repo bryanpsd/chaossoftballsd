@@ -7,8 +7,8 @@ import {
 import { ContentfulImage } from "~/components/Image/ContentfulImage";
 import { useInView } from "~/utils/useInView";
 import { Button } from "../Button/Button.tsx";
+import { Modal } from "../Modal/Modal.tsx";
 import * as styles from "./Gallery.css.ts";
-import { Lightbox } from "./Lightbox";
 
 // Shared type for gallery media
 type MediaType = {
@@ -30,16 +30,18 @@ interface GalleryProps {
 
 export const Gallery = ({ galleryId }: GalleryProps) => {
 	const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
-	const [lightboxOpen, setLightboxOpen] = useState(false);
-	const [lightboxMedia, setLightboxMedia] = useState<MediaType | null>(null);
+	const [GalleryModalOpen, setGalleryModalOpen] = useState(false);
+	const [GalleryModalMedia, setGalleryModalMedia] = useState<MediaType | null>(
+		null,
+	);
 
-	const handleOpenLightbox = (media: MediaType) => {
-		setLightboxMedia(media);
-		setLightboxOpen(true);
+	const handleOpenGalleryModal = (media: MediaType) => {
+		setGalleryModalMedia(media);
+		setGalleryModalOpen(true);
 	};
-	const handleCloseLightbox = () => {
-		setLightboxOpen(false);
-		setLightboxMedia(null);
+	const handleCloseGalleryModal = () => {
+		setGalleryModalOpen(false);
+		setGalleryModalMedia(null);
 	};
 
 	const handleMediaLoad = (id: string) => {
@@ -126,17 +128,17 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
 						media={media}
 						loaded={!!loadedImages[media.id]}
 						onLoad={handleMediaLoad}
-						onOpenLightbox={handleOpenLightbox}
+						onOpenGalleryModal={handleOpenGalleryModal}
 					/>
 				))}
 			</div>
-			{lightboxOpen && lightboxMedia && (
-				<Lightbox
-					open={lightboxOpen}
+			{GalleryModalOpen && GalleryModalMedia && (
+				<Modal
+					open={GalleryModalOpen}
 					onOpenChange={(open) =>
-						open ? setLightboxOpen(true) : handleCloseLightbox()
+						open ? setGalleryModalOpen(true) : handleCloseGalleryModal()
 					}
-					media={lightboxMedia}
+					media={GalleryModalMedia}
 				/>
 			)}
 			<div className={styles.buttonWrapper}>
@@ -172,7 +174,7 @@ interface GalleryItemProps {
 	media: MediaType;
 	loaded: boolean;
 	onLoad: (id: string) => void;
-	onOpenLightbox: (media: MediaType) => void;
+	onOpenGalleryModal: (media: MediaType) => void;
 	lqip?: string; // Removed since media.lqip is already available
 }
 
@@ -180,7 +182,7 @@ function GalleryItem({
 	media,
 	loaded,
 	onLoad,
-	onOpenLightbox,
+	onOpenGalleryModal,
 }: GalleryItemProps) {
 	let containerClass = styles.galleryItemLandscape;
 	if (media.type === "video") {
@@ -214,7 +216,7 @@ function GalleryItem({
 						border: "none",
 						background: "none",
 					}}
-					onClick={() => onOpenLightbox(media)}
+					onClick={() => onOpenGalleryModal(media)}
 					aria-label={media.title ? `Open ${media.title}` : "Open media"}
 				>
 					{inView ? (

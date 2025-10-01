@@ -1,19 +1,9 @@
 import * as Dialog from "@radix-ui/react-dialog";
-
-// Visually hidden utility
-const visuallyHidden: React.CSSProperties = {
-	position: "absolute",
-	left: "-9999px",
-	width: 1,
-	height: 1,
-	overflow: "hidden",
-};
-
 import { MdClose } from "react-icons/md";
 import { ContentfulImage } from "~/components/Image/ContentfulImage";
-import * as styles from "./Gallery.css.ts";
+import * as styles from "./Modal.css";
 
-interface LightboxProps {
+interface ModalProps {
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
 	media: {
@@ -28,51 +18,48 @@ interface LightboxProps {
 	} | null;
 }
 
-export const Lightbox: React.FC<LightboxProps> = ({
-	open,
-	onOpenChange,
-	media,
-}) => {
-	const descId = "lightbox-modal-desc";
+export const Modal: React.FC<ModalProps> = ({ open, onOpenChange, media }) => {
+	const descId = undefined;
 	if (!media) return null;
 
-	// Always provide a non-empty, static description for accessibility
 	return (
 		<Dialog.Root open={open} onOpenChange={onOpenChange}>
 			<Dialog.Portal>
-				<Dialog.Overlay className={styles.lightboxOverlay} />
+				<Dialog.Overlay className={styles.ModalOverlay} />
 				<Dialog.Content
-					className={styles.lightboxContent}
+					className={styles.ModalContent}
 					aria-describedby={descId}
 				>
-					<span id={descId} className="sr-only" style={visuallyHidden}>
-						Media modal
-					</span>
+					<p id={descId} className="sr-only">
+						{media.type === "video"
+							? "This is a modal dialog showing a gallery video."
+							: "This is a modal dialog showing a gallery image."}
+					</p>
 					{media.title ? (
 						<Dialog.Title className="sr-only">{media.title}</Dialog.Title>
 					) : (
 						<Dialog.Title asChild>
-							<span className="sr-only" style={visuallyHidden}>
+							<span className="sr-only">
 								{media.type === "video" ? "Gallery video" : "Gallery image"}
 							</span>
 						</Dialog.Title>
 					)}
 					<Dialog.Close asChild>
 						<button
-							className={styles.lightboxCloseBtn}
+							className={styles.ModalCloseBtn}
 							aria-label="Close"
 							type="button"
 						>
 							<MdClose size={28} />
 						</button>
 					</Dialog.Close>
-					<div className={styles.lightboxMediaWrapper}>
+					<div className={styles.ModalMediaWrapper}>
 						{media.type === "video" ? (
 							<video
 								src={media.url}
 								controls
 								autoPlay
-								className={styles.lightboxMedia}
+								className={styles.ModalMedia}
 								title={media.title || "Gallery video"}
 								aria-label={media.title || "Gallery video"}
 								style={{
@@ -99,7 +86,7 @@ export const Lightbox: React.FC<LightboxProps> = ({
 								imgProps={{
 									width: media.width,
 									height: media.height,
-									className: styles.lightboxMedia,
+									className: styles.ModalMedia,
 									style: {
 										objectFit: "contain",
 										display: "block",

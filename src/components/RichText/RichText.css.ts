@@ -35,10 +35,14 @@ export const link = style({
 export const image = style([
 	tokens({
 		display: "block",
-		width: "col-12",
 		height: "auto",
 		marginBottom: 16,
+		width: "col-12",
 	}),
+	{
+		maxWidth: "400px",
+		boxSizing: "border-box",
+	},
 ]);
 
 export const blockquote = style([

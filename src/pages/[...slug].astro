@@ -12,7 +12,7 @@ const entry = await contentfulClient.getEntries<TypePageSkeleton>({
 	content_type: "page",
 	"fields.slug": slug,
 	limit: 1,
-	include: 2,
+	include: 3,
 });
 
 if (!slug || !entry.items || entry.items.length === 0) {
@@ -26,6 +26,7 @@ const pageContent = entry.items[0]?.fields || {};
 <Layout
     title={`${pageContent.seoTitle} | Chaos Softball San Diego`}
     description={pageContent.seoDescription}
+    noIndex={pageContent.noIndex}
 >
     <div class={styles.subPageWrapper}>
         <ResponsiveHeadline size={1} as="h1">

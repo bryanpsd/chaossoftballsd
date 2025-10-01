@@ -233,6 +233,7 @@ const options: Options = {
 					imgProps={{
 						className: styles.image,
 						height,
+						width: details?.image?.width,
 					}}
 				/>
 			);

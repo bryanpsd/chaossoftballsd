@@ -36,6 +36,7 @@ const {
 ---
 
 <head>
+	<!-- Primary Meta -->
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width" />
 	<title>{title}</title>
@@ -43,37 +44,56 @@ const {
 	{noIndex && <meta name="robots" content="noindex" />}
 	<meta name="description" content={description || "Best Buy Health"} />
 	<meta name="theme-color" content="#ffffff" />
-	<link rel="sitemap" href="/sitemap-index.xml" />
+	<meta name="generator" content={Astro.generator} />
+	<link rel="canonical" href={canonicalURL} />
+
+	<!-- Icons & Manifest -->
 	<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 	<link rel="shortcut icon" href="/favicon.ico" />
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 	<link rel="manifest" href="/site.webmanifest" />
-	<meta name="generator" content={Astro.generator} />
+	<link rel="sitemap" href="/sitemap-index.xml" />
 
-	<link rel="canonical" href={canonicalURL} />
-
+	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content={Astro.url} />
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
 	{image ? (
-	  <meta property="og:image" content={image} />
+		<meta property="og:image" content={image} />
 	) : (
-	  <meta property="og:image" content="/chaos-logo-large.png" />
+		<meta property="og:image" content="/chaos-logo-large.png" />
 	)}
+
+	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image" />
 	<meta property="twitter:url" content={Astro.url} />
 	<meta property="twitter:title" content={title} />
 	<meta property="twitter:description" content={description} />
-	{
-		image && (
-			<meta
-				property="twitter:image"
-				content={new URL(image, Astro.url)}
-			/>
-		)
-	}
+	{image && (
+		<meta property="twitter:image" content={new URL(image, Astro.url)} />
+	)}
+
+	<!-- Schema.org JSON-LD -->
+	<script type="application/ld+json">{JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "SportsTeam",
+		"name": "Chaos Softball San Diego",
+		"sport": "Softball",
+		"url": "https://chaossoftballsd.com",
+		"logo": "https://chaossoftballsd.com/chaos-logo-large.png",
+		"memberOf": {
+			"@type": "SportsOrganization",
+			"name": "San Diego Youth Softball"
+		},
+		"address": {
+			"@type": "PostalAddress",
+			"addressLocality": "San Diego",
+			"addressRegion": "CA",
+			"addressCountry": "US"
+		}
+	})}</script>
 </head>
 
 <ClientRouter />

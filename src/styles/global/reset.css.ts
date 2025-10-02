@@ -330,7 +330,7 @@ globalStyle(
 
 globalStyle('[type="search"]', {
 	WebkitAppearance: "textfield" /* 1 */,
-	outlineOffset: "-2px" /* 2 */,
+	outlineOffset: -2 /* 2 */,
 });
 
 /**

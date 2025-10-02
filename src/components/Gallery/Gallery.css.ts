@@ -44,7 +44,7 @@ export const galleryItemLandscape = style([
 	}),
 	{
 		aspectRatio: "16/9",
-		minHeight: "180px",
+		minHeight: 180,
 		background: color.surface.secondary,
 		overflow: "hidden",
 		width: "100%",
@@ -61,7 +61,7 @@ export const galleryItemPortrait = style([
 	}),
 	{
 		aspectRatio: "3/4",
-		minHeight: "180px",
+		minHeight: 180,
 		background: color.surface.secondary,
 		overflow: "hidden",
 		width: "100%",

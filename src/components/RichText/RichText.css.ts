@@ -29,7 +29,7 @@ export const textBlock = style([
 export const link = style({
 	color: color.brand.purple,
 	textDecoration: "underline",
-	textUnderlineOffset: "2px",
+	textUnderlineOffset: 2,
 });
 
 export const image = style([
@@ -40,7 +40,7 @@ export const image = style([
 		width: "col-12",
 	}),
 	{
-		maxWidth: "400px",
+		maxWidth: 400,
 		boxSizing: "border-box",
 	},
 ]);

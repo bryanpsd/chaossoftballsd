@@ -31,7 +31,7 @@ export const ModalContent = style([
 		maxWidth: "100vw",
 		"@media": {
 			"(min-width: 728px)": {
-				maxWidth: "900px",
+				maxWidth: 900,
 			},
 		},
 		maxHeight: "90vh",

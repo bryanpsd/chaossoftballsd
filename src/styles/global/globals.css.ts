@@ -21,15 +21,15 @@ globalStyle("*", {
 globalStyle("body", {
 	color: "#000000",
 	margin: 0,
-	fontSize: "16px",
+	fontSize: 16,
 });
 
 globalStyle(".sr-only", {
 	position: "absolute",
-	width: "1px",
-	height: "1px",
+	width: 1,
+	height: 1,
 	padding: 0,
-	margin: "-1px",
+	margin: -1,
 	overflow: "hidden",
 	clip: "rect(0,0,0,0)",
 	border: 0,

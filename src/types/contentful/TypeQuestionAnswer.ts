@@ -20,10 +20,7 @@ export type TypeQuestionAnswer<
 	Locales extends LocaleCode = LocaleCode,
 > = Entry<TypeQuestionAnswerSkeleton, Modifiers, Locales>;
 
-export function isTypeQuestionAnswer<
-	Modifiers extends ChainModifiers,
-	Locales extends LocaleCode,
->(
+export function isTypeQuestionAnswer<Modifiers extends ChainModifiers, Locales extends LocaleCode>(
 	entry: Entry<EntrySkeletonType, Modifiers, Locales>,
 ): entry is TypeQuestionAnswer<Modifiers, Locales> {
 	return entry.sys.contentType.sys.id === "questionAnswer";

@@ -26,10 +26,7 @@ export const Modal: React.FC<ModalProps> = ({ open, onOpenChange, media }) => {
 		<Dialog.Root open={open} onOpenChange={onOpenChange}>
 			<Dialog.Portal>
 				<Dialog.Overlay className={styles.ModalOverlay} />
-				<Dialog.Content
-					className={styles.ModalContent}
-					aria-describedby={descId}
-				>
+				<Dialog.Content className={styles.ModalContent} aria-describedby={descId}>
 					<p id={descId} className="sr-only">
 						{media.type === "video"
 							? "This is a modal dialog showing a gallery video."
@@ -45,11 +42,7 @@ export const Modal: React.FC<ModalProps> = ({ open, onOpenChange, media }) => {
 						</Dialog.Title>
 					)}
 					<Dialog.Close asChild>
-						<button
-							className={styles.ModalCloseBtn}
-							aria-label="Close"
-							type="button"
-						>
+						<button className={styles.ModalCloseBtn} aria-label="Close" type="button">
 							<MdClose size={28} />
 						</button>
 					</Dialog.Close>

@@ -62,12 +62,7 @@ const tableCellOptions: Options = {
 			const uri = _node.data.uri;
 			if (uri.startsWith("https://")) {
 				return (
-					<Link
-						className={styles.link}
-						target="_blank"
-						rel="noopener noreferrer"
-						href={uri}
-					>
+					<Link className={styles.link} target="_blank" rel="noopener noreferrer" href={uri}>
 						{children}
 					</Link>
 				);
@@ -176,8 +171,7 @@ const options: Options = {
 														c &&
 														typeof c === "object" &&
 														"nodeType" in c &&
-														typeof (c as { nodeType?: string }).nodeType ===
-															"string",
+														typeof (c as { nodeType?: string }).nodeType === "string",
 												) as TopLevelBlock[])
 											: [],
 									} as Document,
@@ -202,8 +196,7 @@ const options: Options = {
 														c &&
 														typeof c === "object" &&
 														"nodeType" in c &&
-														typeof (c as { nodeType?: string }).nodeType ===
-															"string",
+														typeof (c as { nodeType?: string }).nodeType === "string",
 												) as TopLevelBlock[])
 											: [],
 									} as Document,
@@ -254,12 +247,7 @@ const options: Options = {
 			const uri = node.data.uri;
 			if (uri.startsWith("https://")) {
 				return (
-					<Link
-						className={styles.link}
-						target="_blank"
-						rel="noopener noreferrer"
-						href={uri}
-					>
+					<Link className={styles.link} target="_blank" rel="noopener noreferrer" href={uri}>
 						{children}
 					</Link>
 				);
@@ -288,11 +276,5 @@ interface RichTextProps {
 }
 
 export const RichText = ({ richText }: RichTextProps) => {
-	return (
-		<TextBlockSection
-			className={styles.textBlock}
-			text={richText}
-			options={options}
-		/>
-	);
+	return <TextBlockSection className={styles.textBlock} text={richText} options={options} />;
 };

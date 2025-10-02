@@ -2,10 +2,7 @@ import { style } from "@vanilla-extract/css";
 import { color } from "../../styles/tokens/colors";
 import { tokens } from "../../styles/tokens/designTokens.css";
 import { fontFamily, fontSize } from "../../styles/tokens/typography";
-import {
-	contentPadding,
-	pageMaxWidth,
-} from "../../styles/utilities/common.css";
+import { contentPadding, pageMaxWidth } from "../../styles/utilities/common.css";
 
 export const footerWrapper = style([
 	tokens({

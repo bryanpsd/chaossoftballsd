@@ -11,19 +11,13 @@ export interface TypeGalleryFields {
 	photos?: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
 }
 
-export type TypeGallerySkeleton = EntrySkeletonType<
-	TypeGalleryFields,
-	"gallery"
->;
+export type TypeGallerySkeleton = EntrySkeletonType<TypeGalleryFields, "gallery">;
 export type TypeGallery<
 	Modifiers extends ChainModifiers,
 	Locales extends LocaleCode = LocaleCode,
 > = Entry<TypeGallerySkeleton, Modifiers, Locales>;
 
-export function isTypeGallery<
-	Modifiers extends ChainModifiers,
-	Locales extends LocaleCode,
->(
+export function isTypeGallery<Modifiers extends ChainModifiers, Locales extends LocaleCode>(
 	entry: Entry<EntrySkeletonType, Modifiers, Locales>,
 ): entry is TypeGallery<Modifiers, Locales> {
 	return entry.sys.contentType.sys.id === "gallery";

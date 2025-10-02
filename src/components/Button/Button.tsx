@@ -1,42 +1,33 @@
 import type { FC } from "react";
-import React, {
-	type ElementType,
-	forwardRef,
-	type MouseEventHandler,
-	type ReactNode,
-} from "react";
+import React, { type ElementType, forwardRef, type MouseEventHandler, type ReactNode } from "react";
 import {
 	type ButtonVariants,
 	button,
 	buttonIcon,
 	buttonLabel,
 } from "~/components/Button/Button.css";
-import type {
-	PolymorphicComponentPropWithRef,
-	PolymorphicRef,
-} from "~/types/PolymorphicComponent";
+import type { PolymorphicComponentPropWithRef, PolymorphicRef } from "~/types/PolymorphicComponent";
 import { concatClasses } from "~/utils/concatClasses";
 
-export type ButtonProps<C extends ElementType = "button"> =
-	PolymorphicComponentPropWithRef<
-		C,
-		ButtonVariants & {
-			"data-testid"?: string;
-			href?: string | undefined;
-			external?: boolean;
-			type?: "button" | "reset" | "submit";
-			startIcon?: ReactNode;
-			endIcon?: ReactNode;
-			className?: string;
-			classes?: Partial<{
-				root: string;
-				label: string;
-				startIcon: string;
-				endIcon: string;
-			}>;
-			round?: boolean;
-		}
-	>;
+export type ButtonProps<C extends ElementType = "button"> = PolymorphicComponentPropWithRef<
+	C,
+	ButtonVariants & {
+		"data-testid"?: string;
+		href?: string | undefined;
+		external?: boolean;
+		type?: "button" | "reset" | "submit";
+		startIcon?: ReactNode;
+		endIcon?: ReactNode;
+		className?: string;
+		classes?: Partial<{
+			root: string;
+			label: string;
+			startIcon: string;
+			endIcon: string;
+		}>;
+		round?: boolean;
+	}
+>;
 
 type ChildrenProps = {
 	startIcon?: ReactNode;
@@ -50,32 +41,18 @@ type ChildrenProps = {
 	children?: ReactNode;
 };
 
-const Children: FC<ChildrenProps> = ({
-	startIcon,
-	endIcon,
-	size,
-	classes,
-	children,
-}) => (
+const Children: FC<ChildrenProps> = ({ startIcon, endIcon, size, classes, children }) => (
 	<span className={concatClasses([buttonLabel, classes?.label])}>
 		{startIcon ? (
 			<span
-				className={concatClasses([
-					buttonIcon({ position: "start", size }),
-					classes?.startIcon,
-				])}
+				className={concatClasses([buttonIcon({ position: "start", size }), classes?.startIcon])}
 			>
 				{startIcon}
 			</span>
 		) : null}
 		{children}
 		{endIcon ? (
-			<span
-				className={concatClasses([
-					buttonIcon({ position: "end", size }),
-					classes?.endIcon,
-				])}
-			>
+			<span className={concatClasses([buttonIcon({ position: "end", size }), classes?.endIcon])}>
 				{endIcon}
 			</span>
 		) : null}
@@ -111,20 +88,11 @@ export const Button = forwardRef(
 				{...rest}
 				onClick={handleClick}
 				type={type}
-				className={concatClasses([
-					className,
-					classes?.root,
-					button({ color, size, variant }),
-				])}
+				className={concatClasses([className, classes?.root, button({ color, size, variant })])}
 				ref={ref}
 				tabIndex={rest.disabled ? -1 : rest.tabIndex}
 			>
-				<Children
-					startIcon={startIcon}
-					endIcon={endIcon}
-					size={size}
-					classes={classes}
-				>
+				<Children startIcon={startIcon} endIcon={endIcon} size={size} classes={classes}>
 					{children}
 				</Children>
 			</Component>

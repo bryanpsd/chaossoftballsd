@@ -10,11 +10,7 @@ type ListProps = {
 
 export const List = ({ variant, ordered, children }: ListProps) => {
 	return (
-		<Typography
-			variant={variant}
-			as={ordered ? "ol" : "ul"}
-			className={list({ ordered })}
-		>
+		<Typography variant={variant} as={ordered ? "ol" : "ul"} className={list({ ordered })}>
 			{children}
 		</Typography>
 	);

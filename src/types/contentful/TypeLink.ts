@@ -11,9 +11,7 @@ export interface TypeLinkFields {
 	label?: EntryFieldTypes.Symbol;
 	ctaLink?: EntryFieldTypes.Symbol;
 	openInNewWindow?: EntryFieldTypes.Boolean;
-	type?: EntryFieldTypes.Array<
-		EntryFieldTypes.Symbol<"button" | "icon" | "link">
-	>;
+	type?: EntryFieldTypes.Array<EntryFieldTypes.Symbol<"button" | "icon" | "link">>;
 	asset?: EntryFieldTypes.AssetLink;
 }
 
@@ -24,10 +22,7 @@ export type TypeLink<
 	Locales extends LocaleCode = LocaleCode,
 > = Entry<TypeLinkSkeleton, Modifiers, Locales>;
 
-export function isTypeLink<
-	Modifiers extends ChainModifiers,
-	Locales extends LocaleCode,
->(
+export function isTypeLink<Modifiers extends ChainModifiers, Locales extends LocaleCode>(
 	entry: Entry<EntrySkeletonType, Modifiers, Locales>,
 ): entry is TypeLink<Modifiers, Locales> {
 	return entry.sys.contentType.sys.id === "link";

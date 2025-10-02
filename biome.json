@@ -21,17 +21,13 @@
 	},
 	"formatter": {
 		"enabled": true,
-		"indentStyle": "tab"
+		"indentStyle": "tab",
+		"lineWidth": 100
 	},
 	"linter": {
 		"enabled": true,
 		"rules": {
 			"recommended": true
-		}
-	},
-	"javascript": {
-		"formatter": {
-			"quoteStyle": "double"
 		}
 	},
 	"assist": {
@@ -47,6 +43,10 @@
 			"includes": ["**/*.astro"],
 			"linter": {
 				"rules": {
+					"style": {
+						"useConst": "on",
+						"useImportType": "on"
+					},
 					"correctness": {
 						"noUnusedImports": "off",
 						"noUnusedVariables": "off"
@@ -66,7 +66,11 @@
 			"includes": ["**/*.ts", "**/*.tsx"],
 			"linter": {
 				"rules": {
-					"recommended": true
+					"recommended": true,
+					"correctness": {
+						"noUnusedImports": "on",
+						"noUnusedVariables": "on"
+					}
 				}
 			}
 		}

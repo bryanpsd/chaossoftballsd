@@ -28,10 +28,7 @@ export const MainNav = ({ items, currentPath }: MainNavProps) => {
 			<NavMenu.List className={styles.mainNavList}>
 				{items.menuItems.map((item) => (
 					<NavMenu.Item className={styles.mainNavItem} key={item.label}>
-						<NavMenu.Link
-							asChild
-							active={!!(item.href && currentPath.startsWith(item.href))}
-						>
+						<NavMenu.Link asChild active={!!(item.href && currentPath.startsWith(item.href))}>
 							<Button
 								as="a"
 								size="small"
@@ -39,14 +36,10 @@ export const MainNav = ({ items, currentPath }: MainNavProps) => {
 								href={item.href}
 								color="primary"
 								variant={
-									Array.isArray(item.type) && item.type.includes("icon")
-										? "round"
-										: "contained"
+									Array.isArray(item.type) && item.type.includes("icon") ? "round" : "contained"
 								}
 							>
-								{Array.isArray(item.type) &&
-								item.type.includes("icon") &&
-								iconMap[item.label] ? (
+								{Array.isArray(item.type) && item.type.includes("icon") && iconMap[item.label] ? (
 									<>
 										{React.createElement(iconMap[item.label], {
 											"aria-hidden": "true",

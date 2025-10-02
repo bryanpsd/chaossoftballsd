@@ -1,10 +1,6 @@
 import { recipe } from "@vanilla-extract/recipes";
 import { breakpointQuery, tokens } from "../../styles/tokens/designTokens.css";
-import {
-	fontSize,
-	fontWeight,
-	lineHeight,
-} from "../../styles/tokens/typography";
+import { fontSize, fontWeight, lineHeight } from "../../styles/tokens/typography";
 
 export const responsiveHeadline = recipe({
 	base: [

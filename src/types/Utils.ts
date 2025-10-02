@@ -55,19 +55,14 @@ export type FlatMut<T> = Flatten<Mutable<T>> & {};
  * @param obj any object
  * @returns the correctly typed keys array from an object
  */
-export const objectKeys = <Obj extends Record<PropertyKey, unknown>>(
-	obj: Obj,
-) => {
+export const objectKeys = <Obj extends Record<PropertyKey, unknown>>(obj: Obj) => {
 	return Object.keys(obj) as (keyof Obj)[];
 };
 
 /**
  * Type system implementation of Array.join()
  */
-export type Join<T extends unknown[], U extends string | number> = T extends [
-	infer F,
-	...infer R,
-]
+export type Join<T extends unknown[], U extends string | number> = T extends [infer F, ...infer R]
 	? R["length"] extends 0
 		? `${F & string}`
 		: `${F & string}${U}${Join<R, U>}`

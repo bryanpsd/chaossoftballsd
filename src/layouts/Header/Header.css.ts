@@ -1,9 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { tokens } from "../../styles/tokens/designTokens.css";
-import {
-	contentPadding,
-	pageMaxWidth,
-} from "../../styles/utilities/common.css";
+import { contentPadding, pageMaxWidth } from "../../styles/utilities/common.css";
 
 export const headerWrapper = style([
 	tokens({

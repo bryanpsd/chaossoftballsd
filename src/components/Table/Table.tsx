@@ -16,12 +16,7 @@ type Props = {
 	tfoot?: TableCell[];
 };
 
-export const Table: React.FC<Props> = ({
-	thead,
-	tbody,
-	tfoot,
-	colSpan = 0,
-}) => {
+export const Table: React.FC<Props> = ({ thead, tbody, tfoot, colSpan = 0 }) => {
 	return (
 		<table className={styles.table}>
 			{Array.isArray(thead) && (
@@ -76,8 +71,7 @@ export const Table: React.FC<Props> = ({
 							rowKey = `${(firstCell as { value: string }).value}`;
 						}
 						// Always append rowIndex for uniqueness
-						const uniqueRowKey =
-							rowKey !== undefined ? `${rowKey}-${rowIndex}` : `${rowIndex}`;
+						const uniqueRowKey = rowKey !== undefined ? `${rowKey}-${rowIndex}` : `${rowIndex}`;
 						return (
 							<tr key={uniqueRowKey} className={styles.tr}>
 								{row.map((cell: TableCell, cellIndex: number) => {
@@ -98,17 +92,10 @@ export const Table: React.FC<Props> = ({
 												}`}
 											>
 												{(() => {
-													if (
-														cell &&
-														typeof cell === "object" &&
-														"value" in cell
-													) {
+													if (cell && typeof cell === "object" && "value" in cell) {
 														return (cell as { value: ReactNode }).value;
 													}
-													if (
-														typeof cell === "string" ||
-														typeof cell === "number"
-													) {
+													if (typeof cell === "string" || typeof cell === "number") {
 														return cell;
 													}
 													return null;
@@ -129,17 +116,10 @@ export const Table: React.FC<Props> = ({
 												}`}
 											>
 												{(() => {
-													if (
-														cell &&
-														typeof cell === "object" &&
-														"value" in cell
-													) {
+													if (cell && typeof cell === "object" && "value" in cell) {
 														return (cell as { value: ReactNode }).value;
 													}
-													if (
-														typeof cell === "string" ||
-														typeof cell === "number"
-													) {
+													if (typeof cell === "string" || typeof cell === "number") {
 														return cell;
 													}
 													return null;

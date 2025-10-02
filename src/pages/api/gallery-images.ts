@@ -25,8 +25,7 @@ export const GET: APIRoute = async ({ url }) => {
 	}
 
 	try {
-		const entry =
-			await contentfulClient.getEntry<TypeGallerySkeleton>(galleryId);
+		const entry = await contentfulClient.getEntry<TypeGallerySkeleton>(galleryId);
 		if (!entry || !entry.fields.photos) {
 			const emptyRes = JSON.stringify({ photos: [] });
 			galleryCache.set(cacheKey, emptyRes);
@@ -38,9 +37,7 @@ export const GET: APIRoute = async ({ url }) => {
 			});
 		}
 		// Get asset IDs for the current page
-		const assetIds = entry.fields.photos
-			.slice(offset, offset + limit)
-			.map((asset) => asset.sys.id);
+		const assetIds = entry.fields.photos.slice(offset, offset + limit).map((asset) => asset.sys.id);
 		if (assetIds.length === 0) {
 			const emptyRes = JSON.stringify({ photos: [] });
 			galleryCache.set(cacheKey, emptyRes);

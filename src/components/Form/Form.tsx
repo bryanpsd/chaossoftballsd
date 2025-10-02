@@ -65,11 +65,7 @@ export const Form = () => {
 
 	// Error fallback for captcha
 	if (captchaError) {
-		return (
-			<div className={styles.error}>
-				Error initializing captcha: {captchaError}
-			</div>
-		);
+		return <div className={styles.error}>Error initializing captcha: {captchaError}</div>;
 	}
 	// Only render form when captcha is ready
 	if (!isCaptchaReady) {
@@ -98,8 +94,7 @@ export const Form = () => {
 						className={concatClasses([
 							styles.input,
 							getFieldState("name").isTouched && !errors.name ? "valid" : "",
-							(getFieldState("name").isTouched && errors.name) ||
-							(isSubmitted && errors.name)
+							(getFieldState("name").isTouched && errors.name) || (isSubmitted && errors.name)
 								? "invalid"
 								: "",
 						])}
@@ -121,8 +116,7 @@ export const Form = () => {
 						className={concatClasses([
 							styles.input,
 							getFieldState("email").isTouched && !errors.email ? "valid" : "",
-							(getFieldState("email").isTouched && errors.email) ||
-							(isSubmitted && errors.email)
+							(getFieldState("email").isTouched && errors.email) || (isSubmitted && errors.email)
 								? "invalid"
 								: "",
 						])}
@@ -138,9 +132,7 @@ export const Form = () => {
 						})}
 					/>
 				</div>
-				{errors.email && (
-					<span className={styles.error}>{errors.email.message}</span>
-				)}
+				{errors.email && <span className={styles.error}>{errors.email.message}</span>}
 			</div>
 
 			<div className={styles.formField}>
@@ -150,9 +142,7 @@ export const Form = () => {
 				<textarea
 					className={concatClasses([
 						styles.textarea,
-						getFieldState("message").isTouched && !errors.message
-							? "valid"
-							: "",
+						getFieldState("message").isTouched && !errors.message ? "valid" : "",
 						(getFieldState("message").isTouched && errors.message) ||
 						(isSubmitted && errors.message)
 							? "invalid"
@@ -162,9 +152,7 @@ export const Form = () => {
 					autoComplete="message"
 					{...register("message", { required: "Enter a message." })}
 				/>
-				{errors.message && (
-					<span className={styles.error}>{errors.message.message}</span>
-				)}
+				{errors.message && <span className={styles.error}>{errors.message.message}</span>}
 			</div>
 			<div>
 				<Button

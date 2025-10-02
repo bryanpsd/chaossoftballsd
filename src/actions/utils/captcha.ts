@@ -1,12 +1,9 @@
 import { RecaptchaEnterpriseServiceClient } from "@google-cloud/recaptcha-enterprise";
 
 const CAPTCHA_SITE_KEY = import.meta.env.RECAPTCHA_SITE_KEY || "";
-const DISABLE_CAPTCHA_VALIDATION =
-	import.meta.env.DISABLE_CAPTCHA_VALIDATION === "true";
+const DISABLE_CAPTCHA_VALIDATION = import.meta.env.DISABLE_CAPTCHA_VALIDATION === "true";
 const GCP_CREDENTIALS =
-	(import.meta.env.GCP_CREDENTIALS &&
-		JSON.parse(import.meta.env.GCP_CREDENTIALS)) ||
-	{};
+	(import.meta.env.GCP_CREDENTIALS && JSON.parse(import.meta.env.GCP_CREDENTIALS)) || {};
 
 type ValidateCaptchaArgs = {
 	token: string;
@@ -23,8 +20,7 @@ export const validateCaptcha = async ({ token }: ValidateCaptchaArgs) => {
 		};
 	}
 
-	if (!token)
-		return { success: false, "error-codes": ["no-captcha-token-provided"] };
+	if (!token) return { success: false, "error-codes": ["no-captcha-token-provided"] };
 	const client = new RecaptchaEnterpriseServiceClient({
 		credentials: GCP_CREDENTIALS,
 	});

@@ -18,12 +18,10 @@ const entryIntro = await contentfulClient.getEntries<TypePageSectionSkeleton>({
 	"fields.title": "Home Section",
 });
 
-const entryContact = await contentfulClient.getEntries<TypePageSectionSkeleton>(
-	{
-		content_type: "pageSection",
-		"fields.title": "Contact Us Section",
-	},
-);
+const entryContact = await contentfulClient.getEntries<TypePageSectionSkeleton>({
+	content_type: "pageSection",
+	"fields.title": "Contact Us Section",
+});
 
 const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
 	content_type: "list",

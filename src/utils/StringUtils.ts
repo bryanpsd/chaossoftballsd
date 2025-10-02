@@ -17,13 +17,8 @@ export const toKebabCase = (input = ""): string => {
 	return input.toLocaleLowerCase().replace(/ /g, "-");
 };
 
-export const enumToStringArray = (
-	enums: { [s: number]: string },
-	sort = true,
-) => {
-	let result = Object.values(enums).filter(
-		(value) => typeof value === "string",
-	);
+export const enumToStringArray = (enums: { [s: number]: string }, sort = true) => {
+	let result = Object.values(enums).filter((value) => typeof value === "string");
 	if (sort) {
 		result = result.sort((one, two) =>
 			one === "Other" || two === "Other" ? 1 : one > two ? 1 : -1,
@@ -40,9 +35,7 @@ export const enumToKeyValueArray = (
 		[s: number]: string;
 	}>,
 ): Array<{ label: string; value: string }> => {
-	let values = Object.values(enums).filter(
-		(value) => typeof value === "string",
-	);
+	let values = Object.values(enums).filter((value) => typeof value === "string");
 	if (filter) {
 		values = values.filter((item) => !filter.includes(item));
 	}
@@ -51,9 +44,7 @@ export const enumToKeyValueArray = (
 	});
 };
 
-export const enumToValuesArray = (enums: {
-	[s: number]: string;
-}): Array<string> => {
+export const enumToValuesArray = (enums: { [s: number]: string }): Array<string> => {
 	return enumToKeyValueArray(enums).map((e) => e.value);
 };
 

@@ -1,7 +1,4 @@
-import {
-	documentToReactComponents,
-	type Options,
-} from "@contentful/rich-text-react-renderer";
+import { documentToReactComponents, type Options } from "@contentful/rich-text-react-renderer";
 // Contentful rich text constants (ESM-compatible)
 import type { Block, Document, Inline } from "@contentful/rich-text-types";
 
@@ -59,32 +56,17 @@ const textBlockSectionOptions: Options = {
 	renderNode: {
 		// headings
 		[BLOCKS.HEADING_1]: (node, children) => (
-			<ResponsiveHeadline
-				className={styles.h1}
-				size={3}
-				as="h1"
-				id={generateId(node)}
-			>
+			<ResponsiveHeadline className={styles.h1} size={3} as="h1" id={generateId(node)}>
 				{children}
 			</ResponsiveHeadline>
 		),
 		[BLOCKS.HEADING_2]: (node, children) => (
-			<ResponsiveHeadline
-				className={styles.h2}
-				size={2}
-				as="h2"
-				id={generateId(node)}
-			>
+			<ResponsiveHeadline className={styles.h2} size={2} as="h2" id={generateId(node)}>
 				{children}
 			</ResponsiveHeadline>
 		),
 		[BLOCKS.HEADING_3]: (node, children) => (
-			<ResponsiveHeadline
-				className={styles.h3}
-				size={1}
-				as="h3"
-				id={generateId(node)}
-			>
+			<ResponsiveHeadline className={styles.h3} size={1} as="h3" id={generateId(node)}>
 				{children}
 			</ResponsiveHeadline>
 		),
@@ -122,11 +104,7 @@ const textBlockSectionOptions: Options = {
 		[INLINES.HYPERLINK]: (node, children) => {
 			const isJumpLink = node.data.uri.startsWith("#");
 			return (
-				<Link
-					className={styles.link}
-					href={node.data.uri}
-					jumpLink={isJumpLink}
-				>
+				<Link className={styles.link} href={node.data.uri} jumpLink={isJumpLink}>
 					{children}
 				</Link>
 			);
@@ -134,19 +112,12 @@ const textBlockSectionOptions: Options = {
 	},
 
 	renderMark: {
-		[MARKS.BOLD]: (children) => (
-			<span style={{ fontWeight: 500 }}>{children}</span>
-		),
+		[MARKS.BOLD]: (children) => <span style={{ fontWeight: 500 }}>{children}</span>,
 		[MARKS.SUBSCRIPT]: (children) => (
 			// Subscript is being used to apply disclaimer text styling. In order to get the text styling
 			// to apply to the `Disclaimer` popover `linkText` the styles needed to be applied to the
 			// parent container. See the `body` style in `TextBlockSection.css.ts` for more details.
-			<Typography
-				as="span"
-				variant="inherit"
-				color="inherit"
-				data-disclaimer-style="true"
-			>
+			<Typography as="span" variant="inherit" color="inherit" data-disclaimer-style="true">
 				{children}
 			</Typography>
 		),
@@ -166,11 +137,7 @@ export const TextBlockSection = ({
 	if (!text) return null;
 
 	return (
-		<div
-			id={id}
-			className={concatClasses([styles.richTextContainer, className])}
-			style={style}
-		>
+		<div id={id} className={concatClasses([styles.richTextContainer, className])} style={style}>
 			{documentToReactComponents(text, {
 				...textBlockSectionOptions,
 				...options,

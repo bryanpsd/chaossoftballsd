@@ -1,9 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import {
-	MdChevronLeft,
-	MdChevronRight,
-	MdSportsBaseball,
-} from "react-icons/md";
+import { MdChevronLeft, MdChevronRight, MdSportsBaseball } from "react-icons/md";
 import { ContentfulImage } from "~/components/Image/ContentfulImage";
 import { useInView } from "~/utils/useInView";
 import { Button } from "../Button/Button.tsx";
@@ -31,9 +27,7 @@ interface GalleryProps {
 export const Gallery = ({ galleryId }: GalleryProps) => {
 	const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
 	const [GalleryModalOpen, setGalleryModalOpen] = useState(false);
-	const [GalleryModalMedia, setGalleryModalMedia] = useState<MediaType | null>(
-		null,
-	);
+	const [GalleryModalMedia, setGalleryModalMedia] = useState<MediaType | null>(null);
 
 	const handleOpenGalleryModal = (media: MediaType) => {
 		setGalleryModalMedia(media);
@@ -110,16 +104,12 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
                 `}</style>
 			</div>
 		);
-	if (!photos.length)
-		return <div className={styles.empty}>No images found.</div>;
+	if (!photos.length) return <div className={styles.empty}>No images found.</div>;
 
 	return (
 		<div>
 			<div
-				className={
-					styles.galleryWrapper +
-					(fade ? " " + styles.fadeOut : " " + styles.fadeIn)
-				}
+				className={styles.galleryWrapper + (fade ? ` ${styles.fadeOut}` : ` ${styles.fadeIn}`)}
 				style={{ transition: "opacity 0.25s" }}
 			>
 				{photos.map((media) => (
@@ -135,9 +125,7 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
 			{GalleryModalOpen && GalleryModalMedia && (
 				<Modal
 					open={GalleryModalOpen}
-					onOpenChange={(open) =>
-						open ? setGalleryModalOpen(true) : handleCloseGalleryModal()
-					}
+					onOpenChange={(open) => (open ? setGalleryModalOpen(true) : handleCloseGalleryModal())}
 					media={GalleryModalMedia}
 				/>
 			)}
@@ -178,28 +166,19 @@ interface GalleryItemProps {
 	lqip?: string; // Removed since media.lqip is already available
 }
 
-function GalleryItem({
-	media,
-	loaded,
-	onLoad,
-	onOpenGalleryModal,
-}: GalleryItemProps) {
+function GalleryItem({ media, loaded, onLoad, onOpenGalleryModal }: GalleryItemProps) {
 	let containerClass = styles.galleryItemLandscape;
 	if (media.type === "video") {
 		if (media.width && media.height) {
 			containerClass =
-				media.width > media.height
-					? styles.galleryItemLandscape
-					: styles.galleryItemPortrait;
+				media.width > media.height ? styles.galleryItemLandscape : styles.galleryItemPortrait;
 		} else {
 			containerClass = styles.galleryItemLandscape;
 		}
 	} else {
 		if (media.width && media.height) {
 			containerClass =
-				media.width > media.height
-					? styles.galleryItemLandscape
-					: styles.galleryItemPortrait;
+				media.width > media.height ? styles.galleryItemLandscape : styles.galleryItemPortrait;
 		}
 	}
 	const [ref, inView] = useInView<HTMLDivElement>({ rootMargin: "100px" });
@@ -268,9 +247,7 @@ function GalleryItem({
 								imgProps={{
 									width: media.width,
 									height: media.height,
-									className: loaded
-										? styles.galleryImageLoaded
-										: styles.galleryImageNotLoaded,
+									className: loaded ? styles.galleryImageLoaded : styles.galleryImageNotLoaded,
 									onLoad: () => onLoad(media.id),
 									style: {
 										width: "100%",

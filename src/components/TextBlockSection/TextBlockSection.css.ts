@@ -12,20 +12,11 @@ const firstChildMarginTop = style({
 
 export const h1 = style([tokens({ margin: 0 })]);
 
-export const h2 = style([
-	tokens({ margin: 0, marginTop: 64 }),
-	firstChildMarginTop,
-]);
+export const h2 = style([tokens({ margin: 0, marginTop: 64 }), firstChildMarginTop]);
 
-export const h3 = style([
-	tokens({ margin: 0, marginTop: 24 }),
-	firstChildMarginTop,
-]);
+export const h3 = style([tokens({ margin: 0, marginTop: 24 }), firstChildMarginTop]);
 
-export const h4 = style([
-	tokens({ margin: 0, marginTop: 8 }),
-	firstChildMarginTop,
-]);
+export const h4 = style([tokens({ margin: 0, marginTop: 8 }), firstChildMarginTop]);
 
 const bodyCopyWidth = style({});
 

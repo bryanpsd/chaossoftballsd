@@ -5,13 +5,12 @@ import { responsiveHeadline } from "./ResponsiveHeadline.css";
 
 const defaultElement: ElementType = "p";
 
-type HeadlineProps<C extends ElementType = typeof defaultElement> =
-	PolymorphicComponentProp<
-		C,
-		{
-			size?: 1 | 2 | 3 | 4 | 5 | 6; // 1 is largest, 6 is smallest
-		}
-	>;
+type HeadlineProps<C extends ElementType = typeof defaultElement> = PolymorphicComponentProp<
+	C,
+	{
+		size?: 1 | 2 | 3 | 4 | 5 | 6; // 1 is largest, 6 is smallest
+	}
+>;
 
 export const ResponsiveHeadline = <C extends ElementType>({
 	children,
@@ -23,10 +22,7 @@ export const ResponsiveHeadline = <C extends ElementType>({
 	const Element = asComponent || defaultElement;
 
 	return (
-		<Element
-			className={concatClasses([responsiveHeadline({ size }), className])}
-			{...rest}
-		>
+		<Element className={concatClasses([responsiveHeadline({ size }), className])} {...rest}>
 			{children}
 		</Element>
 	);

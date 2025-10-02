@@ -1,18 +1,11 @@
 import type { APIRoute } from "astro";
 import { validateCaptcha } from "~/actions/utils/captcha";
 
-export const CAPTCHA_THRESHOLD =
-	Number(import.meta.env.RECAPTCHA_THRESHOLD) || 0.1;
+export const CAPTCHA_THRESHOLD = Number(import.meta.env.RECAPTCHA_THRESHOLD) || 0.1;
 
 export const POST: APIRoute = async ({ request }) => {
 	try {
-		const {
-			name,
-			email,
-			message,
-			captchaToken,
-			"bot-field": botField,
-		} = await request.json();
+		const { name, email, message, captchaToken, "bot-field": botField } = await request.json();
 
 		// Honeypot check
 		if (botField) {
@@ -39,16 +32,12 @@ export const POST: APIRoute = async ({ request }) => {
 			!captchaResponse ||
 			typeof captchaResponse.success !== "boolean" ||
 			captchaResponse.success !== true ||
-			(typeof captchaResponse.score === "number" &&
-				captchaResponse.score < CAPTCHA_THRESHOLD)
+			(typeof captchaResponse.score === "number" && captchaResponse.score < CAPTCHA_THRESHOLD)
 		) {
-			return new Response(
-				JSON.stringify({ error: "Captcha validation failed." }),
-				{
-					status: 400,
-					headers: { "Content-Type": "application/json" },
-				},
-			);
+			return new Response(JSON.stringify({ error: "Captcha validation failed." }), {
+				status: 400,
+				headers: { "Content-Type": "application/json" },
+			});
 		}
 
 		// Prepare Netlify form data
@@ -62,9 +51,7 @@ export const POST: APIRoute = async ({ request }) => {
 		// Only use your production domain
 		const netlifyUrl = "https://chaossoftballsd.org";
 
-		let netlifyResponse: Response | undefined,
-			netlifyText: string | undefined,
-			lastError: unknown;
+		let netlifyResponse: Response | undefined, netlifyText: string | undefined, lastError: unknown;
 
 		try {
 			netlifyResponse = await fetch(netlifyUrl, {
@@ -106,12 +93,9 @@ export const POST: APIRoute = async ({ request }) => {
 		});
 	} catch (err) {
 		console.error("Server error:", err);
-		return new Response(
-			JSON.stringify({ error: "Server error. Please try again." }),
-			{
-				status: 500,
-				headers: { "Content-Type": "application/json" },
-			},
-		);
+		return new Response(JSON.stringify({ error: "Server error. Please try again." }), {
+			status: 500,
+			headers: { "Content-Type": "application/json" },
+		});
 	}
 };

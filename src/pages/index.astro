@@ -1,6 +1,10 @@
 ---
 export const prerender = true;
 
+import "../styles/global/global.css";
+import "../styles/global/reset.css";
+import "../styles/global/theme.css";
+
 import { ToastContainer } from "react-toastify";
 import { BasicAccordion } from "~/components/Accordion";
 import { Form } from "~/components/Form";
@@ -33,15 +37,13 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
   <ToastContainer position="top-center" client:load />
   <Hero />
   <section id="intro" class={`${section}`}>
-    {
-      entryIntro.items.map((item) => (
-        <div>
-          {item.fields.content && (
-            <RichText richText={item.fields.content} client:load />
-          )}
-        </div>
-      ))
-    }
+    {entryIntro.items.map((item) => (
+      <div>
+        {item.fields.content && (
+          <RichText richText={item.fields.content} client:load />
+        )}
+      </div>
+    ))}
   </section>
   <section id="faqs" class={`${section}`}>
     <ResponsiveHeadline size={2} as="h2">
@@ -53,15 +55,13 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
     />
   </section>
   <section id="contact" class={`${section}`}>
-    {
-      entryContact.items.map((item) => (
-        <div>
-          {item.fields.content && (
-            <RichText richText={item.fields.content} client:load />
-          )}
-        </div>
-      ))
-    }
+    {entryContact.items.map((item) => (
+      <div>
+        {item.fields.content && (
+          <RichText richText={item.fields.content} client:load />
+        )}
+      </div>
+    ))}
     <Form client:load />
   </section>
 </Layout>

@@ -17,6 +17,10 @@ export const footerWrapper = style([
 		marginBottom: 32,
 		gap: 16,
 	}),
+	{
+		fontFamily: fontFamily.base,
+		fontSize: fontSize.sizeFont6,
+	},
 	contentPadding,
 	pageMaxWidth,
 ]);
@@ -30,8 +34,6 @@ export const footerNav = style([
 
 export const footerNavLink = style({
 	color: color.link,
-	fontFamily: fontFamily.base,
-	fontSize: fontSize.sizeFont6,
 	textDecoration: "none",
 	selectors: {
 		"&:hover, &:focus": {
@@ -41,6 +43,5 @@ export const footerNavLink = style({
 });
 
 export const footerCopyright = style({
-	fontFamily: fontFamily.base,
 	textAlign: "center",
 });

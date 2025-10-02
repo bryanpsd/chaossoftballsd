@@ -19,9 +19,6 @@ export default defineConfig({
 		robotsTxt(),
 		icon(),
 	],
-	devToolbar: {
-		enabled: false,
-	},
 	vite: {
 		plugins: [vanillaExtractPlugin()],
 	},

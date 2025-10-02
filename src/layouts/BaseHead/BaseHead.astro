@@ -19,10 +19,27 @@ export interface Props {
 }
 
 const url = Astro.url.href;
-
 const baseHref = url.endsWith("/") ? url : `${url}/`;
-
 const canonicalURL = Astro.url.href;
+
+const schema = {
+	"@context": "https://schema.org",
+	"@type": "SportsTeam",
+	name: "Chaos Softball San Diego",
+	sport: "Softball",
+	url: "https://chaossoftballsd.com",
+	logo: "https://chaossoftballsd.com/chaos-logo-large.png",
+	memberOf: {
+		"@type": "SportsOrganization",
+		name: "San Diego Youth Softball",
+	},
+	address: {
+		"@type": "PostalAddress",
+		addressLocality: "San Diego",
+		addressRegion: "CA",
+		addressCountry: "US",
+	},
+};
 
 import { ClientRouter } from "astro:transitions";
 
@@ -75,24 +92,7 @@ const {
 		<meta property="twitter:image" content={new URL(image, Astro.url)} />
 	)}
 
-		<script type="application/ld+json">{JSON.stringify({
-			"@context": "https://schema.org",
-			"@type": "SportsTeam",
-			"name": "Chaos Softball San Diego",
-			"sport": "Softball",
-			"url": "https://chaossoftballsd.com",
-			"logo": "https://chaossoftballsd.com/chaos-logo-large.png",
-			"memberOf": {
-				"@type": "SportsOrganization",
-				"name": "San Diego Youth Softball"
-			},
-			"address": {
-				"@type": "PostalAddress",
-				"addressLocality": "San Diego",
-				"addressRegion": "CA",
-				"addressCountry": "US"
-			}
-		})}</script>
+	<script type="application/ld+json">{JSON.stringify(schema)}</script>
 </head>
 
 <ClientRouter />

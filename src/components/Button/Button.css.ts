@@ -1,5 +1,6 @@
 import { globalStyle, style } from "@vanilla-extract/css";
 import { type RecipeVariants, recipe } from "@vanilla-extract/recipes";
+import { color } from "../../styles/tokens/colors";
 import { tokens } from "../../styles/tokens/designTokens.css";
 
 export const baseButton = style([
@@ -22,8 +23,8 @@ export const baseButton = style([
 		transitionDuration: "250ms",
 		transitionTimingFunction: "ease-in",
 		outlineOffset: ".2rem",
-		boxShadow: "0 .1rem .8rem -.4rem #000000",
-		border: "1px solid #000000",
+		boxShadow: `0 .1rem .8rem -.4rem ${color.brand.black}`,
+		border: `1px solid ${color.brand.black}`,
 	},
 ]);
 

@@ -66,7 +66,7 @@ export const Form = () => {
 	// Error fallback for captcha
 	if (captchaError) {
 		return (
-			<div style={{ color: "red" }}>
+			<div className={styles.error}>
 				Error initializing captcha: {captchaError}
 			</div>
 		);

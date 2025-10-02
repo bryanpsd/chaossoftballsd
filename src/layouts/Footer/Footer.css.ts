@@ -29,7 +29,7 @@ export const footerNav = style([
 ]);
 
 export const footerNavLink = style({
-	color: color.brand.purple,
+	color: color.link,
 	fontFamily: fontFamily.base,
 	fontSize: fontSize.sizeFont6,
 	textDecoration: "none",

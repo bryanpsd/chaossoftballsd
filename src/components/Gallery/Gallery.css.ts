@@ -26,9 +26,9 @@ export const galleryItemWrapper = style([
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "center",
+		marginBottom: 15,
 	}),
 	{
-		marginBottom: "1.5rem",
 		breakInside: "avoid",
 	},
 ]);
@@ -40,14 +40,14 @@ export const galleryItemLandscape = style([
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
+		height: "auto",
 	}),
 	{
 		aspectRatio: "16/9",
 		minHeight: "180px",
-		background: "#f6f6f6",
+		background: color.surface.secondary,
 		overflow: "hidden",
 		width: "100%",
-		height: "auto",
 	},
 ]);
 
@@ -62,7 +62,7 @@ export const galleryItemPortrait = style([
 	{
 		aspectRatio: "3/4",
 		minHeight: "180px",
-		background: "#f6f6f6",
+		background: color.surface.secondary,
 		overflow: "hidden",
 		width: "100%",
 		height: "auto",

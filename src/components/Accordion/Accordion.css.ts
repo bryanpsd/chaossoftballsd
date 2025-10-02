@@ -62,10 +62,10 @@ export const accordionIcon = style([
 	}),
 	{
 		marginLeft: "0.5em",
-		minWidth: "18px",
-		minHeight: "18px",
-		width: "18px",
-		height: "18px",
+		minWidth: 18,
+		minHeight: 18,
+		width: 18,
+		height: 18,
 	},
 ]);
 

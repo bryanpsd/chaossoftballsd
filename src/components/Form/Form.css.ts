@@ -45,7 +45,7 @@ export const input = style([
 		borderRadius: "xxl",
 	}),
 	{
-		border: "1px solid #ccc",
+		border: `1px solid ${color.outline.default}`,
 		transition: "border-color 0.2s",
 		boxSizing: "border-box",
 		selectors: {
@@ -70,7 +70,7 @@ export const textarea = style([
 		borderRadius: "xxl",
 	}),
 	{
-		border: "1px solid #ccc",
+		border: `1px solid ${color.outline.default}`,
 		transition: "border-color 0.2s",
 		selectors: {
 			"&:focus": {

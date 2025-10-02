@@ -92,7 +92,7 @@ const {
 		<meta property="twitter:image" content={new URL(image, Astro.url)} />
 	)}
 
-	<script type="application/ld+json">{JSON.stringify(schema)}</script>
+	<script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
 </head>
 
 <ClientRouter />

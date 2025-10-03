@@ -48,6 +48,7 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
 	const [page, setPage] = useState(1);
 	const [hasNext, setHasNext] = useState(true);
 	const [fade, setFade] = useState(false);
+	const [totalPages, setTotalPages] = useState<number | null>(null);
 
 	const fetchGalleryPage = useCallback(
 		async (pageNum: number) => {
@@ -65,6 +66,14 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
 					setFade(false);
 				}, 250); // fade duration
 				setHasNext(newItems.length === PAGE_SIZE);
+				// If API returns total count, use it; otherwise estimate
+				if (typeof data.total === "number") {
+					setTotalPages(Math.ceil(data.total / PAGE_SIZE));
+				} else if (newItems.length < PAGE_SIZE && pageNum > 1) {
+					setTotalPages(pageNum);
+				} else if (newItems.length === PAGE_SIZE && hasNext) {
+					setTotalPages(null); // unknown
+				}
 			} catch {
 				setPhotos([]);
 				setHasNext(false);
@@ -73,7 +82,7 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
 				setLoading(false);
 			}
 		},
-		[galleryId],
+		[galleryId, hasNext],
 	);
 
 	useEffect(() => {
@@ -141,7 +150,10 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
 				>
 					<MdChevronLeft size={22} aria-hidden="true" />
 				</Button>
-				<span style={{ fontSize: "1.1rem" }}>Page {page}</span>
+				<span style={{ fontSize: "1.1rem" }}>
+					Page {page}
+					{totalPages ? ` of ${totalPages}` : ""}
+				</span>
 				<Button
 					color="primary"
 					size="small"

@@ -8,6 +8,7 @@ interface ContentfulImageProps {
 	lqip?: string;
 	className?: string;
 	fullWidth?: boolean;
+	fixed1024?: boolean; // If true, use only 1024px image (for modal/gallery)
 }
 
 export const ContentfulImage: React.FC<ContentfulImageProps> = ({
@@ -16,19 +17,24 @@ export const ContentfulImage: React.FC<ContentfulImageProps> = ({
 	imgProps = {},
 	lqip,
 	fullWidth = false,
+	fixed1024 = false,
 }) => {
 	const [loaded, setLoaded] = useState(false);
 
-	// Responsive srcSet for Contentful CDN
-	const srcSet = [
-		`${src}?w=400&fm=webp 400w`,
-		`${src}?w=800&fm=webp 800w`,
-		`${src}?w=1200&fm=webp 1200w`,
-		`${src}?w=1600&fm=webp 1600w`,
-		`${src}?w=2400&fm=webp 2400w`,
-	].join(", ");
+	// If fixed1024, use only 1024px image (for modal/gallery)
+	const srcSet = fixed1024
+		? undefined
+		: [
+				`${src}?w=400&fm=webp 400w`,
+				`${src}?w=800&fm=webp 800w`,
+				`${src}?w=1200&fm=webp 1200w`,
+				`${src}?w=1600&fm=webp 1600w`,
+				`${src}?w=2400&fm=webp 2400w`,
+			].join(", ");
+	const sizes = fixed1024 ? undefined : fullWidth ? "100vw" : "(max-width: 900px) 100vw, 700px";
 
-	const sizes = fullWidth ? "100vw" : "(max-width: 900px) 100vw, 700px";
+	// For modal/gallery, always use 1024px version
+	const imgSrc = fixed1024 ? `${src}?w=1024&fm=webp` : src;
 
 	return (
 		<div
@@ -60,7 +66,7 @@ export const ContentfulImage: React.FC<ContentfulImageProps> = ({
 				/>
 			)}
 			<img
-				src={src}
+				src={imgSrc}
 				srcSet={srcSet}
 				sizes={sizes}
 				alt={alt}

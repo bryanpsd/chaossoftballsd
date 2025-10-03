@@ -26,15 +26,17 @@ export const ModalContent = style([
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "center",
+		justifyContent: "center",
 		overflow: "auto",
 		width: "90%",
+		minWidth: 0,
 		maxWidth: "100vw",
 		"@media": {
 			"(min-width: 728px)": {
-				maxWidth: 900,
+				maxWidth: 1024,
 			},
 		},
-		maxHeight: "90vh",
+		maxHeight: "95vh",
 	},
 ]);
 
@@ -65,17 +67,21 @@ export const ModalMediaWrapper = style({
 	width: "100%",
 	height: "100%",
 	boxSizing: "border-box",
+	flex: 1,
+	minHeight: 0,
 });
 
 export const ModalMedia = style({
-	borderRadius: 8,
+	borderRadius: 0,
 	boxShadow: "0 2px 16px rgba(0,0,0,0.18)",
 	background: "#000",
 	display: "block",
 	width: "100%",
-	height: "auto",
-	maxWidth: "100%",
-	maxHeight: "80vh",
+	height: "100%",
+	maxWidth: "1024px",
+	maxHeight: "100vh",
+	margin: 0,
+	objectFit: "cover",
 });
 
 export const ModalCaption = style({

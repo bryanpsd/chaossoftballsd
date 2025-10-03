@@ -40,8 +40,8 @@ const schema = {
 import { ClientRouter } from "astro:transitions";
 
 const {
-	title = "Chaos Softball San Diego",
-	description = "Chaos Softball San Diego 10U girls travel team builds confidence, skills, and character through elite coaching, teamwork, and competitive softball in a positive environment.",
+	title = "Chaos Softball San Diego 10U | Girls Travel Softball Team & Youth Fastpitch",
+	description = "Chaos Softball San Diego 10U builds confidence, skills, and character through elite coaching, teamwork, and competitive play in a positive setting.",
 	withBaseHref,
 	image,
 	noIndex = false,
@@ -54,17 +54,30 @@ const {
 	<meta name="viewport" content="width=device-width" />
 	<title>{title}</title>
 	{withBaseHref && <base href={baseHref} />}
-	{noIndex && <meta name="robots" content="noindex" />}
+	{
+		noIndex ? (
+			<meta name="robots" content="noindex" />
+		) : (
+			<meta
+				name="robots"
+				content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+			/>
+		)
+	}
 	<meta name="description" content={description || "Best Buy Health"} />
+	<meta
+		name="keywords"
+		content="softball, girls softball, youth sports, San Diego, travel team, Chaos Softball, girls sports, fastpitch, softball team, youth softball, competitive softball, coaching, teamwork, sports development"
+	/>
 	<meta name="theme-color" content="#ffffff" />
 	<meta name="generator" content={Astro.generator} />
 	<link rel="canonical" href={canonicalURL} />
 
 	<!-- Resource Hints for Google Fonts -->
-	<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="dns-prefetch" href="//fonts.googleapis.com">
-	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+	<link rel="dns-prefetch" href="//fonts.gstatic.com" />
 
 	<!-- Icons & Manifest -->
 	<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -79,37 +92,38 @@ const {
 	<meta property="og:url" content={Astro.url} />
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
-	{image ? (
-		<meta property="og:image" content={image} />
-	) : (
-		<meta property="og:image" content="/chaos-logo-large.png" />
-	)}
+	{
+		image ? (
+			<meta property="og:image" content={image} />
+		) : (
+			<meta property="og:image" content="/chaos-logo-large.png" />
+		)
+	}
 
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:url" content={Astro.url} />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
-	{image && (
-		<meta name="twitter:image" content={new URL(image, Astro.url)} />
-	)}
+	{image && <meta name="twitter:image" content={new URL(image, Astro.url)} />}
 
-	<script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
+	<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 </head>
 
 <ClientRouter />
 
 <GoogleAnalytics measurementId={"G-C3WFCBGF96"} />
 <script is:inline>
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("/sw.js", { scope: "/" })
-        .then(reg => {
-          console.log("Service worker registered:", reg);
-        })
-        .catch(err => {
-          console.warn("Service worker registration failed:", err);
-        });
-    });
-  }
+	if ("serviceWorker" in navigator) {
+		window.addEventListener("load", () => {
+			navigator.serviceWorker
+				.register("/sw.js", { scope: "/" })
+				.then((reg) => {
+					console.log("Service worker registered:", reg);
+				})
+				.catch((err) => {
+					console.warn("Service worker registration failed:", err);
+				});
+		});
+	}
 </script>

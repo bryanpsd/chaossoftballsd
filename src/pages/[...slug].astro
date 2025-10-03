@@ -13,22 +13,22 @@ import type { TypePageSkeleton } from "../types/contentful";
 const { slug = "" } = Astro.params;
 
 const entry = await contentfulClient.getEntries<TypePageSkeleton>({
-	content_type: "page",
-	"fields.slug": slug,
-	limit: 1,
-	include: 3,
+    content_type: "page",
+    "fields.slug": slug,
+    limit: 1,
+    include: 3,
 });
 
 if (!slug || !entry.items || entry.items.length === 0) {
-	Astro.response.status = 404;
-	throw new Error("Not Found");
+    Astro.response.status = 404;
+    throw new Error("Not Found");
 }
 
 const pageContent = entry.items[0]?.fields || {};
 ---
 
 <Layout
-    title={`${pageContent.seoTitle} | Chaos Softball San Diego`}
+    title={`${pageContent.seoTitle} | Chaos Softball San Diego 10U`}
     description={pageContent.seoDescription}
     noIndex={pageContent.noIndex}
 >
@@ -36,6 +36,10 @@ const pageContent = entry.items[0]?.fields || {};
         <ResponsiveHeadline size={1} as="h1">
             {pageContent.title}
         </ResponsiveHeadline>
-        {pageContent.content && <RichText richText={pageContent.content} client:load/>}
+        {
+            pageContent.content && (
+                <RichText richText={pageContent.content} client:load />
+            )
+        }
     </div>
 </Layout>

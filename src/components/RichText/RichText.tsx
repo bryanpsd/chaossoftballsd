@@ -216,7 +216,9 @@ const options: Options = {
 		[BLOCKS.HR]: () => <hr className={styles.hr} />,
 
 		[BLOCKS.EMBEDDED_ASSET]: (node) => {
-			const { url, details } = node.data.target.fields.file;
+			const file = node.data?.target?.fields?.file;
+			if (!file) return null;
+			const { url, details } = file;
 			const description = node.data.target.fields.description || "";
 			const height = details?.image?.height;
 			return (

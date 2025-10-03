@@ -67,7 +67,7 @@ export const heroContainer = style([
 
 export const heroHeading = style({
 	color: color.brand.white,
-	fontFamily: '"Anton", sans-serif',
+	fontFamily: '"Anton", sans-serif !important',
 });
 
 export const heroSVG = style([
@@ -108,7 +108,7 @@ export const heroHeadingSmall = style({
 	flex: 1,
 	textAlign: "left",
 	color: color.brand.white,
-	fontFamily: '"Anton", sans-serif',
+	fontFamily: '"Anton", sans-serif !important',
 });
 
 export const heroButton = style({

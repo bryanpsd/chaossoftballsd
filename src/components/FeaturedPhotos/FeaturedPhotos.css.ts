@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
 export const featuredPhotos = style({
-	margin: "2rem 0",
+	margin: "0 0 2rem 0",
 });
 
 export const featuredPhotosRow = style({

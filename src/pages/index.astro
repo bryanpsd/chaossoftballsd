@@ -10,8 +10,10 @@ import { BasicAccordion } from "~/components/Accordion";
 import { FeaturedPhotos } from "~/components/FeaturedPhotos";
 import { Form } from "~/components/Form";
 import { Hero } from "~/components/Hero";
+import { Link } from "~/components/Link";
 import { ResponsiveHeadline } from "~/components/ResponsiveHeadline";
 import { RichText } from "~/components/RichText";
+import { Typography } from "~/components/Typography";
 import Layout from "~/layouts/Layout.astro";
 import { contentfulClient } from "~/services/contentful/contentful";
 import { section } from "~/styles/utilities/common.css";
@@ -69,8 +71,11 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
     }
     <Form client:idle />
   </section>
-  <section id="featured" class={`${section}`}>
+  <section id="featured" class={`${section}`}> 
     <ResponsiveHeadline size={2} as="h2"> Chaos in Action </ResponsiveHeadline>
+    <Typography as="p" size="md">
+      Photos by <Link href="https://www.gabybro.com/" target="_blank" rel="noopener noreferrer">Gaby Bro Photography</Link>
+    </Typography>
     <FeaturedPhotos galleryName="Featured Photos" maxPhotos={12}  />
   </section>
 </Layout>

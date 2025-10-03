@@ -1,8 +1,15 @@
 import { style } from "@vanilla-extract/css";
+import { color } from "../../styles/tokens/colors";
+import { tokens } from "../../styles/tokens/designTokens.css";
 
-export const featuredPhotos = style({
-	margin: "0 0 2rem 0",
-});
+export const featuredPhotos = style([
+	tokens({
+		display: "flex",
+		flexDirection: "column",
+		gap: 4,
+		marginBottom: 16,
+	}),
+]);
 
 export const featuredPhotosRow = style({
 	columns: 1,
@@ -45,4 +52,17 @@ export const featuredPhotosFigcaption = style({
 	fontSize: "0.95rem",
 	color: "#555",
 	padding: "0.5rem",
+});
+
+export const featuredPhotosLinksWrapper = style([
+	tokens({
+		display: "flex",
+		justifyContent: "space-between",
+		flexDirection: { "xs-min": "column", "md-min": "row" },
+		gap: 4,
+	}),
+]);
+
+export const featuredPhotosLink = style({
+	color: color.brand.purple,
 });

@@ -56,16 +56,21 @@ import * as styles from "./FeaturedPhotos.css";
           );
         })}
       </div>
-      <Typography as="p" size="md">
-        Photos by
-        <Link
-          href="https://www.gabybro.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Gaby Bro Photography
+      <div class={styles.featuredPhotosLinksWrapper}>
+        <Link className={styles.featuredPhotosLink} href="/media-gallery">
+          View Full Gallery
         </Link>
-      </Typography>
+        <Typography as="p" size="md">
+          Photos by
+          <Link
+            href="https://www.gabybro.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Gaby Bro Photography
+          </Link>
+        </Typography>
+      </div>
     </div>
   )
 }

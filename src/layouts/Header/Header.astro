@@ -74,7 +74,7 @@ const { pathname } = Astro.url;
 
 {
   banners.data && (
-    <Banner banner={banners.data} currentPath={pathname} client:load />
+	<Banner banner={banners.data} currentPath={pathname} client:visible />
   )
 }
 
@@ -95,7 +95,7 @@ const { pathname } = Astro.url;
         />
       </Link>
     </div>
-    <MainNav items={items} currentPath={pathname} client:load />
-    <MobileNav navItems={items} client:load />
+	<MainNav items={items} currentPath={pathname} client:visible />
+	<MobileNav navItems={items} client:visible />
   </div>
 </header>

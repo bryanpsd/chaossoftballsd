@@ -1,0 +1,51 @@
+---
+import { contentfulClient } from "~/services/contentful/contentful";
+import type { TypeGallery, TypeGallerySkeleton } from "~/types/contentful/TypeGallery";
+
+// Props: galleryName is the Contentful Gallery name to pull photos from
+export interface Props {
+	galleryName: string;
+	maxPhotos?: number;
+}
+
+const { galleryName, maxPhotos = 4 } = Astro.props;
+
+const entry = await contentfulClient.getEntries<TypeGallerySkeleton>({
+	content_type: "gallery",
+	"fields.name": galleryName,
+	limit: 1,
+	include: 2,
+});
+
+const gallery = entry.items[0] as TypeGallery<"WITHOUT_UNRESOLVABLE_LINKS"> | undefined;
+
+// Use Contentful Asset fields directly for gallery photos
+const photos = (gallery?.fields.photos ?? []).slice(0, maxPhotos);
+
+import * as styles from "./FeaturedPhotos.css";
+---
+
+{photos.length > 0 && (
+  <div class={styles.featuredPhotos}>
+    <div class={styles.featuredPhotosRow}>
+      {photos.map((asset) => {
+        if (!asset || !asset.fields || !asset.fields.file || !asset.fields.file.url) return null;
+        const width = asset.fields.file.details?.image?.width;
+        const height = asset.fields.file.details?.image?.height;
+        return (
+          <figure class={styles.featuredPhotosItem}>
+            <img
+              class={styles.featuredPhotosImg}
+              src={asset.fields.file.url}
+              alt={asset.fields.title ?? "Softball player photo"}
+              loading="lazy"
+              width={width}
+              height={height}
+              style={{ width: "100%", height: "auto" }}
+            />
+          </figure>
+        );
+      })}
+    </div>
+  </div>
+)}

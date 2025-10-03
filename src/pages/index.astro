@@ -7,6 +7,7 @@ import "../styles/global/theme.css";
 
 import { ToastContainer } from "react-toastify";
 import { BasicAccordion } from "~/components/Accordion";
+import { FeaturedPhotos } from "~/components/FeaturedPhotos";
 import { Form } from "~/components/Form";
 import { Hero } from "~/components/Hero";
 import { ResponsiveHeadline } from "~/components/ResponsiveHeadline";
@@ -34,16 +35,18 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
 ---
 
 <Layout>
-  <ToastContainer position="top-center" client:load />
+  <ToastContainer position="top-center" client:idle />
   <Hero />
   <section id="intro" class={`${section}`}>
-    {entryIntro.items.map((item) => (
-      <div>
-        {item.fields.content && (
-          <RichText richText={item.fields.content} client:load />
-        )}
-      </div>
-    ))}
+    {
+      entryIntro.items.map((item) => (
+        <div>
+          {item.fields.content && (
+            <RichText richText={item.fields.content} client:visible />
+          )}
+        </div>
+      ))
+    }
   </section>
   <section id="faqs" class={`${section}`}>
     <ResponsiveHeadline size={2} as="h2">
@@ -51,17 +54,23 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
     </ResponsiveHeadline>
     <BasicAccordion
       list={faqs.items[0] as TypeList<"WITHOUT_UNRESOLVABLE_LINKS">}
-      client:load
+      client:visible
     />
   </section>
   <section id="contact" class={`${section}`}>
-    {entryContact.items.map((item) => (
-      <div>
-        {item.fields.content && (
-          <RichText richText={item.fields.content} client:load />
-        )}
-      </div>
-    ))}
-    <Form client:load />
+    {
+      entryContact.items.map((item) => (
+        <div>
+          {item.fields.content && (
+            <RichText richText={item.fields.content} client:visible />
+          )}
+        </div>
+      ))
+    }
+    <Form client:idle />
+  </section>
+  <section id="featured" class={`${section}`}>
+    <ResponsiveHeadline size={2} as="h2"> Chaos in Action </ResponsiveHeadline>
+    <FeaturedPhotos galleryName="Featured Photos" maxPhotos={12}  />
   </section>
 </Layout>

@@ -42,7 +42,7 @@ export const Gallery = ({ galleryId }: GalleryProps) => {
 		setLoadedImages((prev) => ({ ...prev, [id]: true }));
 	};
 
-	const PAGE_SIZE = 10;
+	const PAGE_SIZE = 20;
 	const [photos, setPhotos] = useState<MediaType[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [page, setPage] = useState(1);

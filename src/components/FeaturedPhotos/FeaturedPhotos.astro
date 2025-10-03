@@ -1,4 +1,6 @@
 ---
+import { Link } from "~/components/Link";
+import { Typography } from "~/components/Typography";
 import { contentfulClient } from "~/services/contentful/contentful";
 import type { TypeGallery, TypeGallerySkeleton } from "~/types/contentful/TypeGallery";
 
@@ -25,27 +27,45 @@ const photos = (gallery?.fields.photos ?? []).slice(0, maxPhotos);
 import * as styles from "./FeaturedPhotos.css";
 ---
 
-{photos.length > 0 && (
-  <div class={styles.featuredPhotos}>
-    <div class={styles.featuredPhotosRow}>
-      {photos.map((asset) => {
-        if (!asset || !asset.fields || !asset.fields.file || !asset.fields.file.url) return null;
-        const width = asset.fields.file.details?.image?.width;
-        const height = asset.fields.file.details?.image?.height;
-        return (
-          <figure class={styles.featuredPhotosItem}>
-            <img
-              class={styles.featuredPhotosImg}
-              src={asset.fields.file.url}
-              alt={asset.fields.title ?? "Softball player photo"}
-              loading="lazy"
-              width={width}
-              height={height}
-              style={{ width: "100%", height: "auto" }}
-            />
-          </figure>
-        );
-      })}
+{
+  photos.length > 0 && (
+    <div class={styles.featuredPhotos}>
+      <div class={styles.featuredPhotosRow}>
+        {photos.map((asset) => {
+          if (
+            !asset ||
+            !asset.fields ||
+            !asset.fields.file ||
+            !asset.fields.file.url
+          )
+            return null;
+          const width = asset.fields.file.details?.image?.width;
+          const height = asset.fields.file.details?.image?.height;
+          return (
+            <figure class={styles.featuredPhotosItem}>
+              <img
+                class={styles.featuredPhotosImg}
+                src={asset.fields.file.url}
+                alt={asset.fields.title ?? "Softball player photo"}
+                loading="lazy"
+                width={width}
+                height={height}
+                style={{ width: "100%", height: "auto" }}
+              />
+            </figure>
+          );
+        })}
+      </div>
+      <Typography as="p" size="md">
+        Photos by
+        <Link
+          href="https://www.gabybro.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Gaby Bro Photography
+        </Link>
+      </Typography>
     </div>
-  </div>
-)}
+  )
+}

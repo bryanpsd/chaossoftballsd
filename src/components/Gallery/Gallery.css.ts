@@ -48,6 +48,7 @@ export const galleryItemLandscape = style([
 		background: color.surface.secondary,
 		overflow: "hidden",
 		width: "100%",
+		borderRadius: 8,
 	},
 ]);
 
@@ -66,6 +67,7 @@ export const galleryItemPortrait = style([
 		overflow: "hidden",
 		width: "100%",
 		height: "auto",
+		borderRadius: 8,
 	},
 ]);
 

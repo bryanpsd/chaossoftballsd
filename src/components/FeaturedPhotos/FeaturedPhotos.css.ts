@@ -24,7 +24,7 @@ export const featuredPhotosItem = style({
 	breakInside: "avoid",
 	marginBottom: "1rem",
 	background: "#fff",
-	borderRadius: "8px",
+	borderRadius: 8,
 	overflow: "hidden",
 	boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
 	textAlign: "center",

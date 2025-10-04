@@ -46,3 +46,9 @@ export type {
 	TypeQuestionAnswerSkeleton,
 } from "./TypeQuestionAnswer";
 export { isTypeQuestionAnswer } from "./TypeQuestionAnswer";
+export type {
+	TypeSeo,
+	TypeSeoFields,
+	TypeSeoSkeleton,
+} from "./TypeSeo";
+export { isTypeSeo } from "./TypeSeo";

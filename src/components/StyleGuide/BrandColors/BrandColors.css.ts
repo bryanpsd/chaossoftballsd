@@ -8,12 +8,13 @@ export const palette = style([
 		flexWrap: "wrap",
 		gap: 32,
 		marginY: 32,
+		justifyContent: { "xs-min": "center", "md-min": "flex-start" },
+		width: "col-12",
+		alignItems: "stretch",
 	}),
 	{
-		justifyContent: "flex-start",
-		alignItems: "flex-start",
-		rowGap: 32,
-		columnGap: 32,
+		rowGap: 24,
+		columnGap: 24,
 	},
 ]);
 
@@ -22,8 +23,13 @@ export const swatch = style([
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "center",
-		minWidth: 80,
+		minWidth: 100,
 	}),
+	{
+		flex: "1 1 120px",
+		maxWidth: 160,
+		margin: "8px 0",
+	},
 ]);
 
 export const colorBox = style([
@@ -44,6 +50,7 @@ export const label = style([
 		textAlign: "center",
 		fontSize: 14,
 		display: "flex",
+		flexDirection: "column",
 		gap: 4,
 	}),
 	{

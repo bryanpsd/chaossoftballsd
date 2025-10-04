@@ -16,12 +16,17 @@ import { RichText } from "~/components/RichText";
 import Layout from "~/layouts/Layout.astro";
 import { contentfulClient } from "~/services/contentful/contentful";
 import { anchorTarget, section } from "~/styles/utilities/common.css";
-
-// Utility to combine section and anchorTarget classes for anchor sections
-const anchorSection = `${section} ${anchorTarget}`;
-
 import type { TypePageSectionSkeleton } from "~/types/contentful";
 import type { TypeList, TypeListSkeleton } from "~/types/contentful/TypeList";
+import type { TypeSeoSkeleton } from "../types/contentful/TypeSeo";
+
+const anchorSection = `${section} ${anchorTarget}`;
+
+const seoEntry = await contentfulClient.getEntries<TypeSeoSkeleton>({
+	content_type: "seo",
+	"fields.internalTitle": "Home",
+});
+const seo = seoEntry.items[0]?.fields;
 
 const entryIntro = await contentfulClient.getEntries<TypePageSectionSkeleton>({
 	content_type: "pageSection",
@@ -39,7 +44,7 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
 });
 ---
 
-<Layout>
+<Layout seo={seo}>
   <ToastContainer position="top-center" client:idle />
   <Hero />
   <section id="intro" class={anchorSection}> 

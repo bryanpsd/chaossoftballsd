@@ -1,22 +1,13 @@
 ---
-/**
- * This is the base Layouts that all other layouts should be built from
- * It's purpose is to manage global layout props (i.e. page title), global data providers, as well
- * as global style imports.
- */
+import { ClientRouter } from "astro:transitions";
 import { GoogleAnalytics } from "~/layouts/GoogleAnalytics";
+import { Seo } from "~/layouts/Seo";
 
-export interface Props {
-	title: string;
-	description?: string;
-	image?: string;
-	withBaseHref?: boolean;
-	noIndex?: boolean;
-}
+const { seo, image, noIndex = false, withBaseHref } = Astro.props;
 
 const url = Astro.url.href;
 const baseHref = url.endsWith("/") ? url : `${url}/`;
-const canonicalURL = Astro.url.href;
+const canonicalURL = url;
 
 const schema = {
 	"@context": "https://schema.org",
@@ -36,74 +27,32 @@ const schema = {
 		addressCountry: "US",
 	},
 };
-
-import { ClientRouter } from "astro:transitions";
-
-const {
-	title = "Chaos Softball San Diego 10U | Girls Travel Softball Team & Youth Fastpitch",
-	description = "Chaos Softball San Diego 10U builds confidence, skills, and character through elite coaching, teamwork, and competitive play in a positive setting.",
-	withBaseHref,
-	image,
-	noIndex = false,
-} = Astro.props;
 ---
 
 <head>
-	<!-- Primary Meta -->
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width" />
-	<title>{title}</title>
-	{withBaseHref && <base href={baseHref} />}
-	{
-		noIndex ? (
-			<meta name="robots" content="noindex" />
-		) : (
-			<meta
-				name="robots"
-				content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
-			/>
-		)
-	}
-	<meta name="description" content={description || "Best Buy Health"} />
-	<meta name="theme-color" content="#ffffff" />
-	<meta name="generator" content={Astro.generator} />
-	<link rel="canonical" href={canonicalURL} />
+	<Seo
+		seo={seo}
+		image={image}
+		canonical={canonicalURL}
+		noIndex={noIndex}
+		schema={schema}
+	/>
 
-	<!-- Resource Hints for Google Fonts -->
-	<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link rel="dns-prefetch" href="//fonts.googleapis.com" />
-	<link rel="dns-prefetch" href="//fonts.gstatic.com" />
+  {withBaseHref && <base href={baseHref} />}
 
-	<!-- Icons & Manifest -->
-	<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-	<link rel="shortcut icon" href="/favicon.ico" />
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-	<link rel="manifest" href="/site.webmanifest" />
-	<link rel="sitemap" href="/sitemap-index.xml" />
+  {/* Resource Hints for Google Fonts */}
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="//fonts.gstatic.com" />
 
-	<!-- Open Graph / Facebook -->
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content={Astro.url} />
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={description} />
-	{
-		image ? (
-			<meta property="og:image" content={image} />
-		) : (
-			<meta property="og:image" content="/chaos-logo-large.png" />
-		)
-	}
-
-	<!-- Twitter -->
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:url" content={Astro.url} />
-	<meta name="twitter:title" content={title} />
-	<meta name="twitter:description" content={description} />
-	{image && <meta name="twitter:image" content={new URL(image, Astro.url)} />}
-
-	<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  {/* Icons & Manifest */}
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
 </head>
 
 <ClientRouter />

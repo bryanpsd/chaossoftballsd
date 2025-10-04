@@ -1,0 +1,74 @@
+---
+import type { TypeSeoProps } from "../../types/contentful/TypeSeo";
+
+export interface Props {
+	title?: string;
+	description?: string;
+	image?: string;
+	canonical?: string;
+	noIndex?: boolean;
+	robots?: string;
+	schema?: Record<string, unknown>;
+	siteName?: string;
+	ogType?: string;
+	twitterCard?: string;
+	seo?: TypeSeoProps;
+}
+
+const {
+	title: propTitle,
+	description: propDescription,
+	image: propImage,
+	canonical: propCanonical,
+	noIndex = false,
+	robots = "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+	schema,
+	siteName = "Chaos Softball San Diego",
+	ogType = "website",
+	twitterCard = "summary_large_image",
+	seo,
+} = Astro.props;
+
+const title = seo?.title || seo?.internalTitle || propTitle || "";
+const description = seo?.description || propDescription || "";
+const imageAsset = seo?.image;
+const image = imageAsset?.fields?.file?.url
+	? imageAsset.fields.file.url.startsWith("http")
+		? imageAsset.fields.file.url
+		: `https:${imageAsset.fields.file.url}`
+	: propImage;
+const canonical = propCanonical || Astro.url?.href || "https://chaossoftballsd.org";
+const ogImage = image || "/chaos-logo-large.png";
+const twitterImage = image ? new URL(image, Astro.url).toString() : "/chaos-logo-large.png";
+---
+<title>{title}</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+{description && <meta name="description" content={description} />}
+{noIndex ? (
+	<meta name="robots" content="noindex" />
+) : (
+	<meta name="robots" content={robots} />
+)}
+<meta name="theme-color" content="#ffffff" />
+<meta name="generator" content={Astro.generator} />
+<link rel="canonical" href={canonical} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:site_name" content={siteName} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content={twitterCard} />
+<meta name="twitter:url" content={canonical} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={twitterImage} />
+
+{schema && (
+	<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+)}

@@ -1,16 +1,14 @@
 ---
-import { Layout } from "~/layouts";
 
+import Layout from "~/layouts/Layout.astro";
 import * as styles from "~/styles/utilities/errorPages.css";
-
-export type Props = {
-	title: string;
-};
-
-const { title } = Astro.props;
 ---
 
-<Layout title={title}>
+<head>
+  <title>Page Not Found | Chaos Softball San Diego</title>
+  <meta name="description" content="Sorry, the page you are looking for does not exist or an error has occurred." />
+</head>
+<Layout>
   <main>
     <div class={styles.contentPadding}>
       <slot />

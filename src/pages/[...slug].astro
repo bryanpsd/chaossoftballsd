@@ -1,45 +1,68 @@
 ---
+
 import "../styles/global/global.css";
 import "../styles/global/reset.css";
 import "../styles/global/theme.css";
-
 import { ResponsiveHeadline } from "../components/ResponsiveHeadline";
 import { RichText } from "../components/RichText";
 import Layout from "../layouts/Layout.astro";
 import { contentfulClient } from "../services/contentful/contentful";
 import * as styles from "../styles/utilities/common.css";
 import type { TypePageSkeleton } from "../types/contentful";
+import type { TypeSeoProps, TypeSeoSkeleton } from "../types/contentful/TypeSeo";
 
 const { slug = "" } = Astro.params;
 
 const entry = await contentfulClient.getEntries<TypePageSkeleton>({
-    content_type: "page",
-    "fields.slug": slug,
-    limit: 1,
-    include: 3,
+	content_type: "page",
+	"fields.slug": slug,
+	limit: 1,
+	include: 3,
 });
-
 if (!slug || !entry.items || entry.items.length === 0) {
-    Astro.response.status = 404;
-    throw new Error("Not Found");
+	Astro.response.status = 404;
+	throw new Error("Not Found");
+}
+const pageContent = entry.items[0]?.fields || {};
+
+function isResolvedSeoFields(fields: unknown): fields is TypeSeoProps {
+	if (!fields || typeof fields !== "object") return false;
+	const f = fields as Record<string, unknown>;
+	if (typeof f.title !== "string" || typeof f.description !== "string") return false;
+	if (f.image === undefined) return true;
+	if (
+		typeof f.image === "object" &&
+		f.image !== null &&
+		"fields" in f.image &&
+		f.image.fields &&
+		typeof f.image.fields === "object" &&
+		"file" in f.image.fields
+	) {
+		return true;
+	}
+	return false;
 }
 
-const pageContent = entry.items[0]?.fields || {};
+let seo: TypeSeoProps | undefined;
+if (pageContent.seo && "fields" in pageContent.seo && isResolvedSeoFields(pageContent.seo.fields)) {
+	seo = pageContent.seo.fields;
+} else {
+	const seoEntry = await contentfulClient.getEntries<TypeSeoSkeleton>({
+		content_type: "seo",
+		"fields.internalTitle": "Default",
+	});
+	const candidate = seoEntry.items[0]?.fields;
+	seo = isResolvedSeoFields(candidate) ? candidate : undefined;
+}
 ---
 
-<Layout
-    title={`${pageContent.seoTitle} | Chaos Softball San Diego 10U`}
-    description={pageContent.seoDescription}
-    noIndex={pageContent.noIndex}
->
-    <div class={styles.subPageWrapper}>
-        <ResponsiveHeadline size={1} as="h1">
-            {pageContent.title}
-        </ResponsiveHeadline>
-        {
-            pageContent.content && (
-                <RichText richText={pageContent.content} client:load />
-            )
-        }
-    </div>
+<Layout seo={seo} noIndex={pageContent.noIndex}>
+	<div class={styles.subPageWrapper}>
+		<ResponsiveHeadline size={1} as="h1">
+			{pageContent.title}
+		</ResponsiveHeadline>
+		{pageContent.content && (
+			<RichText richText={pageContent.content} client:load />
+		)}
+	</div>
 </Layout>

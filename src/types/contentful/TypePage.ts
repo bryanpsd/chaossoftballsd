@@ -5,11 +5,11 @@ import type {
 	EntrySkeletonType,
 	LocaleCode,
 } from "contentful";
+import type { TypeSeoSkeleton } from "./TypeSeo";
 
 export interface TypePageFields {
 	title: EntryFieldTypes.Symbol;
-	seoTitle?: EntryFieldTypes.Symbol;
-	seoDescription?: EntryFieldTypes.Symbol;
+	seo?: EntryFieldTypes.EntryLink<TypeSeoSkeleton>;
 	slug?: EntryFieldTypes.Symbol;
 	noIndex?: EntryFieldTypes.Boolean;
 	class?: EntryFieldTypes.Symbol;

@@ -15,7 +15,11 @@ import { ResponsiveHeadline } from "~/components/ResponsiveHeadline";
 import { RichText } from "~/components/RichText";
 import Layout from "~/layouts/Layout.astro";
 import { contentfulClient } from "~/services/contentful/contentful";
-import { section } from "~/styles/utilities/common.css";
+import { anchorTarget, section } from "~/styles/utilities/common.css";
+
+// Utility to combine section and anchorTarget classes for anchor sections
+const anchorSection = `${section} ${anchorTarget}`;
+
 import type { TypePageSectionSkeleton } from "~/types/contentful";
 import type { TypeList, TypeListSkeleton } from "~/types/contentful/TypeList";
 
@@ -38,7 +42,7 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
 <Layout>
   <ToastContainer position="top-center" client:idle />
   <Hero />
-  <section id="intro" class={`${section}`}>
+  <section id="intro" class={anchorSection}> 
     {
       entryIntro.items.map((item) => (
         <div>
@@ -49,7 +53,7 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
       ))
     }
   </section>
-  <section id="faqs" class={`${section}`}>
+  <section id="faqs" class={anchorSection}> 
     <ResponsiveHeadline size={2} as="h2">
       Frequently Asked Questions
     </ResponsiveHeadline>
@@ -58,7 +62,7 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
       client:visible
     />
   </section>
-  <section id="contact" class={`${section}`}>
+  <section id="contact" class={anchorSection}> 
     {
       entryContact.items.map((item) => (
         <div>
@@ -70,7 +74,7 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
     }
     <Form client:idle />
   </section>
-  <section id="featured" class={`${section}`}> 
+  <section id="featured" class={anchorSection}> 
     <ResponsiveHeadline size={2} as="h2"> Chaos in Action </ResponsiveHeadline>
     <FeaturedPhotos galleryName="Featured Photos" maxPhotos={12}  />
   </section>

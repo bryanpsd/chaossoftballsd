@@ -41,6 +41,10 @@ export const section = style([
 	contentPadding,
 ]);
 
+export const anchorTarget = style({
+	scrollMarginTop: 90,
+});
+
 export const subPageWrapper = style([
 	tokens({
 		marginY: 12,

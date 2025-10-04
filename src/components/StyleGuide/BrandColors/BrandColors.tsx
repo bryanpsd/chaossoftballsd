@@ -7,6 +7,11 @@ const brandColors = [
 	{ name: "Orange", value: color.brand.orange },
 	{ name: "Pink", value: color.brand.pink },
 	{ name: "Green", value: color.brand.green },
+	{ name: "Gray", value: color.brand.gray },
+	{ name: "White", value: color.brand.white },
+	{ name: "Black", value: color.brand.black },
+	{ name: "Dark Gray", value: color.brand.darkGray },
+	{ name: "Red", value: color.brand.red },
 ];
 
 export const BrandColors = () => (

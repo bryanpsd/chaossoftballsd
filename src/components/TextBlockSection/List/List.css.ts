@@ -6,9 +6,9 @@ export const list = recipe({
 	base: [
 		tokens({
 			fontSize: "inherit",
-			marginTop: 24,
+			marginTop: 20,
 			paddingLeft: 20,
-			marginBottom: 24,
+			marginBottom: 20,
 		}),
 		{
 			listStyleType: "disc",

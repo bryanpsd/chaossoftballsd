@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+import { globalStyle, style } from "@vanilla-extract/css";
 import { color } from "../../styles/tokens/colors";
 import { tokens } from "../../styles/tokens/designTokens.css";
 
@@ -60,3 +60,7 @@ export const blockquote = style([
 		fontStyle: "italic",
 	},
 ]);
+
+globalStyle(`.${blockquote} p:last-child`, {
+	marginBottom: 0,
+});

@@ -10,6 +10,7 @@ import { TextBlockSection } from "../../components/TextBlockSection";
 import { List } from "../../components/TextBlockSection/List";
 import type { TypographyProps } from "../../components/Typography";
 import { Typography } from "../../components/Typography";
+import { BrandColors } from "../StyleGuide/BrandColors";
 import { Table } from "../Table";
 import * as styles from "./RichText.css";
 
@@ -236,6 +237,12 @@ const options: Options = {
 
 		[BLOCKS.EMBEDDED_ENTRY]: (node) => {
 			const entry = node?.data?.target;
+			if (
+				entry?.sys?.contentType?.sys?.id === "customBlock" && // or your content type ID
+				entry.fields?.blockType === "brandColors"
+			) {
+				return <BrandColors />;
+			}
 			if (entry?.sys?.contentType?.sys?.id === "list" && entry.fields) {
 				return <BasicAccordion list={entry} key={entry.sys.id} />;
 			}

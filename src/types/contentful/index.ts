@@ -5,6 +5,12 @@ export type {
 } from "./TypeBanner";
 export { isTypeBanner } from "./TypeBanner";
 export type {
+	TypeCustomBlock,
+	TypeCustomBlockFields,
+	TypeCustomBlockSkeleton,
+} from "./TypeCustomBlock";
+export { isTypeCustomBlock } from "./TypeCustomBlock";
+export type {
 	TypeGallery,
 	TypeGalleryFields,
 	TypeGallerySkeleton,

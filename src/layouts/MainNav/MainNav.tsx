@@ -22,6 +22,23 @@ export type MainNavProps = {
 };
 
 function MainNavInner(props: MainNavProps) {
+	// On initial load, if on homepage and URL has a hash, scroll to anchor
+	useEffect(() => {
+		if (typeof window === "undefined") return;
+		if (
+			(window.location.pathname === "/" || window.location.pathname === "") &&
+			window.location.hash
+		) {
+			const hash = window.location.hash.replace(/^#/, "");
+			const el = document.getElementById(hash);
+			if (el) {
+				// Use a timeout to ensure DOM is ready
+				setTimeout(() => {
+					el.scrollIntoView({ behavior: "auto", block: "start" });
+				}, 10);
+			}
+		}
+	}, []);
 	const { items } = props;
 	const [currentPath, setCurrentPath] = useState("");
 	const [hydrated, setHydrated] = useState(false);
@@ -36,7 +53,7 @@ function MainNavInner(props: MainNavProps) {
 				.filter(Boolean) as string[],
 		[items.menuItems],
 	);
-	 const [activeSection, setScrollTarget] = useScrollSpy(sectionIds);
+	const [activeSection, setScrollTarget] = useScrollSpy(sectionIds);
 	const [pendingAnchor, setPendingAnchor] = useState<string | null>(null);
 
 	// Recalculate scrollspy after hydration and hash/popstate navigation
@@ -54,10 +71,10 @@ function MainNavInner(props: MainNavProps) {
 	}, [hydrated]);
 
 	// Track hydration and current path, and handle direct hash navigation
-	 const lastHashRef = React.useRef<string | null>(null);
-	 // Hydration/ready flag to suppress active state until hash/scrollspy logic runs
-	 const [navReady, setNavReady] = useState(false);
-	 useLayoutEffect(() => {
+	const lastHashRef = React.useRef<string | null>(null);
+	// Hydration/ready flag to suppress active state until hash/scrollspy logic runs
+	const [navReady, setNavReady] = useState(false);
+	useLayoutEffect(() => {
 		setHydrated(true);
 		const updatePathAndAnchor = () => {
 			const newPath = window.location.pathname + window.location.hash;
@@ -137,20 +154,20 @@ function MainNavInner(props: MainNavProps) {
 					if (item.href?.startsWith("/#")) {
 						anchorId = item.href.replace("/#", "");
 					}
-					 const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-					 	// Only set pendingAnchor/scrollTarget for in-page navigation
-					 	if (anchorId && window.location.pathname === "/") {
-					 		setPendingAnchor(anchorId);
-					 		setScrollTarget(anchorId);
-					 		const el = document.getElementById(anchorId);
-					 		if (el) {
-					 			e.preventDefault();
-					 			el.scrollIntoView({ behavior: "smooth" });
-					 			window.history.replaceState(null, "", `/#${anchorId}`);
-					 		}
-					 	}
-					 	// For cross-page navigation, do nothing: let new page handle active state
-					 };
+					const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+						// Only set pendingAnchor/scrollTarget for in-page navigation
+						if (anchorId && window.location.pathname === "/") {
+							setPendingAnchor(anchorId);
+							setScrollTarget(anchorId);
+							const el = document.getElementById(anchorId);
+							if (el) {
+								e.preventDefault();
+								el.scrollIntoView({ behavior: "smooth" });
+								window.history.replaceState(null, "", `/#${anchorId}`);
+							}
+						}
+						// For cross-page navigation, do nothing: let new page handle active state
+					};
 					return (
 						<NavMenu.Item className={styles.mainNavItem} key={item.label}>
 							<NavMenu.Link asChild>

@@ -4,11 +4,10 @@ import { Typography } from "~/components/Typography";
 import { iconMap } from "~/utils/iconMap";
 import { contentfulClient } from "../../services/contentful/contentful";
 import type { TypeLinkFields } from "../../types/contentful/TypeLink";
+import type { TypeListSkeleton } from "../../types/contentful/TypeList";
 
 const currentDate = new Date();
 const year = currentDate.getFullYear();
-
-import type { TypeListSkeleton } from "../../types/contentful/TypeList";
 
 const entry = await contentfulClient.getEntries<TypeListSkeleton>({
 	content_type: "list",
@@ -54,7 +53,12 @@ import * as styles from "./Footer.css";
                                         ? "noopener noreferrer"
                                         : undefined
                                 }
-                                className={styles.footerNavLink}
+                                className={[
+                                    styles.footerNavLink,
+                                    Astro.url.pathname === url ? "active" : "",
+                                ]
+                                    .filter(Boolean)
+                                    .join(" ")}
                             >
                                 {label === "Contact" && ContactIcon ? (
                                     <>

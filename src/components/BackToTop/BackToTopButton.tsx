@@ -16,6 +16,11 @@ export const BackToTopButton = () => {
 
 	const scrollToTop = () => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
+		if (window.location.hash) {
+			history.replaceState(null, "", window.location.pathname + window.location.search);
+		}
+		// Dispatch chaos:nav-clear event to clear nav active state everywhere
+		window.dispatchEvent(new Event("chaos:nav-clear"));
 	};
 
 	if (!visible) return null;

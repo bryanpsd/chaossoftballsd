@@ -15,9 +15,9 @@ type NavigationLink = {
 
 type MobileNavProps = {
 	navItems: NavigationLink[] | { menuItems: NavigationLink[] };
+	currentPath?: string;
 };
 
-// Hamburger icon animation (moved outside component)
 const Hamburger = ({ open }: { open: boolean }) => (
 	<svg
 		width="30"
@@ -71,10 +71,21 @@ const Hamburger = ({ open }: { open: boolean }) => (
 export const MobileNav = ({ navItems }: MobileNavProps) => {
 	const items = Array.isArray(navItems) ? navItems : navItems?.menuItems || [];
 	const [open, setOpen] = useState(false);
+	const [hasMounted, setHasMounted] = useState(false);
+	const [navRefresh, setNavRefresh] = useState(0);
 	const menuRef = useRef<HTMLDivElement>(null);
 	const menuId = useId();
 
-	// Disable body scroll when mobile nav is open
+	useEffect(() => {
+		setHasMounted(true);
+		// Listen for backToTopClicked event to force nav re-render
+		const handler = () => setNavRefresh((n) => n + 1);
+		window.addEventListener("backToTopClicked", handler);
+		return () => {
+			window.removeEventListener("backToTopClicked", handler);
+		};
+	}, []);
+
 	useEffect(() => {
 		if (open) {
 			document.body.style.overflow = "hidden";
@@ -83,13 +94,13 @@ export const MobileNav = ({ navItems }: MobileNavProps) => {
 			document.body.style.overflow = "";
 			document.body.classList.remove("mobile-nav-open");
 		}
+		// Always clean up scroll lock on unmount
 		return () => {
 			document.body.style.overflow = "";
 			document.body.classList.remove("mobile-nav-open");
 		};
 	}, [open]);
 
-	// Trap focus in menu when open
 	useEffect(() => {
 		if (open && menuRef.current) {
 			const focusable = menuRef.current.querySelectorAll("a,button");
@@ -99,10 +110,8 @@ export const MobileNav = ({ navItems }: MobileNavProps) => {
 		}
 	}, [open]);
 
-	// Set inert attribute directly for accessibility
 	useEffect(() => {
 		if (menuRef.current) {
-			// inert is not in React types yet, so we assert HTMLElement and set inert
 			(menuRef.current as HTMLElement & { inert: boolean }).inert = !open;
 		}
 	}, [open]);
@@ -140,21 +149,41 @@ export const MobileNav = ({ navItems }: MobileNavProps) => {
 					</Button>
 				</span>
 				<ul className={styles.mobileNavList}>
-					{items.map((item) => (
-						<li className={styles.mobileNavListItem} key={item.href}>
-							<Link
-								href={item.href}
-								className={styles.mobileNavLink}
-								onClick={() => setOpen(false)}
-								tabIndex={open ? 0 : -1}
-							>
-								{item.label}
-							</Link>
-						</li>
-					))}
+					{items.map((item) => {
+						// Use navRefresh in dependency to force re-render
+						void navRefresh;
+						let isActive = false;
+						if (hasMounted && item.href) {
+							const { pathname, hash } = window.location;
+							if (item.href.startsWith("#")) {
+								isActive = hash === item.href;
+							} else if (item.href.startsWith("/")) {
+								const [itemPath, itemHash] = item.href.split("#");
+								if (itemHash) {
+									isActive = pathname === itemPath && hash === `#${itemHash}`;
+								} else {
+									isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+								}
+							}
+						}
+						return (
+							<li className={styles.mobileNavListItem} key={item.href}>
+								<Link
+									href={item.href}
+									className={
+										isActive ? [styles.mobileNavLink, "active"].join(" ") : styles.mobileNavLink
+									}
+									aria-current={isActive ? "page" : undefined}
+									onClick={() => setOpen(false)}
+									tabIndex={open ? 0 : -1}
+								>
+									{item.label}
+								</Link>
+							</li>
+						);
+					})}
 				</ul>
 			</div>
-			{/* Optional: Add a semi-transparent backdrop for focus/UX */}
 			<div
 				style={{
 					background: open ? "rgba(0,0,0,0.5)" : "transparent",

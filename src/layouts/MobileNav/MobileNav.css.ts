@@ -74,5 +74,12 @@ export const mobileNavLink = style([
 	}),
 	{
 		color: color.brand.white,
+		textDecoration: "none",
+		transition: "color 0.2s, text-decoration 0.2s",
+		selectors: {
+			"&.active": {
+				color: color.brand.yellow,
+			},
+		},
 	},
 ]);

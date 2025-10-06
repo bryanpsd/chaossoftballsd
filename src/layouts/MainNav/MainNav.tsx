@@ -36,7 +36,7 @@ function MainNavInner(props: MainNavProps) {
 				.filter(Boolean) as string[],
 		[items.menuItems],
 	);
-	const [activeSection, setScrollTarget] = useScrollSpy(sectionIds, 90);
+	 const [activeSection, setScrollTarget] = useScrollSpy(sectionIds);
 	const [pendingAnchor, setPendingAnchor] = useState<string | null>(null);
 
 	// Recalculate scrollspy after hydration and hash/popstate navigation
@@ -137,21 +137,20 @@ function MainNavInner(props: MainNavProps) {
 					if (item.href?.startsWith("/#")) {
 						anchorId = item.href.replace("/#", "");
 					}
-					const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-						// Only set pendingAnchor/scrollTarget for in-page navigation
-						if (anchorId && window.location.pathname === "/") {
-							setPendingAnchor(anchorId);
-							setScrollTarget(anchorId);
-							const el = document.getElementById(anchorId);
-							if (el) {
-								e.preventDefault();
-								const y = el.getBoundingClientRect().top + window.scrollY - 90;
-								window.scrollTo({ top: y, behavior: "smooth" });
-								window.history.replaceState(null, "", `/#${anchorId}`);
-							}
-						}
-						// For cross-page navigation, do nothing: let new page handle active state
-					};
+					 const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+					 	// Only set pendingAnchor/scrollTarget for in-page navigation
+					 	if (anchorId && window.location.pathname === "/") {
+					 		setPendingAnchor(anchorId);
+					 		setScrollTarget(anchorId);
+					 		const el = document.getElementById(anchorId);
+					 		if (el) {
+					 			e.preventDefault();
+					 			el.scrollIntoView({ behavior: "smooth" });
+					 			window.history.replaceState(null, "", `/#${anchorId}`);
+					 		}
+					 	}
+					 	// For cross-page navigation, do nothing: let new page handle active state
+					 };
 					return (
 						<NavMenu.Item className={styles.mainNavItem} key={item.label}>
 							<NavMenu.Link asChild>

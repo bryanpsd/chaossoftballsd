@@ -113,6 +113,7 @@ function MainNavInner(props: MainNavProps) {
 
 	// Determine which nav button is active
 	const getActiveIdx = () => {
+		// If there is a pending anchor, use it
 		for (let idx = 0; idx < items.menuItems.length; idx++) {
 			const item = items.menuItems[idx];
 			let anchorId = null;
@@ -121,6 +122,20 @@ function MainNavInner(props: MainNavProps) {
 				if (pendingAnchor) {
 					if (pendingAnchor === anchorId) return idx;
 				} else if (activeSection === anchorId) {
+					// Special case: if this is the last section and user is below it, do not highlight
+					if (
+						idx === items.menuItems.length - 1 &&
+						typeof window !== "undefined" &&
+						anchorId &&
+						(() => {
+							const el = document.getElementById(anchorId);
+							if (!el) return false;
+							const rect = el.getBoundingClientRect();
+							return rect.bottom < window.innerHeight;
+						})()
+					) {
+						return -1;
+					}
 					return idx;
 				}
 			} else {
@@ -139,6 +154,10 @@ function MainNavInner(props: MainNavProps) {
 					return idx;
 				}
 			}
+		}
+		// If scrollspy says no section is active, no nav button should be active
+		if (activeSection === null) {
+			return -1;
 		}
 		return -1;
 	};

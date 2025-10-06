@@ -5,9 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
  * @param offset Optional offset in px (default: 0)
  * @returns [activeId, setScrollTarget]
  */
-export function useScrollSpy(
-  ids: string[]
-): [string | null, (target: string | null) => void] {
+export function useScrollSpy(ids: string[]): [string | null, (target: string | null) => void] {
 	const [activeId, setActiveId] = useState<string | null>(null);
 	const [scrollingTarget, setScrollingTarget] = useState<string | null>(null);
 	const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -15,27 +13,27 @@ export function useScrollSpy(
 	useEffect(() => {
 		if (typeof window === "undefined") return;
 
-				// Helper: get scroll-margin-top from :root custom property
-				function getScrollMarginTopPx(): number {
-					if (typeof window === 'undefined') return 0;
-					const root = document.documentElement;
-					const style = window.getComputedStyle(root);
-					const val = style.getPropertyValue('--scroll-margin-top');
-					if (val) {
-						const px = parseInt(val, 12);
-						if (!Number.isNaN(px)) return px;
-					}
-					return 0;
-				}
+		// Helper: get scroll-margin-top from :root custom property
+		function getScrollMarginTopPx(): number {
+			if (typeof window === "undefined") return 0;
+			const root = document.documentElement;
+			const style = window.getComputedStyle(root);
+			const val = style.getPropertyValue("--scroll-margin-top");
+			if (val) {
+				const px = parseInt(val, 12);
+				if (!Number.isNaN(px)) return px;
+			}
+			return 0;
+		}
 
-			// Helper: is a section in view (top at or above visual top, accounting for scroll-margin-top)?
-				const isSectionInView = (id: string) => {
-					const el = document.getElementById(id);
-					if (!el) return false;
-					const rect = el.getBoundingClientRect();
-					const offset = getScrollMarginTopPx();
-					return rect.top <= offset;
-				};
+		// Helper: is a section in view (top at or above visual top, accounting for scroll-margin-top)?
+		const isSectionInView = (id: string) => {
+			const el = document.getElementById(id);
+			if (!el) return false;
+			const rect = el.getBoundingClientRect();
+			const offset = getScrollMarginTopPx();
+			return rect.top <= offset;
+		};
 
 		// Failsafe: clear scroll lock if not released in 600ms
 		if (scrollingTarget) {
@@ -48,26 +46,33 @@ export function useScrollSpy(
 			scrollTimeout.current = null;
 		}
 
-			// Main scrollspy logic: last section whose top is at or above visual top (accounting for scroll-margin-top)
-				const handleSpy = () => {
-					if (scrollingTarget) {
-						setActiveId(scrollingTarget);
-						return;
+		// Main scrollspy logic: last section whose top is at or above visual top (accounting for scroll-margin-top)
+		const handleSpy = () => {
+			if (scrollingTarget) {
+				setActiveId(scrollingTarget);
+				return;
+			}
+			let found: string | null = null;
+			let lastRect: DOMRect | null = null;
+			const offset = getScrollMarginTopPx();
+			for (let i = 0; i < ids.length; i++) {
+				const id = ids[i];
+				const el = document.getElementById(id);
+				if (el) {
+					const rect = el.getBoundingClientRect();
+					if (rect.top <= offset) {
+						found = id;
+						lastRect = rect;
 					}
-					let found: string | null = null;
-					const offset = getScrollMarginTopPx();
-					for (let i = 0; i < ids.length; i++) {
-						const id = ids[i];
-						const el = document.getElementById(id);
-						if (el) {
-							const rect = el.getBoundingClientRect();
-							if (rect.top <= offset) {
-								found = id;
-							}
-						}
-					}
-					setActiveId(found);
-				};
+				}
+			}
+			// If we're below the last section, set activeId to null
+			if (found && lastRect && lastRect.bottom < 1) {
+				setActiveId(null);
+			} else {
+				setActiveId(found);
+			}
+		};
 
 		// Scroll handler
 		const handleScroll = () => {

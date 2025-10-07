@@ -91,10 +91,21 @@ export const MobileNav = ({ navItems }: MobileNavProps) => {
 		const cleanup = () => {
 			document.body.style.overflow = "";
 			document.body.classList.remove("mobile-nav-open");
+			if (menuRef.current) {
+				(menuRef.current as HTMLElement & { inert: boolean }).inert = true;
+				// Blur any focused element inside the nav
+				const active = document.activeElement as HTMLElement | null;
+				if (active && menuRef.current.contains(active)) {
+					active.blur();
+				}
+			}
 		};
 		if (open) {
 			document.body.style.overflow = "hidden";
 			document.body.classList.add("mobile-nav-open");
+			if (menuRef.current) {
+				(menuRef.current as HTMLElement & { inert: boolean }).inert = false;
+			}
 		} else {
 			cleanup();
 		}

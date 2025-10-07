@@ -48,7 +48,6 @@ export const button = recipe({
 				fontSize: "sizeFont6",
 				lineHeight: "sizeLineHeight6",
 				gap: 16,
-				paddingY: 11,
 				paddingX: 10,
 			}),
 			large: tokens({
@@ -59,12 +58,11 @@ export const button = recipe({
 				paddingX: 16,
 			}),
 		},
-		// empty values are placeholders. compoundVariants will control the values
 		color: {
 			primary: "",
 			secondary: "",
 			danger: "",
-			default: "", // neutral coloring naming comes from MUI, TODO: rename to neutral
+			default: "",
 		},
 		variant: {
 			outlined: tokens({ minWidth: { "xs-min": 32, "md-min": 96 } }),
@@ -72,8 +70,35 @@ export const button = recipe({
 			round: tokens({}),
 			text: tokens({ minWidth: "none" }),
 		},
+		active: {
+			true: {},
+			false: {},
+		},
 	},
 	compoundVariants: [
+		{
+			variants: { active: true },
+			style: [
+				tokens({
+					color: { default: "black", hover: "black", disabled: "gray" },
+					borderColor: {
+						default: "yellow",
+						hover: "yellow",
+						disabled: "gray",
+					},
+					backgroundColor: {
+						default: "yellow",
+						hover: "yellow",
+						disabled: "gray",
+					},
+				}),
+				{
+					borderWidth: 1,
+					borderStyle: "solid",
+					borderColor: color.brand.yellow,
+				},
+			],
+		},
 		// *******************************************************************
 		// Contained
 		// *******************************************************************

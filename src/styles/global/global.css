@@ -16,6 +16,11 @@
 	scroll-behavior: smooth;
 }
 
+
+:root {
+	--scroll-margin-top: 90px;
+}
+
 body {
 	line-height: 1.5;
 	-webkit-font-smoothing: antialiased;

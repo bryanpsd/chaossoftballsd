@@ -58,6 +58,7 @@ const items = navEntry
 						label: fields.label ?? fields.name ?? "",
 						href: fields.ctaLink ?? undefined,
 						target: fields.openInNewWindow ? "_blank" : undefined,
+						openinnewwindow: fields.openInNewWindow ?? false,
 						links: [],
 						type: fields.type ?? [],
 					};
@@ -82,7 +83,7 @@ const { pathname } = Astro.url;
   <div class={styles.header}>
     <div class={styles.logoWrapper}>
       <span class="sr-only">chaossoftballsd.org</span>
-      <Link href="/" aria-label="Home">
+      <Link href="/" aria-label="Home" onClick={() => window.dispatchEvent(new CustomEvent('chaos:nav-clear'))}>
         <Image
           aria-hidden="true"
           src={logo}
@@ -95,7 +96,7 @@ const { pathname } = Astro.url;
         />
       </Link>
     </div>
-	<MainNav items={items} currentPath={pathname} client:visible />
-	<MobileNav navItems={items} client:visible />
+		<MainNav items={items} currentPath={pathname} client:visible />
+		<MobileNav navItems={items} currentPath={pathname} client:visible />
   </div>
 </header>

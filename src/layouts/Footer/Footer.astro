@@ -4,11 +4,10 @@ import { Typography } from "~/components/Typography";
 import { iconMap } from "~/utils/iconMap";
 import { contentfulClient } from "../../services/contentful/contentful";
 import type { TypeLinkFields } from "../../types/contentful/TypeLink";
+import type { TypeListSkeleton } from "../../types/contentful/TypeList";
 
 const currentDate = new Date();
 const year = currentDate.getFullYear();
-
-import type { TypeListSkeleton } from "../../types/contentful/TypeList";
 
 const entry = await contentfulClient.getEntries<TypeListSkeleton>({
 	content_type: "list",
@@ -19,6 +18,7 @@ const entry = await contentfulClient.getEntries<TypeListSkeleton>({
 const ContactIcon = iconMap.Contact;
 const InstagramIcon = iconMap.Instagram;
 const GalleryIcon = iconMap.Gallery;
+const ShopIcon = iconMap.Shop;
 
 import * as styles from "./Footer.css";
 ---
@@ -54,7 +54,12 @@ import * as styles from "./Footer.css";
                                         ? "noopener noreferrer"
                                         : undefined
                                 }
-                                className={styles.footerNavLink}
+                                className={[
+                                    styles.footerNavLink,
+                                    Astro.url.pathname === url ? "active" : "",
+                                ]
+                                    .filter(Boolean)
+                                    .join(" ")}
                             >
                                 {label === "Contact" && ContactIcon ? (
                                     <>
@@ -80,7 +85,15 @@ import * as styles from "./Footer.css";
                                         />
                                         <span class="sr-only">Gallery</span>
                                     </>
-                                ) : (
+                                ) : label === "Shop" && ShopIcon ? (
+                                    <>
+                                        <ShopIcon
+                                            aria-hidden="true"
+                                            focusable="false"
+                                        />
+                                        <span class="sr-only">Shop Chaos Gear</span>
+                                    </>
+                                ): (
                                     label
                                 )}
                             </Link>

@@ -42,7 +42,7 @@ export const section = style([
 ]);
 
 export const anchorTarget = style({
-	scrollMarginTop: 90,
+  scrollMarginTop: 'var(--scroll-margin-top)',
 });
 
 export const subPageWrapper = style([

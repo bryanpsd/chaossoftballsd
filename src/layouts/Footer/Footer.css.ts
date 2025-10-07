@@ -32,9 +32,15 @@ export const footerNav = style([
 export const footerNavLink = style({
 	color: color.link,
 	textDecoration: "none",
+	transition: "color 0.2s, background 0.2s",
 	selectors: {
 		"&:hover, &:focus": {
 			textDecoration: "underline",
+		},
+		"&.active": {
+			color: color.brand.darkPurple,
+			textDecoration: "underline",
+			fontWeight: 700,
 		},
 	},
 });

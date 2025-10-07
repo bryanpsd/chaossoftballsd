@@ -26,6 +26,7 @@ export type ButtonProps<C extends ElementType = "button"> = PolymorphicComponent
 			endIcon: string;
 		}>;
 		round?: boolean;
+		active?: boolean;
 	}
 >;
 
@@ -73,6 +74,7 @@ export const Button = forwardRef(
 			variant,
 			startIcon,
 			endIcon,
+			active,
 			...rest
 		}: ButtonProps<C>,
 		ref: PolymorphicRef<C>,
@@ -83,15 +85,23 @@ export const Button = forwardRef(
 
 		const Component = asComponent || "button";
 
+		// Only add 'type' prop if rendering a button, not an anchor
+		const componentProps: React.ComponentPropsWithRef<ElementType> = {
+			...rest,
+			onClick: handleClick,
+			className: concatClasses([
+				className,
+				classes?.root,
+				button({ color, size, variant, active }),
+			]),
+			ref,
+			tabIndex: rest.disabled ? -1 : rest.tabIndex,
+		};
+		if ((asComponent || Component) === "button") {
+			(componentProps as React.ButtonHTMLAttributes<HTMLButtonElement>).type = type;
+		}
 		return (
-			<Component
-				{...rest}
-				onClick={handleClick}
-				type={type}
-				className={concatClasses([className, classes?.root, button({ color, size, variant })])}
-				ref={ref}
-				tabIndex={rest.disabled ? -1 : rest.tabIndex}
-			>
+			<Component {...componentProps}>
 				<Children startIcon={startIcon} endIcon={endIcon} size={size} classes={classes}>
 					{children}
 				</Children>

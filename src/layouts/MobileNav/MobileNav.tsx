@@ -88,17 +88,28 @@ export const MobileNav = ({ navItems }: MobileNavProps) => {
 	}, []);
 
 	useEffect(() => {
+		const cleanup = () => {
+			document.body.style.overflow = "";
+			document.body.classList.remove("mobile-nav-open");
+		};
 		if (open) {
 			document.body.style.overflow = "hidden";
 			document.body.classList.add("mobile-nav-open");
 		} else {
-			document.body.style.overflow = "";
-			document.body.classList.remove("mobile-nav-open");
+			cleanup();
 		}
+		// Handle iOS Safari/tab return: always clean up and close nav on visibilitychange
+		const handleVisibility = () => {
+			if (document.visibilityState === "visible") {
+				setOpen(false);
+				cleanup();
+			}
+		};
+		document.addEventListener("visibilitychange", handleVisibility);
 		// Always clean up scroll lock on unmount
 		return () => {
-			document.body.style.overflow = "";
-			document.body.classList.remove("mobile-nav-open");
+			document.removeEventListener("visibilitychange", handleVisibility);
+			cleanup();
 		};
 	}, [open]);
 

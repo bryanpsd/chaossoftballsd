@@ -58,6 +58,7 @@ const items = navEntry
 						label: fields.label ?? fields.name ?? "",
 						href: fields.ctaLink ?? undefined,
 						target: fields.openInNewWindow ? "_blank" : undefined,
+						openinnewwindow: fields.openInNewWindow ?? false,
 						links: [],
 						type: fields.type ?? [],
 					};

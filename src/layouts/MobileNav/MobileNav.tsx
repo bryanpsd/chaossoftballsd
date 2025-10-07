@@ -11,6 +11,7 @@ type NavigationLink = {
 	target?: string;
 	links?: NavigationLink[];
 	type?: string | string[];
+	openinnewwindow?: boolean;
 };
 
 type MobileNavProps = {
@@ -166,6 +167,7 @@ export const MobileNav = ({ navItems }: MobileNavProps) => {
 								}
 							}
 						}
+						const openInNewWindow = item.openinnewwindow;
 						return (
 							<li className={styles.mobileNavListItem} key={item.href}>
 								<Link
@@ -176,6 +178,8 @@ export const MobileNav = ({ navItems }: MobileNavProps) => {
 									aria-current={isActive ? "page" : undefined}
 									onClick={() => setOpen(false)}
 									tabIndex={open ? 0 : -1}
+									target={openInNewWindow ? "_blank" : undefined}
+									rel={openInNewWindow ? "noopener noreferrer" : undefined}
 								>
 									{item.label}
 								</Link>

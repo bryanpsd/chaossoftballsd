@@ -74,6 +74,7 @@ export const MobileNav = ({ navItems }: MobileNavProps) => {
 	const [open, setOpen] = useState(false);
 	const [hasMounted, setHasMounted] = useState(false);
 	const [navRefresh, setNavRefresh] = useState(0);
+	const [navInstance, setNavInstance] = useState(0); // force re-render on tab return
 	const menuRef = useRef<HTMLDivElement>(null);
 	const menuId = useId();
 
@@ -114,6 +115,7 @@ export const MobileNav = ({ navItems }: MobileNavProps) => {
 			if (document.visibilityState === "visible") {
 				setOpen(false);
 				cleanup();
+				setNavInstance((n) => n + 1); // force re-render
 			}
 		};
 		document.addEventListener("visibilitychange", handleVisibility);
@@ -140,7 +142,7 @@ export const MobileNav = ({ navItems }: MobileNavProps) => {
 	}, [open]);
 
 	return (
-		<nav className={styles.mobileNav} aria-label="Mobile Navigation">
+		<nav className={styles.mobileNav} aria-label="Mobile Navigation" key={navInstance}>
 			<Button
 				variant="text"
 				onClick={() => setOpen((v) => !v)}

@@ -187,7 +187,7 @@ export const MobileNav = ({ navItems }: MobileNavProps) => {
 								if (itemHash) {
 									isActive = pathname === itemPath && hash === `#${itemHash}`;
 								} else {
-									isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+									isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
 								}
 							}
 						}

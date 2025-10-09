@@ -8,8 +8,9 @@
 		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"format": "biome format --write .",
-  		"lint:fix": "biome check --apply .",
+		"format": "pnpm exec -- biome format --write .",
+		"lint": "pnpm exec -- biome check .",
+		"lint:fix": "pnpm exec -- biome format --write . && pnpm exec -- biome check .",
 		"cf-export": "contentful space export --config src/services/contentful/export-config.json --management-token $CONTENTFUL_DELIVERY_TOKEN --space-id $CONTENTFUL_SPACE_ID",
 		"cf-generate-types": "cf-content-types-generator src/services/contentful/export.json --v10 --typeguard --out src/types/contentful"
 	},
@@ -42,7 +43,7 @@
 		"recaptcha-v3": "^1.11.3"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.2.4",
+		"@biomejs/biome": "2.2.5",
 		"@types/node": "^24.5.2",
 		"@vanilla-extract/vite-plugin": "^5.1.1",
 		"cf-content-types-generator": "^2.16.0"

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.2.5/schema.json",
 	"vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
 	"files": {
 		"includes": [
@@ -8,15 +8,17 @@
 			"!dist",
 			"!.astro",
 			"!.netlify",
-			"!package.json",
-			"!yarn.lock",
-			"!package-lock.json",
 			"!public/*",
 			"!src/assets",
 			"!infra",
 			"!reportWebVitals.ts",
 			"!*.yml",
-			"!*.md"
+			"!*.md",
+			"!.cache",
+			"!.husky",
+			"!.vscode",
+			"!.idea",
+			"!.pnpm-store"
 		]
 	},
 	"formatter": {
@@ -41,6 +43,10 @@
 	"overrides": [
 		{
 			"includes": ["**/*.astro"],
+			"formatter": {
+				"indentStyle": "tab",
+				"lineWidth": 100
+			},
 			"linter": {
 				"rules": {
 					"style": {

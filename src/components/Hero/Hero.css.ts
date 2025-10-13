@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { breakpoints } from "../../styles/tokens/breakpoints";
 import { color } from "../../styles/tokens/colors";
 import { tokens } from "../../styles/tokens/designTokens.css";
 
@@ -16,7 +17,10 @@ export const hero = style([
 		justifyContent: "center",
 	}),
 	{
-		minHeight: "60vh",
+		minHeight: "55vh",
+		[`@media (min-width: ${breakpoints.lg}px)`]: {
+			minHeight: "70vh",
+		},
 		selectors: {
 			"&#hero::before": {
 				content: "''",

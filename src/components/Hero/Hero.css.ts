@@ -18,7 +18,7 @@ export const hero = style([
 	}),
 	{
 		minHeight: "55vh",
-		[`@media (min-width: ${breakpoints.lg}px)`]: {
+		[`@media (min-width: ${breakpoints.xl}px)`]: {
 			minHeight: "70vh",
 		},
 		selectors: {

@@ -29,8 +29,15 @@ const bannerOptions: Options = {
 			</Typography>
 		),
 		[INLINES.HYPERLINK]: (node, children) => {
+			const uri: string = node.data?.uri ?? "";
+			const isAbsolute = /^(?:https?:)?\/\//i.test(uri);
 			return (
-				<Link className={styles.bannerLink} href={node.data.uri}>
+				<Link
+					className={styles.bannerLink}
+					href={uri}
+					target={isAbsolute ? "_blank" : undefined}
+					rel={isAbsolute ? "noopener noreferrer" : undefined}
+				>
 					{children}
 				</Link>
 			);

@@ -1,12 +1,18 @@
 import type { Options } from "@contentful/rich-text-react-renderer";
 import type { Document } from "@contentful/rich-text-types";
 
-// Contentful rich text constants (ESM-compatible)
 const BLOCKS = {
 	PARAGRAPH: "paragraph",
 };
 const INLINES = {
 	HYPERLINK: "hyperlink",
+};
+
+const MARKS = {
+	BOLD: "bold",
+	ITALIC: "italic",
+	UNDERLINE: "underline",
+	CODE: "code",
 };
 
 import { Link } from "~/components/Link";
@@ -22,6 +28,10 @@ export type BannerProps = {
 };
 
 const bannerOptions: Options = {
+	renderMark: {
+		[MARKS.ITALIC]: (_text) => <em>{_text}</em>,
+		[MARKS.BOLD]: (_text) => <strong>{_text}</strong>,
+	},
 	renderNode: {
 		[BLOCKS.PARAGRAPH]: (_, children) => (
 			<Typography color="inverse" variant="bodyMd" align="center">

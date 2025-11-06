@@ -9,6 +9,8 @@ import {
 	FaYoutube,
 } from "react-icons/fa";
 
+import { SiGoogledocs } from "react-icons/si";
+
 export const iconMap: Record<string, React.ElementType> = {
 	Instagram: FaInstagram,
 	Facebook: FaFacebook,
@@ -18,4 +20,5 @@ export const iconMap: Record<string, React.ElementType> = {
 	Shop: FaShoppingBag,
 	Contact: FaEnvelope,
 	Gallery: FaCameraRetro,
+	GoogleDoc: SiGoogledocs,
 };

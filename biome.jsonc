@@ -1,0 +1,95 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.3.0/schema.json",
+	"vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+	"files": {
+		"includes": [
+			"**",
+			"!node_modules",
+			"!dist",
+			"!.astro",
+			"!.netlify",
+			"!.cache",
+			"!.husky",
+			"!.vscode",
+			"!.idea",
+			"!.pnpm-store"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"lineWidth": 100
+	},
+	"html": {
+		"experimentalFullSupportEnabled": true,
+		"formatter": {
+			"indentScriptAndStyle": true
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double",
+			"jsxQuoteStyle": "double",
+			"semicolons": "always"
+		}
+	},
+	"linter": {
+		"enabled": true,
+		"rules": { "recommended": true }
+	},
+	"assist": {
+		"enabled": true,
+		"actions": { "source": { "organizeImports": "on" } }
+	},
+	"overrides": [
+		{
+			"includes": ["**/*.astro"],
+			"formatter": { "indentStyle": "tab", "lineWidth": 100 },
+			"linter": {
+				"rules": {
+					"recommended": false,
+					"style": { "useConst": "off", "useImportType": "off" },
+					"correctness": { "noUnusedImports": "off", "noUnusedVariables": "off" },
+					"a11y": {
+						"recommended": true,
+						"useAltText": "warn",
+						"useValidAnchor": "warn",
+						"noRedundantAlt": "warn",
+						"noStaticElementInteractions": "warn",
+						"useValidLang": "warn"
+					}
+				}
+			}
+		},
+		{
+			"includes": ["**/*.css.ts"],
+			"linter": { "rules": { "recommended": true } }
+		},
+		{
+			"includes": ["**/*.ts"],
+			"linter": {
+				"rules": {
+					"recommended": true,
+					"correctness": { "noUnusedImports": "on", "noUnusedVariables": "on" },
+					"style": { "useConst": "on", "useImportType": "on" }
+				}
+			}
+		},
+		{
+			"includes": ["**/*.tsx"],
+			"linter": {
+				"rules": {
+					"recommended": true,
+					"correctness": { "noUnusedImports": "on", "noUnusedVariables": "on" },
+					"style": { "useConst": "on", "useImportType": "on" },
+					"a11y": {
+						"recommended": true,
+						"useAltText": "error",
+						"useValidAnchor": "warn",
+						"noStaticElementInteractions": "error"
+					}
+				}
+			}
+		}
+	]
+}

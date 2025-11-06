@@ -45,6 +45,18 @@ export const image = style([
 	},
 ]);
 
+export const button = style([
+	tokens({
+		marginBottom: 16,
+	}),
+]);
+
+export const buttonInline = style([
+	tokens({
+		marginBottom: 0,
+	}),
+]);
+
 export const blockquote = style([
 	tokens({
 		display: "block",

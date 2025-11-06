@@ -2,6 +2,7 @@ import type { Options } from "@contentful/rich-text-react-renderer";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import type { Document, TopLevelBlock } from "@contentful/rich-text-types";
 import { BasicAccordion } from "../../components/Accordion";
+import { Button } from "../../components/Button";
 import { Gallery } from "../../components/Gallery";
 import { ContentfulImage } from "../../components/Image/ContentfulImage";
 import { Link } from "../../components/Link";
@@ -10,11 +11,12 @@ import { TextBlockSection } from "../../components/TextBlockSection";
 import { List } from "../../components/TextBlockSection/List";
 import type { TypographyProps } from "../../components/Typography";
 import { Typography } from "../../components/Typography";
+import type { TypeLinkFields } from "../../types/contentful/TypeLink";
+import { iconMap } from "../../utils/iconMap";
 import { BrandColors } from "../StyleGuide/BrandColors";
 import { Table } from "../Table";
 import * as styles from "./RichText.css";
 
-// Contentful rich text constants (ESM-compatible)
 const BLOCKS = {
 	DOCUMENT: "document",
 	PARAGRAPH: "paragraph",
@@ -51,6 +53,102 @@ const MARKS = {
 };
 
 const BODY_TYPOGRAPHY_VARIANT: TypographyProps["variant"] = "bodyMd";
+
+function getIconByLabelStrict(label: string) {
+	const trimmed = (label || "").trim();
+	if (!trimmed) return undefined;
+	if (iconMap[trimmed]) return iconMap[trimmed];
+	const lower = trimmed.toLowerCase();
+	const exactInsensitive = Object.keys(iconMap).find((k) => k.toLowerCase() === lower);
+	if (exactInsensitive) return iconMap[exactInsensitive];
+	const noSpaceLower = lower.replace(/\s+/g, "");
+	const spaceInsensitive = Object.keys(iconMap).find(
+		(k) => k.toLowerCase().replace(/\s+/g, "") === noSpaceLower,
+	);
+	return spaceInsensitive ? iconMap[spaceInsensitive] : undefined;
+}
+
+function renderContentfulLinkEntry(entry: unknown, opts?: { isInline?: boolean }) {
+	const maybeEntry = entry as { fields?: unknown } | undefined;
+	if (!maybeEntry?.fields) return null;
+	const fields = maybeEntry.fields as unknown as TypeLinkFields;
+	const label = String(fields.label ?? fields.name ?? "");
+	const title = String(fields.name ?? "");
+	const href = fields.ctaLink ? String(fields.ctaLink) : undefined;
+	const typeValues = Array.isArray(fields.type) ? (fields.type as unknown as string[]) : [];
+	const openInNewWindow = Boolean(fields.openInNewWindow);
+	const isInline = Boolean(opts?.isInline);
+	if (!href) return null;
+
+	const isButton = typeValues.includes("button");
+	const isIcon = typeValues.includes("icon");
+	const isPlainLink = typeValues.includes("link") || (!isButton && !isIcon);
+
+	if (isButton) {
+		const iconKey = isInline ? title || label : label;
+		const StartIcon = getIconByLabelStrict(iconKey);
+		return (
+			<Button
+				as="a"
+				href={href}
+				className={isInline ? styles.buttonInline : styles.button}
+				size="small"
+				color="primary"
+				variant="contained"
+				startIcon={
+					isInline && isIcon && StartIcon ? (
+						<StartIcon aria-hidden="true" focusable="false" />
+					) : undefined
+				}
+				target={openInNewWindow ? "_blank" : undefined}
+				rel={openInNewWindow ? "noopener noreferrer" : undefined}
+			>
+				{label}
+			</Button>
+		);
+	}
+
+	if (isIcon) {
+		const iconKey = isInline ? title || label : label;
+		const Icon = getIconByLabelStrict(iconKey);
+		return (
+			<Button
+				as="a"
+				href={href}
+				className={isInline ? styles.buttonInline : styles.button}
+				size="small"
+				color="primary"
+				variant="round"
+				target={openInNewWindow ? "_blank" : undefined}
+				rel={openInNewWindow ? "noopener noreferrer" : undefined}
+			>
+				{Icon ? (
+					<>
+						<Icon aria-hidden="true" focusable="false" />
+						<span className="sr-only">{label}</span>
+					</>
+				) : (
+					label
+				)}
+			</Button>
+		);
+	}
+
+	if (isPlainLink) {
+		return (
+			<Link
+				className={styles.link}
+				href={href}
+				target={openInNewWindow ? "_blank" : undefined}
+				rel={openInNewWindow ? "noopener noreferrer" : undefined}
+			>
+				{label}
+			</Link>
+		);
+	}
+
+	return null;
+}
 
 const tableCellOptions: Options = {
 	renderMark: {
@@ -248,6 +346,18 @@ const options: Options = {
 			}
 			if (entry?.sys?.contentType?.sys?.id === "gallery" && entry.fields) {
 				return <Gallery galleryId={entry.sys.id} />;
+			}
+
+			if (entry?.sys?.contentType?.sys?.id === "link" && entry.fields) {
+				return renderContentfulLinkEntry(entry);
+			}
+			return null;
+		},
+
+		[INLINES.EMBEDDED_ENTRY]: (node) => {
+			const entry = node?.data?.target;
+			if (entry?.sys?.contentType?.sys?.id === "link" && entry.fields) {
+				return renderContentfulLinkEntry(entry, { isInline: true });
 			}
 			return null;
 		},

@@ -13,6 +13,7 @@ export interface TypeLinkFields {
 	openInNewWindow?: EntryFieldTypes.Boolean;
 	type?: EntryFieldTypes.Array<EntryFieldTypes.Symbol<"button" | "icon" | "link">>;
 	asset?: EntryFieldTypes.AssetLink;
+	address?: EntryFieldTypes.Location;
 }
 
 export type TypeLinkSkeleton = EntrySkeletonType<TypeLinkFields, "link">;

@@ -75,14 +75,38 @@ function renderContentfulLinkEntry(entry: unknown, opts?: { isInline?: boolean }
 	const label = String(fields.label ?? fields.name ?? "");
 	const title = String(fields.name ?? "");
 	const href = fields.ctaLink ? String(fields.ctaLink) : undefined;
+	const address = (fields as unknown as { address?: { lat?: number; lon?: number } }).address;
 	const typeValues = Array.isArray(fields.type) ? (fields.type as unknown as string[]) : [];
 	const openInNewWindow = Boolean(fields.openInNewWindow);
 	const isInline = Boolean(opts?.isInline);
-	if (!href) return null;
+	if (!href && !address) return null;
 
 	const isButton = typeValues.includes("button");
 	const isIcon = typeValues.includes("icon");
 	const isPlainLink = typeValues.includes("link") || (!isButton && !isIcon);
+
+	// If address is provided, build smart Maps links using Apple Maps on iOS and Google Maps elsewhere
+	const hasCoords = Boolean(address && typeof address.lat === "number" && typeof address.lon === "number");
+	const mapsQuery = hasCoords ? `${address!.lat},${address!.lon}` : title || label;
+	const enc = (v: string) => encodeURIComponent((v || "").trim());
+	const appleSearch = (q: string) => `https://maps.apple.com/?q=${enc(q)}`;
+	const googleSearch = (q: string) => `https://www.google.com/maps/search/?api=1&query=${enc(q)}`;
+	const mapsFallbackHref = mapsQuery ? googleSearch(mapsQuery) : undefined;
+	const mapsOnClick: React.MouseEventHandler<HTMLAnchorElement> | undefined = mapsQuery
+		? (e) => {
+			try {
+				const ua = navigator.userAgent || "";
+				const isiOS = /iPad|iPhone|iPod/.test(ua);
+				const isAndroid = /Android/.test(ua);
+				if (isiOS || isAndroid) {
+					e.preventDefault();
+					window.location.href = isiOS ? appleSearch(mapsQuery) : googleSearch(mapsQuery);
+				}
+			} catch {
+				/* noop */
+			}
+		}
+		: undefined;
 
 	if (isButton) {
 		const iconKey = isInline ? title || label : label;
@@ -90,16 +114,15 @@ function renderContentfulLinkEntry(entry: unknown, opts?: { isInline?: boolean }
 		return (
 			<Button
 				as="a"
-				href={href}
+				href={mapsFallbackHref || href}
 				className={isInline ? styles.buttonInline : styles.button}
 				size="small"
 				color="primary"
 				variant="contained"
-				startIcon={
-					isInline && isIcon && StartIcon ? (
-						<StartIcon aria-hidden="true" focusable="false" />
-					) : undefined
-				}
+				startIcon={isIcon && StartIcon ? (
+					<StartIcon aria-hidden="true" focusable="false" />
+				) : undefined}
+				onClick={mapsOnClick}
 				target={openInNewWindow ? "_blank" : undefined}
 				rel={openInNewWindow ? "noopener noreferrer" : undefined}
 			>
@@ -114,11 +137,12 @@ function renderContentfulLinkEntry(entry: unknown, opts?: { isInline?: boolean }
 		return (
 			<Button
 				as="a"
-				href={href}
+				href={mapsFallbackHref || href}
 				className={isInline ? styles.buttonInline : styles.button}
 				size="small"
 				color="primary"
 				variant="round"
+				onClick={mapsOnClick}
 				target={openInNewWindow ? "_blank" : undefined}
 				rel={openInNewWindow ? "noopener noreferrer" : undefined}
 			>
@@ -138,7 +162,8 @@ function renderContentfulLinkEntry(entry: unknown, opts?: { isInline?: boolean }
 		return (
 			<Link
 				className={styles.link}
-				href={href}
+				href={mapsFallbackHref || href}
+				onClick={mapsOnClick}
 				target={openInNewWindow ? "_blank" : undefined}
 				rel={openInNewWindow ? "noopener noreferrer" : undefined}
 			>

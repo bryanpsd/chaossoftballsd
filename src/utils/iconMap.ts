@@ -7,6 +7,7 @@ import {
 	FaTiktok,
 	FaTwitter,
 	FaYoutube,
+	FaCar,
 } from "react-icons/fa";
 
 import { SiGoogledocs } from "react-icons/si";
@@ -21,4 +22,5 @@ export const iconMap: Record<string, React.ElementType> = {
 	Contact: FaEnvelope,
 	Gallery: FaCameraRetro,
 	GoogleDoc: SiGoogledocs,
+	Directions: FaCar,
 };

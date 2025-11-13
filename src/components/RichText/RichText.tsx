@@ -13,7 +13,7 @@ import type { TypographyProps } from "../../components/Typography";
 import { Typography } from "../../components/Typography";
 import type { TypeLinkFields } from "../../types/contentful/TypeLink";
 import { iconMap } from "../../utils/iconMap";
-import { createMapsClickHandler, getMapsFallbackURL } from "../../utils/maps";
+import { createDirectionsClickHandler, getDirectionsFallbackURL } from "../../utils/maps";
 import { BrandColors } from "../StyleGuide/BrandColors";
 import { Table } from "../Table";
 import * as styles from "./RichText.css";
@@ -88,9 +88,9 @@ function renderContentfulLinkEntry(entry: unknown, opts?: { isInline?: boolean }
 	const isIcon = typeValues.includes("icon");
 	const isPlainLink = typeValues.includes("link") || (!isButton && !isIcon);
 
-	// Handle driving directions: use address if available, otherwise regular href
-	const finalHref = address ? getMapsFallbackURL(address, title || label) : href;
-	const handleClick = address ? createMapsClickHandler(address, title || label) : undefined;
+	// Handle driving directions: use directions URLs if address provided, otherwise regular href
+	const finalHref = address ? getDirectionsFallbackURL(address, title || label) : href;
+	const handleClick = address ? createDirectionsClickHandler(address, title || label) : undefined;
 	
 	if (!finalHref) return null;
 

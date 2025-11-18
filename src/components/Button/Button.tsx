@@ -7,6 +7,7 @@ import {
 	buttonLabel,
 } from "~/components/Button/Button.css";
 import type { PolymorphicComponentPropWithRef, PolymorphicRef } from "~/types/PolymorphicComponent";
+import { trackButtonClick, trackOutboundLink, isExternalUrl } from "~/utils/analytics";
 import { concatClasses } from "~/utils/concatClasses";
 
 export type ButtonProps<C extends ElementType = "button"> = PolymorphicComponentPropWithRef<
@@ -80,6 +81,21 @@ export const Button = forwardRef(
 		ref: PolymorphicRef<C>,
 	) => {
 		const handleClick: MouseEventHandler = (e) => {
+			// Track button click in GA4
+			const label = typeof children === "string" ? children : (rest as { "aria-label"?: string })["aria-label"] || "Button";
+			const href = rest.href as string | undefined;
+			
+			if (href && isExternalUrl(href)) {
+				trackOutboundLink(href, label);
+			} else {
+				trackButtonClick(label, {
+					button_variant: variant,
+					button_color: color,
+					button_size: size,
+					...(href && { link_url: href }),
+				});
+			}
+
 			onClick?.(e as React.MouseEvent<HTMLButtonElement>);
 		};
 

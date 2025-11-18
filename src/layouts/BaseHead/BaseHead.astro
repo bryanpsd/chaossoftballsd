@@ -60,8 +60,17 @@ const schema = {
 <GoogleAnalytics measurementId={"G-C3WFCBGF96"} />
 <script is:inline>
 	if ("serviceWorker" in navigator) {
-		window.addEventListener("load", () => {
-			navigator.serviceWorker.register("/sw.js", { scope: "/" });
+		window.addEventListener("load", async () => {
+			try {
+				// Unregister existing service workers to clear old config
+				const registrations = await navigator.serviceWorker.getRegistrations();
+				await Promise.all(registrations.map(reg => reg.unregister()));
+				
+				// Register fresh service worker
+				await navigator.serviceWorker.register("/sw.js", { scope: "/" });
+			} catch (error) {
+				console.error("Service worker registration failed:", error);
+			}
 		});
 	}
 </script>

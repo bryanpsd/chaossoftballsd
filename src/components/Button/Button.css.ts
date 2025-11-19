@@ -24,7 +24,6 @@ export const baseButton = style([
 		transitionTimingFunction: "ease-in",
 		outlineOffset: ".2rem",
 		boxShadow: `0 .1rem .8rem -.4rem ${color.brand.black}`,
-		border: `1px solid ${color.brand.black}`,
 	},
 ]);
 
@@ -110,7 +109,7 @@ export const button = recipe({
 			style: tokens({
 				color: { default: "white", hover: "white", disabled: "darkGray" },
 				borderColor: {
-					default: "purple",
+					default: "black",
 					hover: "purple",
 					disabled: "black",
 				},
@@ -128,7 +127,7 @@ export const button = recipe({
 			},
 			style: tokens({
 				color: { default: "white", hover: "white", disabled: "darkGray" },
-				borderColor: { default: "purple", hover: "purple", disabled: "black" },
+				borderColor: { default: "black", hover: "purple", disabled: "black" },
 				backgroundColor: {
 					default: "purple",
 					hover: "darkPurple",
@@ -147,7 +146,7 @@ export const button = recipe({
 			},
 			style: tokens({
 				color: { default: "white", hover: "white", disabled: "darkPurple" },
-				borderColor: { default: "purple", disabled: "darkPurple" },
+				borderColor: { default: "black", disabled: "darkPurple" },
 				backgroundColor: {
 					default: "transparent",
 					hover: "darkPurple",

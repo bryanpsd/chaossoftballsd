@@ -16,8 +16,6 @@ export const baseButton = style([
 		fontFamily: "base",
 		borderStyle: "solid",
 		borderRadius: "round",
-		borderWidth: 1,
-		borderColor: "black",
 	}),
 	{
 		boxSizing: "border-box",

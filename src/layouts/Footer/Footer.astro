@@ -24,86 +24,64 @@ import * as styles from "./Footer.css";
 ---
 
 <footer class={styles.footerWrapper}>
-    <nav aria-label="Footer Navigation">
-        <ul class={styles.footerNav}>
-            {
-                entry.items[0]?.fields?.type?.map((linkEntry) => {
-                    if (!linkEntry || !("fields" in linkEntry)) return null;
-                    if (linkEntry.sys.contentType.sys.id !== "link")
-                        return null;
-                    const link = linkEntry.fields as TypeLinkFields;
-                    const url: string = link.ctaLink
-                        ? String(link.ctaLink.valueOf())
-                        : "#";
-                    const label: string = link.label
-                        ? String(link.label.valueOf())
-                        : link.name
-                          ? String(link.name.valueOf())
-                          : "Link";
-                    const openInNewWindow: boolean =
-                        typeof link.openInNewWindow === "boolean"
-                            ? link.openInNewWindow
-                            : !!link.openInNewWindow?.valueOf();
-                    return (
-                        <li>
-                            <Link
-                                href={url}
-                                target={openInNewWindow ? "_blank" : undefined}
-                                rel={
-                                    openInNewWindow
-                                        ? "noopener noreferrer"
-                                        : undefined
-                                }
-                                className={[
-                                    styles.footerNavLink,
-                                    Astro.url.pathname === url ? "active" : "",
-                                ]
-                                    .filter(Boolean)
-                                    .join(" ")}
-                            >
-                                {label === "Contact" && ContactIcon ? (
-                                    <>
-                                        <ContactIcon
-                                            aria-hidden="true"
-                                            focusable="false"
-                                        />
-                                        <span class="sr-only">Contact</span>
-                                    </>
-                                ) : label === "Instagram" && InstagramIcon ? (
-                                    <>
-                                        <InstagramIcon
-                                            aria-hidden="true"
-                                            focusable="false"
-                                        />
-                                        <span class="sr-only">Instagram</span>
-                                    </>
-                                ) : label === "Gallery" && GalleryIcon ? (
-                                    <>
-                                        <GalleryIcon
-                                            aria-hidden="true"
-                                            focusable="false"
-                                        />
-                                        <span class="sr-only">Gallery</span>
-                                    </>
-                                ) : label === "Shop" && ShopIcon ? (
-                                    <>
-                                        <ShopIcon
-                                            aria-hidden="true"
-                                            focusable="false"
-                                        />
-                                        <span class="sr-only">Shop Chaos Gear</span>
-                                    </>
-                                ): (
-                                    label
-                                )}
-                            </Link>
-                        </li>
-                    );
-                })
-            }
-        </ul>
-    </nav>
-    <Typography className={styles.footerCopyright}>
-        &copy;{year} Chaos Softball SD. All rights reserved.</Typography
-    >
+	<nav aria-label="Footer Navigation">
+		<ul class={styles.footerNav}>
+			{
+				entry.items[0]?.fields?.type?.map((linkEntry) => {
+					if (!linkEntry || !("fields" in linkEntry)) return null;
+					if (linkEntry.sys.contentType.sys.id !== "link") return null;
+					const link = linkEntry.fields as TypeLinkFields;
+					const url: string = link.ctaLink ? String(link.ctaLink.valueOf()) : "#";
+					const label: string = link.label
+						? String(link.label.valueOf())
+						: link.name
+							? String(link.name.valueOf())
+							: "Link";
+					const openInNewWindow: boolean =
+						typeof link.openInNewWindow === "boolean"
+							? link.openInNewWindow
+							: !!link.openInNewWindow?.valueOf();
+					return (
+						<li>
+							<Link
+								href={url}
+								target={openInNewWindow ? "_blank" : undefined}
+								rel={openInNewWindow ? "noopener noreferrer" : undefined}
+								className={[styles.footerNavLink, Astro.url.pathname === url ? "active" : ""]
+									.filter(Boolean)
+									.join(" ")}
+							>
+								{label === "Contact" && ContactIcon ? (
+									<>
+										<ContactIcon aria-hidden="true" focusable="false" />
+										<span class="sr-only">Contact</span>
+									</>
+								) : label === "Instagram" && InstagramIcon ? (
+									<>
+										<InstagramIcon aria-hidden="true" focusable="false" />
+										<span class="sr-only">Instagram</span>
+									</>
+								) : label === "Gallery" && GalleryIcon ? (
+									<>
+										<GalleryIcon aria-hidden="true" focusable="false" />
+										<span class="sr-only">Gallery</span>
+									</>
+								) : label === "Shop" && ShopIcon ? (
+									<>
+										<ShopIcon aria-hidden="true" focusable="false" />
+										<span class="sr-only">Shop Chaos Gear</span>
+									</>
+								) : (
+									label
+								)}
+							</Link>
+						</li>
+					);
+				})
+			}
+		</ul>
+	</nav>
+	<Typography className={styles.footerCopyright}>
+		&copy;{year} Chaos Softball SD. All rights reserved.</Typography
+	>
 </footer>

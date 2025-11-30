@@ -30,29 +30,23 @@ const schema = {
 ---
 
 <head>
-	<Seo
-		seo={seo}
-		image={image}
-		canonical={canonicalURL}
-		noIndex={noIndex}
-		schema={schema}
-	/>
+	<Seo seo={seo} image={image} canonical={canonicalURL} noIndex={noIndex} schema={schema} />
 
-  {withBaseHref && <base href={baseHref} />}
+	{withBaseHref && <base href={baseHref} />}
 
-  {/* Resource Hints for Google Fonts */}
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-  <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+	{/* Resource Hints for Google Fonts */}
+	<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+	<link rel="dns-prefetch" href="//fonts.gstatic.com" />
 
-  {/* Icons & Manifest */}
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <link rel="sitemap" href="/sitemap-index.xml" />
+	{/* Icons & Manifest */}
+	<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+	<link rel="manifest" href="/site.webmanifest" />
+	<link rel="sitemap" href="/sitemap-index.xml" />
 </head>
 
 <ClientRouter />
@@ -64,8 +58,8 @@ const schema = {
 			try {
 				// Unregister existing service workers to clear old config
 				const registrations = await navigator.serviceWorker.getRegistrations();
-				await Promise.all(registrations.map(reg => reg.unregister()));
-				
+				await Promise.all(registrations.map((reg) => reg.unregister()));
+
 				// Register fresh service worker
 				await navigator.serviceWorker.register("/sw.js", { scope: "/" });
 			} catch (error) {

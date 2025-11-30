@@ -41,15 +41,12 @@ const canonical = propCanonical || Astro.url?.href || "https://chaossoftballsd.o
 const ogImage = image || "/chaos-logo-large.png";
 const twitterImage = image ? new URL(image, Astro.url).toString() : "/chaos-logo-large.png";
 ---
+
 <title>{title}</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width" />
 {description && <meta name="description" content={description} />}
-{noIndex ? (
-	<meta name="robots" content="noindex" />
-) : (
-	<meta name="robots" content={robots} />
-)}
+{noIndex ? <meta name="robots" content="noindex" /> : <meta name="robots" content={robots} />}
 <meta name="theme-color" content="#ffffff" />
 <meta name="generator" content={Astro.generator} />
 <link rel="canonical" href={canonical} />
@@ -69,6 +66,4 @@ const twitterImage = image ? new URL(image, Astro.url).toString() : "/chaos-logo
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={twitterImage} />
 
-{schema && (
-	<script type="application/ld+json" set:html={JSON.stringify(schema)} />
-)}
+{schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}

@@ -7,17 +7,18 @@ import { Header } from "./Header";
 
 const { seo, lang = "en-US" } = Astro.props;
 ---
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang={lang}>
-  <head>
-    <BaseHead seo={seo} />
-  </head>
-  <body>
-    <Header />
-    <main id="main-content" role="main" class={styles.mainWrapper}>
-      <slot />
-    </main>
-    <Footer />
-    <BackToTopButton client:idle />
-  </body>
+	<head>
+		<BaseHead seo={seo} />
+	</head>
+	<body>
+		<Header />
+		<main id="main-content" role="main" class={styles.mainWrapper}>
+			<slot />
+		</main>
+		<Footer />
+		<BackToTopButton client:idle />
+	</body>
 </html>

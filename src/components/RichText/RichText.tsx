@@ -72,7 +72,7 @@ function getIconByLabelStrict(label: string) {
 function renderContentfulLinkEntry(entry: unknown, opts?: { isInline?: boolean }) {
 	const maybeEntry = entry as { fields?: unknown } | undefined;
 	if (!maybeEntry?.fields) return null;
-	
+
 	const fields = maybeEntry.fields as unknown as TypeLinkFields;
 	const label = String(fields.label ?? fields.name ?? "");
 	const title = String(fields.name ?? "");
@@ -82,7 +82,7 @@ function renderContentfulLinkEntry(entry: unknown, opts?: { isInline?: boolean }
 	const typeValues = Array.isArray(fields.type) ? (fields.type as unknown as string[]) : [];
 	const openInNewWindow = Boolean(fields.openInNewWindow);
 	const isInline = Boolean(opts?.isInline);
-	
+
 	// Determine link type
 	const isButton = typeValues.includes("button");
 	const isIcon = typeValues.includes("icon");
@@ -91,7 +91,7 @@ function renderContentfulLinkEntry(entry: unknown, opts?: { isInline?: boolean }
 	// Handle driving directions: use directions URLs if address provided, otherwise regular href
 	const finalHref = address ? getDirectionsFallbackURL(address, title || label) : href;
 	const handleClick = address ? createDirectionsClickHandler(address, title || label) : undefined;
-	
+
 	if (!finalHref) return null;
 
 	if (isButton) {
@@ -105,9 +105,9 @@ function renderContentfulLinkEntry(entry: unknown, opts?: { isInline?: boolean }
 				size="small"
 				color="primary"
 				variant="contained"
-				startIcon={isIcon && StartIcon ? (
-					<StartIcon aria-hidden="true" focusable="false" />
-				) : undefined}
+				startIcon={
+					isIcon && StartIcon ? <StartIcon aria-hidden="true" focusable="false" /> : undefined
+				}
 				onClick={handleClick}
 				target={openInNewWindow ? "_blank" : undefined}
 				rel={openInNewWindow ? "noopener noreferrer" : undefined}

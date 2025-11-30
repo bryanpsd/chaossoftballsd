@@ -11,12 +11,7 @@ export default defineConfig({
 	site: "https://chaossoftballsd.org",
 	output: "server",
 	adapter: netlify(),
-	integrations: [
-		react(),
-		sitemap(),
-		robotsTxt(),
-		icon(),
-	],
+	integrations: [react(), sitemap(), robotsTxt(), icon()],
 	vite: {
 		plugins: [vanillaExtractPlugin()],
 	},

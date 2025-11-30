@@ -82,9 +82,12 @@ export const Button = forwardRef(
 	) => {
 		const handleClick: MouseEventHandler = (e) => {
 			// Track button click in GA4
-			const label = typeof children === "string" ? children : (rest as { "aria-label"?: string })["aria-label"] || "Button";
+			const label =
+				typeof children === "string"
+					? children
+					: (rest as { "aria-label"?: string })["aria-label"] || "Button";
 			const href = rest.href as string | undefined;
-			
+
 			if (href && isExternalUrl(href)) {
 				trackOutboundLink(href, label);
 			} else {

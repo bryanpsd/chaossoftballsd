@@ -69,34 +69,32 @@ const items = navEntry
 const { pathname } = Astro.url;
 ---
 
-<a class={`sr-only ${styles.mainContentJumpLink}`} href="#main-content"
-  >Jump to main content</a
->
+<a class={`sr-only ${styles.mainContentJumpLink}`} href="#main-content">Jump to main content</a>
 
-{
-  banners.data && (
-	<Banner banner={banners.data} currentPath={pathname} client:visible />
-  )
-}
+{banners.data && <Banner banner={banners.data} currentPath={pathname} client:visible />}
 
 <header class={styles.headerWrapper}>
-  <div class={styles.header}>
-    <div class={styles.logoWrapper}>
-      <span class="sr-only">chaossoftballsd.org</span>
-      <Link href="/" aria-label="Home" onClick={() => window.dispatchEvent(new CustomEvent('chaos:nav-clear'))}>
-        <Image
-          aria-hidden="true"
-          src={logo}
-          alt="Chaos Softball San Diego"
-          width={75}
-          height={81}
-          loading="eager"
-          fetchpriority="high"
-          class={commonStyles.image}
-        />
-      </Link>
-    </div>
+	<div class={styles.header}>
+		<div class={styles.logoWrapper}>
+			<span class="sr-only">chaossoftballsd.org</span>
+			<Link
+				href="/"
+				aria-label="Home"
+				onClick={() => window.dispatchEvent(new CustomEvent("chaos:nav-clear"))}
+			>
+				<Image
+					aria-hidden="true"
+					src={logo}
+					alt="Chaos Softball San Diego"
+					width={75}
+					height={81}
+					loading="eager"
+					fetchpriority="high"
+					class={commonStyles.image}
+				/>
+			</Link>
+		</div>
 		<MainNav items={items} currentPath={pathname} client:visible />
 		<MobileNav navItems={items} currentPath={pathname} client:visible />
-  </div>
+	</div>
 </header>

@@ -1,5 +1,4 @@
 ---
-
 import "../styles/global/global.css";
 import "../styles/global/reset.css";
 import "../styles/global/theme.css";
@@ -61,8 +60,6 @@ if (pageContent.seo && "fields" in pageContent.seo && isResolvedSeoFields(pageCo
 		<ResponsiveHeadline size={1} as="h1">
 			{pageContent.title}
 		</ResponsiveHeadline>
-		{pageContent.content && (
-			<RichText richText={pageContent.content} client:load />
-		)}
+		{pageContent.content && <RichText richText={pageContent.content} client:load />}
 	</div>
 </Layout>

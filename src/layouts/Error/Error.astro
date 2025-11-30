@@ -1,17 +1,19 @@
 ---
-
 import Layout from "~/layouts/Layout.astro";
 import * as styles from "~/styles/utilities/errorPages.css";
 ---
 
 <head>
-  <title>Page Not Found | Chaos Softball San Diego</title>
-  <meta name="description" content="Sorry, the page you are looking for does not exist or an error has occurred." />
+	<title>Page Not Found | Chaos Softball San Diego</title>
+	<meta
+		name="description"
+		content="Sorry, the page you are looking for does not exist or an error has occurred."
+	/>
 </head>
 <Layout>
-  <main>
-    <div class={styles.contentPadding}>
-      <slot />
-    </div>
-  </main>
+	<main>
+		<div class={styles.contentPadding}>
+			<slot />
+		</div>
+	</main>
 </Layout>

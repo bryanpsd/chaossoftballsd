@@ -139,7 +139,9 @@ export function createDirectionsClickHandler(
 		try {
 			if (isIOSDevice() || isAndroidDevice()) {
 				e.preventDefault();
-				const url = isIOSDevice() ? getAppleMapsDirectionsURL(query) : getGoogleMapsDirectionsURL(query);
+				const url = isIOSDevice()
+					? getAppleMapsDirectionsURL(query)
+					: getGoogleMapsDirectionsURL(query);
 				window.location.href = url;
 			}
 		} catch (error) {

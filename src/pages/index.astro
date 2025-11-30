@@ -45,42 +45,33 @@ const faqs = await contentfulClient.getEntries<TypeListSkeleton>({
 ---
 
 <Layout seo={seo}>
-  <ToastContainer position="top-center" client:idle />
-  <Hero />
-  <section id="intro" class={anchorSection}> 
-    {
-      entryIntro.items.map((item) => (
-        <div>
-          {item.fields.content && (
-            <RichText richText={item.fields.content} client:visible />
-          )}
-        </div>
-      ))
-    }
-  </section>
-  <section id="faqs" class={anchorSection}> 
-    <ResponsiveHeadline size={2} as="h2">
-      Frequently Asked Questions
-    </ResponsiveHeadline>
-    <BasicAccordion
-      list={faqs.items[0] as TypeList<"WITHOUT_UNRESOLVABLE_LINKS">}
-      client:visible
-    />
-  </section>
-  <section id="contact" class={anchorSection}> 
-    {
-      entryContact.items.map((item) => (
-        <div>
-          {item.fields.content && (
-            <RichText richText={item.fields.content} client:visible />
-          )}
-        </div>
-      ))
-    }
-    <Form client:idle />
-  </section>
-  <section id="featured" class={anchorSection}> 
-    <ResponsiveHeadline size={2} as="h2"> Chaos in Action </ResponsiveHeadline>
-    <FeaturedPhotos galleryName="Featured Photos" maxPhotos={12}  />
-  </section>
+	<ToastContainer position="top-center" client:idle />
+	<Hero />
+	<section id="intro" class={anchorSection}>
+		{
+			entryIntro.items.map((item) => (
+				<div>
+					{item.fields.content && <RichText richText={item.fields.content} client:visible />}
+				</div>
+			))
+		}
+	</section>
+	<section id="faqs" class={anchorSection}>
+		<ResponsiveHeadline size={2} as="h2"> Frequently Asked Questions </ResponsiveHeadline>
+		<BasicAccordion list={faqs.items[0] as TypeList<"WITHOUT_UNRESOLVABLE_LINKS">} client:visible />
+	</section>
+	<section id="contact" class={anchorSection}>
+		{
+			entryContact.items.map((item) => (
+				<div>
+					{item.fields.content && <RichText richText={item.fields.content} client:visible />}
+				</div>
+			))
+		}
+		<Form client:idle />
+	</section>
+	<section id="featured" class={anchorSection}>
+		<ResponsiveHeadline size={2} as="h2"> Chaos in Action </ResponsiveHeadline>
+		<FeaturedPhotos galleryName="Featured Photos" maxPhotos={12} />
+	</section>
 </Layout>

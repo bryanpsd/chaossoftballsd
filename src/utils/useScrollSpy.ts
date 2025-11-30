@@ -20,7 +20,7 @@ export function useScrollSpy(ids: string[]): [string | null, (target: string | n
 			const style = window.getComputedStyle(root);
 			const val = style.getPropertyValue("--scroll-margin-top");
 			if (val) {
-				const px = parseInt(val, 12);
+				const px = Number.parseInt(val, 12);
 				if (!Number.isNaN(px)) return px;
 			}
 			return 0;

@@ -3,10 +3,9 @@
 	"compilerOptions": {
 		"target": "ES2022",
 		"lib": ["dom", "dom.iterable", "ESNext"],
-		"allowJs": true,
+		"allowJs": false,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true,
 		"strict": true,
 		"forceConsistentCasingInFileNames": true,
 		"noFallthroughCasesInSwitch": true,
@@ -16,15 +15,14 @@
 		"isolatedModules": true,
 		"jsx": "react-jsx",
 		"jsxImportSource": "react",
+		"baseUrl": "./src",
 		"noEmit": true,
-		"baseUrl": ".",
-		"types": ["node"],
 		"paths": {
-			"~/*": ["src/*"]
-		},
-		"noUnusedLocals": true,
-		"noUnusedParameters": true
+			"~styles/*": ["styles/*"],
+			"~/*": ["*"],
+			"~*": ["*"]
+		}
 	},
-	"include": ["src", "astro-env.d.ts", ".astro/types.d.ts"],
+	"include": ["src", ".astro/types.d.ts"],
 	"exclude": ["dist", "node_modules"]
 }

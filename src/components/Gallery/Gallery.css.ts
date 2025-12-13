@@ -102,6 +102,7 @@ export const videoNotLoaded = style({
 	objectFit: "cover",
 	display: "block",
 });
+
 export const galleryImageLoaded = style({
 	opacity: 1,
 	transition: "opacity 0.4s",
@@ -111,6 +112,7 @@ export const galleryImageLoaded = style({
 	objectFit: "cover",
 	display: "block",
 });
+
 export const galleryImageNotLoaded = style({
 	opacity: 0,
 	transition: "opacity 0.4s",

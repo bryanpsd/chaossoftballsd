@@ -81,7 +81,7 @@ export const Modal: React.FC<ModalProps> = ({ open, onOpenChange, media }) => {
 									height: media.height,
 									className: styles.ModalMedia,
 									style: {
-										objectFit: "contain",
+										objectFit: "cover",
 										display: "block",
 										margin: "0 auto",
 									},

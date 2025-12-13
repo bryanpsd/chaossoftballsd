@@ -77,11 +77,11 @@ export const ModalMedia = style({
 	background: "#000",
 	display: "block",
 	width: "100%",
-	height: "100%",
-	maxWidth: "1024px",
-	maxHeight: "100vh",
+	height: "auto",
+	maxWidth: "100%",
+	maxHeight: "95vh",
 	margin: 0,
-	objectFit: "cover",
+	objectFit: "contain",
 });
 
 export const ModalCaption = style({

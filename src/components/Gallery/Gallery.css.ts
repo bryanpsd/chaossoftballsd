@@ -13,7 +13,6 @@ export const galleryWrapper = style([
 		columnCount: 3,
 		columnGap: "1.5rem",
 		"@media": {
-			"(max-width: 1280px)": { columnCount: 3 },
 			"(max-width: 1024px)": { columnCount: 2 },
 			"(max-width: 768px)": { columnCount: 1 },
 		},
@@ -44,7 +43,7 @@ export const galleryItemLandscape = style([
 	}),
 	{
 		aspectRatio: "16/9",
-		minHeight: 180,
+		minHeight: 150,
 		background: color.surface.secondary,
 		overflow: "hidden",
 		width: "100%",
@@ -62,7 +61,7 @@ export const galleryItemPortrait = style([
 	}),
 	{
 		aspectRatio: "3/4",
-		minHeight: 180,
+		minHeight: 150,
 		background: color.surface.secondary,
 		overflow: "hidden",
 		width: "100%",

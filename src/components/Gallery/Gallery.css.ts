@@ -4,7 +4,6 @@ import { tokens } from "../../styles/tokens/designTokens.css";
 
 export const galleryWrapper = style([
 	tokens({
-		width: "col-12",
 		paddingY: 10,
 		paddingX: 0,
 		display: "block",
@@ -48,6 +47,11 @@ export const galleryItemLandscape = style([
 		overflow: "hidden",
 		width: "100%",
 		borderRadius: 8,
+		border: "2px solid transparent",
+		transition: "border-color 0.2s",
+		":focus-visible": {
+			borderColor: "inherit",
+		},
 	},
 ]);
 
@@ -67,6 +71,11 @@ export const galleryItemPortrait = style([
 		width: "100%",
 		height: "auto",
 		borderRadius: 8,
+		border: "2px solid transparent",
+		transition: "border-color 0.2s",
+		":focus-visible": {
+			borderColor: "inherit",
+		},
 	},
 ]);
 

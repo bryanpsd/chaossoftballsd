@@ -204,7 +204,6 @@ function GalleryItem({ media, loaded, onLoad, onOpenGalleryModal }: GalleryItemP
 						position: "relative",
 						cursor: "pointer",
 						padding: 0,
-						border: "none",
 						background: "none",
 					}}
 					onClick={() => onOpenGalleryModal(media)}
